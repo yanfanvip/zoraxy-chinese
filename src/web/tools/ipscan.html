@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="theme-color" content="#4b75ff">
         <link rel="icon" type="image/png" href="./favicon.png" />
-        <title>IP Scanner | Zoraxy</title>
+        <title>IP 扫描 | Zoraxy</title>
         <link rel="stylesheet" href="../script/semantic/semantic.min.css">
         <script src="../script/jquery-3.6.0.min.js"></script>
         <script src="../script/semantic/semantic.min.js"></script>
@@ -29,34 +29,34 @@
                 <div style="padding: 1em;">
                     <div class="ui stackable grid">
                         <div class="eight wide column">
-                            <h4 class="ui dividing header">Scan IP Range</h4>
+                            <h4 class="ui dividing header">扫描 IP 范围</h4>
                             <div class="ui form">
                                 <div class="field">
-                                    <label>Start IP</label>
+                                    <label>起始 IP</label>
                                     <input type="text" id="start-ip" name="start-ip">
                                 </div>
                                 <div class="field">
-                                    <label>End IP</label>
+                                    <label>结束 IP</label>
                                     <input type="text" id="end-ip" name="end-ip">
                                 </div>
-                                <button class="ui basic button scanbtn" id="ip-scan-btn"><i class="blue search icon"></i> Scan</button>
+                                <button class="ui basic button scanbtn" id="ip-scan-btn"><i class="blue search icon"></i> 扫描</button>
                             </div>
                             <br>
                         </div>
                         <div class="eight wide column">
-                            <h4 class="ui dividing header">Scan CIDR Range</h4>
+                            <h4 class="ui dividing header">扫描 CIDR 范围</h4>
                             <div class="ui form">
                                 <div class="field">
                                     <label>CIDR</label>
                                     <input type="text" id="cidr" name="cidr">
                                 </div>
-                                <button class="ui basic button scanbtn" id="cidr-scan-btn"><i class="blue search icon"></i> Scan</button>
+                                <button class="ui basic button scanbtn" id="cidr-scan-btn"><i class="blue search icon"></i> 扫描</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="ui basic button" onclick="toggleOfflineHost();"><i class="grey eye icon"></i>View Offline Hosts</button>
+            <button class="ui basic button" onclick="toggleOfflineHost();"><i class="grey eye icon"></i>查看离线主机</button>
             <div class="ui divider"></div>
             <br>
                 <div id="scan-results" style="overflow-x: auto;">
@@ -64,7 +64,7 @@
                 </div>
             <br>
             <div style="float: right;">
-                <button class="ui basic button" style="margin-right: 1em;" onclick="window.open('', '_self', ''); window.close();"><i class="ui red remove icon"></i> Close</button>
+                <button class="ui basic button" style="margin-right: 1em;" onclick="window.open('', '_self', ''); window.close();"><i class="ui red remove icon"></i> 关闭</button>
             </div>
             <br><br><br>
         </div>
@@ -75,12 +75,12 @@
                     var start = $('#start-ip').val().trim();
                     var end = $('#end-ip').val().trim();
                     if (start === '' || end === '') {
-                        alert('Please enter start and end IP range');
+                        alert('请输入起始和结束 IP 范围');
                         return;
                     }
 
                     if (!isValidIPv4(start) || !isValidIPv4(end)){
-                        alert('Invalid start or end ip address');
+                        alert('起始或结束 IP 地址无效');
                         return;
                     }
 
@@ -104,12 +104,12 @@
                     event.preventDefault();
                     var cidr = $('#cidr').val().trim();
                     if (cidr === '') {
-                        alert('Please enter CIDR notation');
+                        alert('请输入 CIDR 表示法');
                         return;
                     }
 
                     if (!isValidCIDR(cidr)){
-                        alert("Invalid CIDR notation string given");
+                        alert("CIDR 格式无效");
                         return;
                     }
                     $(".scanbtn").addClass("disabled");

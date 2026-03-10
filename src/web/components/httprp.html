@@ -1,7 +1,7 @@
 <div class="standardContainer">
     <div class="ui basic segment">
-        <h2>HTTP Proxy</h2>
-        <p>Proxy HTTP server with HTTP or HTTPS for multiple hosts. If you are only proxying for one host / domain, use Default Site instead.</p>
+        <h2>HTTP 代理</h2>
+        <p>为多主机提供 HTTP 或 HTTPS 代理。若仅代理单一主机/域名，请使用「默认站点」。</p>
     </div>
     <style>
         #httpProxyList .ui.toggle.checkbox input:checked ~ label::before{
@@ -193,11 +193,11 @@
     <div class="httpProxyListTools" style="margin-bottom: 1em;">
         <div id="tagFilterDropdown" class="ui floating basic dropdown labeled icon button" style="min-width: 150px;">
             <i class="filter icon"></i>
-            <span class="text">Filter by tags</span>
+            <span class="text">按标签筛选</span>
             <div class="menu">
               <div class="ui icon search input">
                 <i class="search icon"></i>
-                <input type="text" placeholder="Search tags...">
+                <input type="text" placeholder="搜索标签...">
               </div>
               <div class="divider"></div>
                 <div class="scrolling menu tagList">
@@ -215,10 +215,10 @@
         <div class="ui small input"  style="width: 300px; height: 38px;">
             <!-- Prevent the browser from filling the saved Zoraxy login account into the  input searchInput below -->
             <input type="password"  autocomplete="off" hidden/>
-            <input type="text" id="searchInput"  placeholder="Quick Search" onkeydown="handleSearchInput(event);" onchange="handleSearchInput(event);" onblur="handleSearchInput(event);">
+            <input type="text" id="searchInput"  placeholder="快速搜索" onkeydown="handleSearchInput(event);" onchange="handleSearchInput(event);" onblur="handleSearchInput(event);">
         </div>
         <button class="ui basic button" id="detailViewToggle" onclick="toggleDetailViewButton();" style="float: right;">
-            Basics View
+            基础视图
         </button>
     </div>
     
@@ -227,12 +227,12 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>Host</th>
-                    <th class="details-view">Alt. Listening Addr</th>
-                    <th>Destination</th>
-                    <th class="details-view">Authentication</th>
-                    <th>Virtual Directory</th>
-                    <th class="no-sort">Tags</th>
+                    <th>主机</th>
+                    <th class="details-view">备用监听地址</th>
+                    <th>目标</th>
+                    <th class="details-view">认证</th>
+                    <th>虚拟目录</th>
+                    <th class="no-sort">标签</th>
                     <th class="no-sort" style="width:100px; cursor: default !important;"></th>
                 </tr>
             </thead>
@@ -242,7 +242,7 @@
         </table>
     </div>
 
-    <button class="ui icon right floated basic button" onclick="listProxyEndpoints();"><i class="green refresh icon"></i> Refresh</button>
+    <button class="ui icon right floated basic button" onclick="listProxyEndpoints();"><i class="green refresh icon"></i> 刷新</button>
     <br><br>
 </div>
 
@@ -904,7 +904,7 @@
                     if (thisAccessRuleID == "default"){
                         // Show "default" in details-view column, hide in under-host display
                         if (isDetailsColumn) {
-                            $(this).html("default");
+                            $(this).html("默认");
                         } else {
                             $(this).html("");
                         }
@@ -914,7 +914,7 @@
                     let rule = accessRuleMap[thisAccessRuleID];
                     if (rule == undefined){
                         //Missing config or config too old
-                        $(this).html(`<i class="ui red exclamation triangle icon"></i> <b style="color: #db2828;">Access Rule Error</b>`);
+                        $(this).html(`<i class="ui red exclamation triangle icon"></i> <b style="color: #db2828;">访问规则错误</b>`);
                         return;
                     }
                     let icon = `<i class="ui grey filter icon"></i>`;
@@ -997,7 +997,7 @@
                 if (data.error !== undefined){
                     msgbox(data.error, false, 3000);
                 }else{
-                    msgbox("TLS Config updated");
+                    msgbox("TLS 配置已更新");
                 }
                 updateTlsResolveList(uuid);
             }
@@ -1065,7 +1065,7 @@
                                     if (data.error !== undefined) {
                                         msgbox(data.error, false, 3000);
                                     } else {
-                                        msgbox("Preferred Certificate updated");
+                                        msgbox("首选证书已更新");
                                     }
                                 }
                             });
@@ -1154,7 +1154,7 @@
                 if (data.error !== undefined){
                     msgbox(data.error, false, 6000);
                 }else{
-                    msgbox("Proxy endpoint updated");
+                    msgbox("代理端点已更新");
                     listProxyEndpoints();
                 }
             }
@@ -1164,7 +1164,7 @@
     //Generic functions for delete rp endpoints 
     function deleteEndpoint(epoint){
         epoint = decodeURIComponent(epoint).hexDecode();
-        if (confirm("Confirm remove proxy for :" + epoint + "?")){
+        if (confirm("确认删除代理：" + epoint + "？")){
             $.cjax({
                 url: "/api/proxy/del",
                 method: "POST",
@@ -1172,7 +1172,7 @@
                 success: function(data){
                     if (data.error == undefined){
                         listProxyEndpoints();
-                        msgbox("Proxy Rule Deleted", true);
+                        msgbox("代理规则已删除", true);
                         reloadUptimeList();
                     }else{
                         msgbox(data.error, false);
@@ -1221,9 +1221,9 @@
                     msgbox(data.error, false);
                 }else{
                     if (isChecked){
-                        msgbox("Proxy Rule Enabled");
+                        msgbox("代理规则已启用");
                     }else{
-                        msgbox("Proxy Rule Disabled");
+                        msgbox("代理规则已禁用");
                     }
                     
                 }
@@ -1240,7 +1240,7 @@
         let renewDomainKey = RootAndAliasDomains.join(",");
         let preferedACMEEmail = $("#prefACMEEmail").val();
         if (preferedACMEEmail == ""){
-            msgbox("Preferred email for ACME registration not set", false);
+            msgbox("未设置 ACME 注册首选邮箱", false);
             return;
         }
         let defaultCA = $("#defaultCA").dropdown("get value");
@@ -1251,7 +1251,7 @@
         //Check if the root or the alias domain contain wildcard character, if yes, return error
         for (var i = 0; i < RootAndAliasDomains.length; i++){
             if (RootAndAliasDomains[i].indexOf("*") != -1){
-                msgbox("Wildcard domain can only be setup via ACME tool", false);
+                msgbox("通配符域名只能通过 ACME 工具配置", false);
                 return;
             }
         }
@@ -1270,7 +1270,7 @@
             },
             success: function(data){
                 if (data.error == undefined){
-                    msgbox("Self-Signed Certificate Generated", true);
+                    msgbox("自签名证书已生成", true);
                     resyncProxyEditorConfig();
                     if (typeof(initManagedDomainCertificateList) != undefined){
                         //Re-init the managed domain certificate list
@@ -1311,11 +1311,11 @@
         // Bind remove button events
         editor.find(".removeListeningPortBtn").off("click").on("click", function(){
             let portToRemove = $(this).attr("data-port");
-            if (confirm("Remove listening port " + portToRemove + "?")) {
+            if (confirm("移除监听端口 " + portToRemove + "？")) {
                 let newPorts = ports.filter(p => p !== portToRemove);
                 saveListeningPorts(uuid, newPorts, function(){
                     renderListeningPorts(uuid, newPorts);
-                    msgbox("Listening port removed");
+                    msgbox("监听端口已移除");
                 });
             }
         });
@@ -1351,13 +1351,13 @@
             $(".standardContainer th.details-view, .standardContainer td.details-view").hide();
             $("#httpProxyTableWrapper").removeClass("detail-view-enabled");
             localStorage.setItem("httprp_detailView", "false");
-            $("#detailViewToggle").text("Basics View");
+            $("#detailViewToggle").text("基础视图");
         } else {
             // Switch to Details view
             $(".standardContainer th.details-view, .standardContainer td.details-view").show();
             $("#httpProxyTableWrapper").addClass("detail-view-enabled");
             localStorage.setItem("httprp_detailView", "true");
-            $("#detailViewToggle").text("Details View");
+            $("#detailViewToggle").text("详细视图");
         }
     }
 
@@ -1384,12 +1384,12 @@
             // Show details view
             $(".standardContainer th.details-view, .standardContainer td.details-view").show();
             $("#httpProxyTableWrapper").addClass("detail-view-enabled");
-            $("#detailViewToggle").text("Details View");
+            $("#detailViewToggle").text("详细视图");
         } else {
             // Show basics view (default)
             $(".standardContainer th.details-view, .standardContainer td.details-view").hide();
             $("#httpProxyTableWrapper").removeClass("detail-view-enabled");
-            $("#detailViewToggle").text("Basics View");
+            $("#detailViewToggle").text("基础视图");
         }
     }
 
@@ -1648,7 +1648,7 @@
         editor.find(".saveDownstreamHostnameBtn").off("click").on("click", function(){
             let newHostname = editor.find(".downstream_primary_hostname_edit_input input").val().trim();
             if (newHostname.length == 0){
-                msgbox("Hostname cannot be empty", false);
+                msgbox("主机名不能为空", false);
                 return;
             }
 
@@ -1703,19 +1703,19 @@
         editor.find(".addListeningPortBtn").off("click").on("click", function(){
             let newPort = editor.find(".new_listening_port_input").val().trim();
             if (newPort == "") {
-                msgbox("Please enter a valid port", false);
+                msgbox("请输入有效端口", false);
                 return;
             }
             
             // Validate format
             if (!newPort.includes(":")) {
-                msgbox("Port format must be :port or ip:port (e.g., :8080 or 192.168.1.1:8080)", false);
+                msgbox("端口格式须为 :端口 或 ip:端口（如 :8080 或 192.168.1.1:8080）", false);
                 return;
             }
             
             // Check if already exists
             if (listeningPorts.includes(newPort)) {
-                msgbox("This port is already added", false);
+                msgbox("该端口已添加", false);
                 return;
             }
             
@@ -1726,7 +1726,7 @@
             saveListeningPorts(uuid, listeningPorts, function(){
                 renderListeningPorts(uuid, listeningPorts);
                 editor.find(".new_listening_port_input").val("");
-                msgbox("Listening port added");
+                msgbox("监听端口已添加");
             });
         });
 
@@ -1852,7 +1852,7 @@
         function rateLimitChangeEvent(){
             let rateLimitValue = $(this).val();
             if (rateLimitValue < 0 || isNaN(rateLimitValue)) {
-                msgbox("Rate limit must be >= 0", false);
+                msgbox("速率限制须大于等于 0", false);
                 $(this).val(subd.RateLimit); // Reset to previous valid value
                 return;
             }

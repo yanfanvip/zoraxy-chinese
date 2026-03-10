@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="App">
 <head>
-    <title>LogView | Zoraxy</title>
+    <title>日志查看 | Zoraxy</title>
     <meta charset="UTF-8">
     <meta name="theme-color" content="#4b75ff">
     <meta name="zoraxy.csrf.Token" content="{{.csrfToken}}">
@@ -113,13 +113,13 @@
     <div class="ui container">
         <div class="ui stackable secondary menu">
             <div class="item" style="font-weight: bold;">
-                Zoraxy LogView
+                Zoraxy 日志查看
             </div>
              <a class="item active panel_menu_btn" id="logViewMenu">
-                Log View
+                日志查看
             </a>
             <a class="item panel_menu_btn" id="summaryMenu">
-                Summary
+                摘要
             </a>
             <!-- <a class="item panel_menu_btn" id="settingsMenu">
                 Settings
@@ -131,19 +131,19 @@
         <div class="ui stackable secondary menu">
             <!-- Filter Dropdown -->
             <div class="ui selection dropdown" id="filterDropdown" style="margin-top:0.4em;">
-                <div class="text">Select Filter</div>
+                <div class="text">选择筛选</div>
                 <i class="dropdown icon"></i>
                 <div class="menu">
-                    <div class="item" data-value="all"><i class="filter icon"></i> All</div>
-                    <div class="item" data-value="system"><i class="blue info circle icon"></i> System</div>
-                    <div class="item" data-value="request"><i class="green exchange icon"></i> Request</div>
-                    <div class="item" data-value="error"><i class="red exclamation triangle icon"></i> Error</div>
+                    <div class="item" data-value="all"><i class="filter icon"></i> 全部</div>
+                    <div class="item" data-value="system"><i class="blue info circle icon"></i> 系统</div>
+                    <div class="item" data-value="request"><i class="green exchange icon"></i> 请求</div>
+                    <div class="item" data-value="error"><i class="red exclamation triangle icon"></i> 错误</div>
                 </div>
             </div>
 
             <!-- Log File Dropdown -->
             <div class="ui selection dropdown" id="logfileDropdown" style="margin-top: 0.4em; height: 2.8em;">
-                <div class="text">Select Log File</div>
+                <div class="text">选择日志文件</div>
                 <i class="dropdown icon"></i>
                 <div class="menu" id="logfileDropdownMenu">
                     <!-- Log files will be populated here -->
@@ -152,7 +152,7 @@
 
             <!-- Lines Dropdown -->
             <div class="ui selection dropdown" id="linesDropdown" style="margin-left: 0.4em; margin-top: 0.4em; height: 2.8em;">
-                <div class="text">Last 100 Lines</div>
+                <div class="text">最近 100 行</div>
                 <i class="dropdown icon"></i>
                 <div class="menu">
                     <div class="item selected" data-value="100">Last 100 Lines</div>
@@ -308,7 +308,7 @@ Pick a log file from the menu to start debugging
             openLog(null, null, currentLogFile, currentFilter, currentLines);
             loadLogSummary(currentLogFile);
         } else {
-            alert('Please select a log file first.');
+            alert('请先选择日志文件。');
         }
     });
 
@@ -374,7 +374,7 @@ Pick a log file from the menu to start debugging
     /* Log download button */
     $("#downloadLogBtn").on("click", function() {
         if (!currentLogFile) {
-            alert("Please select a log file first.");
+            alert("请先选择日志文件。");
             return;
         }
         // Always download the full log file, regardless of current line limit

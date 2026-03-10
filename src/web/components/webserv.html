@@ -1,78 +1,75 @@
 <div class="standardContainer">
     <div class="ui basic segment">
-        <h2>Static Web Server</h2>
-        <p>A simple static web server that serve html css and js files</p>
+        <h2>静态 Web 服务器</h2>
+        <p>用于提供 HTML、CSS、JS 等静态文件的简易 Web 服务器</p>
     </div>
     <div class="ui divider"></div>
     <div class="ui basic segment webservRunningStateWrapper">
         <h4 class="ui header" id="webservRunningState">
             <i class="green circle icon"></i>
             <div class="content">
-                <span class="webserv_status">Running</span>
-                <div class="sub header">Listen port :<span class="webserv_port">8081</span></div>
+                <span class="webserv_status">运行中</span>
+                <div class="sub header">监听端口：<span class="webserv_port">8081</span></div>
             </div>
         </h4>
     </div>
     <div>
-        <h3>Web Server Settings</h3>
+        <h3>Web 服务器设置</h3>
         <div class="ui form">
             <div class="inline field">
                 <div class="ui toggle checkbox webservRootDisabled">
                     <input id="webserv_enable" type="checkbox" class="hidden">
-                    <label>Enable Static Web Server</label>
+                    <label>启用静态 Web 服务器</label>
                 </div>
             </div>
             <div class="inline field">
                 <div class="ui toggle checkbox">
                     <input id="webserv_enableDirList" type="checkbox" class="hidden">
-                    <label>Enable Directory Listing</label>
-                    <small>If this folder do not contains any index files, list the directory of this folder.</small>
+                    <label>启用目录列表</label>
+                    <small>当目录下无 index 文件时，列出该目录内容。</small>
                 </div>
             </div>
             <div class="inline field">
                 <div class="ui toggle checkbox">
                     <input id="webserv_enableAllInterfaces" type="checkbox" class="hidden">
-                    <label>Listening to All Interfaces</label>
-                    <small>When disabled, the web server will only listen to localhost (127.0.0.1) and only reachable via reverse proxy rules.</small>
+                    <label>监听所有网卡</label>
+                    <small>关闭时仅监听 localhost (127.0.0.1)，只能通过反向代理规则访问。</small>
                 </div>
             </div>
             <div class="field">
-                <label>Document Root Folder</label>
+                <label>文档根目录</label>
                 <input id="webserv_docRoot" type="text" readonly="true">
                 <small>
-                    The web server root folder can only be changed via startup flags of zoraxy for security reasons. 
-                    See the -webserv flag for more details.
+                    出于安全考虑，根目录仅能通过 Zoraxy 启动参数修改，详见 -webserv 参数。
                 </small>
             </div>
             <div class="field webservRootDisabled">
-                <label>Port Number</label>
+                <label>端口号</label>
                 <input id="webserv_listenPort" type="number" step="1" min="0" max="65535" value="8081" onchange="updateWebServLinkExample(this.value);">
-                <small>Use <code>http://127.0.0.1:<span class="webserv_port">8081</span></code> in proxy rules to access the web server</small>
+                <small>在代理规则中使用 <code>http://127.0.0.1:<span class="webserv_port">8081</span></code> 访问此 Web 服务器</small>
             </div>
         </div>
     </div>
-    <small><i class="ui blue save icon"></i> Changes are saved automatically</small>
+    <small><i class="ui blue save icon"></i> 修改将自动保存</small>
     <br>
     <div class="ui message">
         <div class="ui accordion webservhelp">
             <div class="title">
                 <i class="dropdown icon"></i>
-                How to access the static web server?
+                如何访问静态 Web 服务器？
             </div>
             <div class="content">
-                There are three ways to access the static web server. <br>
+                可通过三种方式访问：<br>
                 <div class="ui ordered list">
                     <div class="item">
-                        If you are using Zoraxy as your gateway reverse proxy server, 
-                        you can add a new subdomain proxy rule that points to 
+                        若 Zoraxy 作为网关反向代理，可新增子域名代理规则指向
                         <a>http://127.0.0.1:<span class="webserv_port">8081</span></a>
                     </div>
                     <div class="item">
-                        If you are using Zoraxy under another reverse proxy server, 
-                        add <a>http://127.0.0.1:<span class="webserv_port">8081</span></a> to the config of your upper layer reverse proxy server's config file. 
+                        若 Zoraxy 位于其他反向代理之后，请在上层反向代理配置中加入 <a>http://127.0.0.1:<span class="webserv_port">8081</span></a>。
                     </div>
                     <div class="item">
-                        Directly access the web server via <a>http://{zoraxy_host_ip}:<span class="webserv_port">8081</span></a> (Not recommended)
+                        直接访问 <a>http://{zoraxy_host_ip}:<span class="webserv_port">8081</span></a>（不推荐）
                     </div>
                     <br>
                 </div>
@@ -84,16 +81,16 @@
     <div class="ui divider"></div>
    
     <div class="ui basic segment">
-        <h2>WebDAV Server</h2>
-        <p>Manage your files in the web directory using WebDAV protocol</p>
+        <h2>WebDAV 服务器</h2>
+        <p>通过 WebDAV 协议管理 Web 目录中的文件</p>
     </div>
     <div class="ui form">
         <div class="ui basic segment webdavRunningStateWrapper">
             <h4 class="ui header" id="webdavRunningState">
                 <i class="grey circle icon"></i>
                 <div class="content">
-                    <span class="webdav_status">Stopped</span>
-                    <div class="sub header">Listen port :<span class="webdav_port">5488</span></div>
+                    <span class="webdav_status">已停止</span>
+                    <div class="sub header">监听端口：<span class="webdav_port">5488</span></div>
                 </div>
             </h4>
         </div>
@@ -255,7 +252,7 @@
                             if (data.error != undefined){
                                 msgbox(data.error, false);
                             }else{
-                                msgbox("Static web server started");
+                                msgbox("静态 Web 服务器已启动");
                                 setWebServerRunningState(true);
                             }
                         });
@@ -264,7 +261,7 @@
                             if (data.error != undefined){
                                 msgbox(data.error, false);
                             }else{
-                                msgbox("Static web server stopped");
+                                msgbox("静态 Web 服务器已停止");
                                 setWebServerRunningState(false);
                             }
                         });
@@ -279,7 +276,7 @@
                                 msgbox(data.error, false);
                                 setWebDAVServerRunningState(false);
                             }else{
-                                msgbox("WebDAV server started");
+                                msgbox("WebDAV 服务器已启动");
                                 setWebDAVServerRunningState(true);
                             }
                         });
@@ -289,7 +286,7 @@
                                 msgbox(data.error, false);
                                 setWebDAVServerRunningState(true);
                             }else{
-                                msgbox("WebDAV server stopped");
+                                msgbox("WebDAV 服务器已停止");
                                 setWebDAVServerRunningState(false);
                             }
                         });
@@ -306,7 +303,7 @@
                             if (data.error != undefined){
                                 msgbox(data.error, false);
                             }else{
-                                msgbox("Directory listing setting updated");
+                                msgbox("目录列表设置已更新");
                             }
                         }
                     })
@@ -322,7 +319,7 @@
                             if (data.error != undefined){
                                 msgbox(data.error, false);
                             }else{
-                                msgbox("Listening interface setting updated");
+                                msgbox("监听接口设置已更新");
                             }
                         }
                     })
@@ -345,7 +342,7 @@
                                         if (data.error != undefined){
                                             msgbox(data.error, false);
                                         }else{
-                                            msgbox("Listening port updated");
+                                            msgbox("监听端口已更新");
                                         }
                                         updateWebServState();
                                     }
@@ -353,7 +350,7 @@
                             }else{
                                 //Cancel. Restore to previous value
                                 updateWebServState();
-                                msgbox("Setting restored");
+                                msgbox("设置已恢复");
                             }
                         });
                     }else{
@@ -365,7 +362,7 @@
                                 if (data.error != undefined){
                                     msgbox(data.error, false);
                                 }else{
-                                    msgbox("Listening port updated");
+                                    msgbox("监听端口已更新");
                                 }
                             }
                         })
@@ -382,7 +379,7 @@
                             if (data.error != undefined){
                                 msgbox(data.error, false);
                             }else{
-                                msgbox("WebDAV port updated");
+                                msgbox("WebDAV 端口已更新");
                                 updateWebDAVPortExample(newPort);
                             }
                         }

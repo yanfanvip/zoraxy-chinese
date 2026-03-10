@@ -31,86 +31,86 @@
   <div class="ui container">
     <div class="ui header">
         <div class="content">
-            Certificates Auto Renew Settings
-            <div class="sub header">Fetch and renew your certificates with Automated Certificate Management Environment (ACME) protocol</div>
+            证书自动续期设置
+            <div class="sub header">通过 ACME 协议获取与续期证书</div>
         </div>
     </div>
     <div class="ui basic segment">
-      <p style="float: right; color: #21ba45; display:none;" id="enableToggleSucc"><i class="green checkmark icon"></i> Setting Updated</p>
+      <p style="float: right; color: #21ba45; display:none;" id="enableToggleSucc"><i class="green checkmark icon"></i> 设置已更新</p>
       <div class="ui toggle checkbox">
         <input type="checkbox" id="enableCertAutoRenew">
-        <label>Enable Certificate Auto Renew</label>
+        <label>启用证书自动续期</label>
       </div>
       <br>
-      <h3>ACME Email</h3>
-      <p>Email is required by many CAs for renewing via ACME protocol</p>
+      <h3>ACME 邮箱</h3>
+      <p>多数 CA 要求提供邮箱以便通过 ACME 续期</p>
       <div class="ui fluid action input">
         <input id="caRegisterEmail" type="text" placeholder="webmaster@example.com">
         <button class="ui icon basic button" onclick="saveEmailToConfig(this);">
             <i class="blue save icon"></i>
         </button>
       </div>
-      <small>If you don't want to share your private email address, you can also fill in an email address that point to a mailbox not exists on your domain.</small>
+      <small>若不想使用私人邮箱，可填写一个指向不存在邮箱的地址。</small>
     </div>
     <div class="ui basic segment advanceoptions">
       <div class="ui accordion advanceSettings">
           <div class="title">
             <i class="dropdown icon"></i>
-              Advance Renew Policy
+              高级续期策略
           </div>
           <div class="content">
-              <p>Renew all certificates with ACME supported CAs</p>
+              <p>使用 Zoraxy 支持的 CA 续期全部证书</p>
               <div class="ui toggle checkbox">
                 <input type="checkbox" id="renewAllSupported" onchange="setAutoRenewIfCASupportMode(this.checked);">
-                <label>Renew All Certs</label>
+                <label>续期全部证书</label>
               </div><br>
-              <button id="renewNowBtn" onclick="renewNow();" class="ui basic right floated button" style="margin-top: -2em;"><i class="yellow refresh icon"></i> Renew Now</button>
-              <div class="ui horizontal divider"> OR </div>
-              <p>Select the certificates to automatic renew in the list below</p>
+              <button id="renewNowBtn" onclick="renewNow();" class="ui basic right floated button" style="margin-top: -2em;"><i class="yellow refresh icon"></i> 立即续期</button>
+              <div class="ui horizontal divider"> 或 </div>
+              <p>在下方列表中勾选要自动续期的证书</p>
               <div style="width: 100%; overflow-x: auto; margin-bottom: 1em;">
                 <table id="domainCertFileTable" class="ui very compact unstackable basic disabled table">
                   <thead>
                     <tr>
-                      <th>Domain Name</th>
-                      <th>Match Rule</th>
-                      <th>Auto-Renew</th>
+                      <th>域名</th>
+                      <th>匹配规则</th>
+                      <th>自动续期</th>
                     </tr>
                   </thead>
                   <tbody id="domainTableBody"></tbody>
                 </table>
               </div>
-              <small><i class="ui red info circle icon"></i> Domain in red are expired</small><br>
+              <small><i class="ui red info circle icon"></i> 红色表示已过期</small><br>
               <div class="ui yellow message">
-                Certificate Renew only works on the certification authority (CA) supported by Zoraxy. Check Zoraxy wiki for more information on supported list of CAs.
+                证书续期仅对 Zoraxy 支持的 CA 有效，详见 Zoraxy 文档。
               </div>
-              <button class="ui basic right floated button" onclick="saveAutoRenewPolicy();"><i class="blue save icon"></i> Save Changes</button>
-              <button id="renewSelectedButton" onclick="renewNow();" class="ui basic right floated disabled button"><i class="yellow refresh icon"></i> Renew Selected</button>
+              <button class="ui basic right floated button" onclick="saveAutoRenewPolicy();"><i class="blue save icon"></i> 保存更改</button>
+              <button id="renewSelectedButton" onclick="renewNow();" class="ui basic right floated disabled button"><i class="yellow refresh icon"></i> 续期所选</button>
               <br><br>
           </div>
       </div>
   </div>
   <div class="ui divider"></div>
-  <h3>Generate New Certificate</h3>
-  <p>Enter a new / existing domain(s) to request new certificate(s)</p>
+  <h3>申请新证书</h3>
+  <p>填写一个或多个域名以申请新证书</p>
   <div class="ui form">
     <div class="field">
-      <label>Domain(s)</label>
+      <label>域名</label>
       <input id="domainsInput" type="text" placeholder="example.com" onkeyup="handlePostInputAutomation();">
-      <small>If you have more than one domain in a single certificate, enter the domains separated by commas (e.g. s1.dev.example.com,s2.dev.example.com)
-        <span id="caNoDNSSupportWarning" style="color: #ffaf2e; display:none;"><br> <i class="exclamation triangle icon"></i> Current selected CA do not support DNS challenge</span>
+      <small>单证书多域名时用逗号分隔（如 s1.dev.example.com,s2.dev.example.com）
+        <span id="caNoDNSSupportWarning" style="color: #ffaf2e; display:none;"><br> <i class="exclamation triangle icon"></i> 当前所选 CA 不支持 DNS 验证</span>
       </small>
       
     </div>
     <div class="field multiDomainOnly" style="display:none;">
-      <label>Matching Rule</label>
-      <input id="filenameInput" type="text" placeholder="Enter filename (no file extension)">
-      <small>Matching rule to let Zoraxy pick which certificate to use (Also be used as filename). Usually is the longest common suffix of the entered addresses. (e.g. dev.example.com)</small>
+      <label>匹配规则</label>
+      <input id="filenameInput" type="text" placeholder="输入文件名（不含扩展名）">
+      <small>供 Zoraxy 选择证书的匹配规则（也用作文件名），通常为所填地址的最长公共后缀（如 dev.example.com）</small>
     </div>
     <div class="field multiDomainOnly" style="display:none;">
-      <button class="ui basic fluid button" onclick="autoDetectMatchingRules();">Auto Detect Matching Rule</button>
+      <button class="ui basic fluid button" onclick="autoDetectMatchingRules();">自动检测匹配规则</button>
     </div>
     <div class="field">
-      <label>Certificate Authority (CA)</label>
+      <label>证书颁发机构 (CA)</label>
       <div class="ui selection dropdown" id="ca">
         <input type="hidden" name="ca">
         <i class="dropdown icon"></i>
@@ -119,22 +119,22 @@
           <div class="item" data-value="Let's Encrypt">Let's Encrypt</div>
           <!-- <div class="item" data-value="Buypass">Buypass</div> -->
           <div class="item" data-value="ZeroSSL">ZeroSSL</div>
-          <div class="item" data-value="Custom ACME Server">Custom ACME Server</div>
+          <div class="item" data-value="Custom ACME Server">自定义 ACME 服务器</div>
         </div>
       </div>
     </div>
     <div class="field" id="dnsChallenge">
       <div class="ui checkbox">
         <input type="checkbox" id="useDnsChallenge" onchange="toggleDnsChallenge()">
-        <label>Use a DNS Challenge<br>
+        <label>使用 DNS 验证<br>
       </div>
     </div>
     <div class="field dnsChallengeOnly" style="display:none;">
-      <label>DNS Provider</label>
+      <label>DNS 服务商</label>
       <div class="ui search selection dropdown" id="dnsProvider">
         <input type="hidden" name="dnsProvider" value="">
         <i class="dropdown icon"></i>
-        <div class="default text">Pick a DNS Provider</div>
+        <div class="default text">选择 DNS 服务商</div>
         <div class="menu" id="dnsProviderList">
           <!-- Auto populate moved to acmedns module and initDNSProviderList() -->
         </div>
@@ -142,15 +142,15 @@
     </div>
     <div class="field dnsChallengeOnly" style="display:none;">
       <div class="ui divider"></div>
-        <p>DNS Credentials</p>
+        <p>DNS 凭据</p>
       <div id="dnsProviderAPIFields">
-        <p><i class="ui loading circle notch icon"></i> Generating WebForm</p>
+        <p><i class="ui loading circle notch icon"></i> 正在生成表单</p>
       </div>
-      <h4><i class="yellow exclamation triangle icon"></i> Notes & FAQ</h4>
+      <h4><i class="yellow exclamation triangle icon"></i> 说明与常见问题</h4>
       <div class="ui bulleted list">
-        <div class="item">Domain DNS credentials are stored separately. For each new subdomain, you will need to enter a new DNS credentials.</div>
-        <div class="item">For some DNS providers like CloudFlare, you do not need to fill in all fields.</div>
-        <div class="item">If you are not sure what to fill in, check out the documentation from <a href="https://go-acme.github.io/lego/dns/" target="_blank">lego (DNS challenge library)</a></div>
+        <div class="item">域名 DNS 凭据单独保存，每个新子域名需重新填写。</div>
+        <div class="item">部分 DNS 服务商（如 CloudFlare）不必填写全部字段。</div>
+        <div class="item">不确定如何填写可参考 <a href="https://go-acme.github.io/lego/dns/" target="_blank">lego DNS 文档</a>。</div>
       </div>
       
       <!-- 
@@ -164,33 +164,33 @@
       -->
     </div>
     <div class="field dnsChallengeOnly" style="display:none;">
-      <label>Domain Name Server (optional)</label>
+      <label>域名服务器（可选）</label>
       <input id="dnsInput" type="text" placeholder="ns.example.com">
-      <small>If you have more than one DNS server, enter them separated by commas (e.g. ns1.example.com,ns2.example.com)</small>
+      <small>多个 DNS 服务器用逗号分隔（如 ns1.example.com,ns2.example.com）</small>
     </div>
     <div class="field" id="caInput" style="display:none;">
-      <label>ACME Server URL</label>
+      <label>ACME 服务器 URL</label>
       <input id="caURL" type="text" placeholder="https://example.com/acme/dictionary">
     </div>
     <div class="field" id="kidInput" style="display:none;">
-      <label>EAB Credentials (KID) for current provider</label>
-      <input id="eab_kid" type="text" placeholder="Leave this field blank to keep the current configuration">
+      <label>当前服务商 EAB 凭据 (KID)</label>
+      <input id="eab_kid" type="text" placeholder="留空则保持当前配置">
     </div>
     <div class="field" id="hmacInput" style="display:none;">
-      <label>EAB HMAC Key for current provider</label>
-      <input id="eab_hmac" type="text" placeholder="Leave this field blank to keep the current configuration">
+      <label>当前服务商 EAB HMAC 密钥</label>
+      <input id="eab_hmac" type="text" placeholder="留空则保持当前配置">
     </div>
     <div class="field" id="skipTLS" style="display:none;">
       <div class="ui checkbox">
         <input type="checkbox" id="skipTLSCheckbox">
-        <label>Ignore TLS/SSL Verification Error<br><small>E.g. self-signed, expired certificate (Not Recommended)</small></label>
+        <label>忽略 TLS/SSL 验证错误<br><small>如自签名、过期证书（不推荐）</small></label>
       </div>
     </div>
-    <button id="obtainButton" class="ui basic button" type="submit"><i class="yellow refresh icon"></i> Get Certificate</button>
+    <button id="obtainButton" class="ui basic button" type="submit"><i class="yellow refresh icon"></i> 获取证书</button>
   </div>
   <div class="ui divider"></div>
-  <small>First time setting up HTTPS?<br>Try out our <a href="../tools/https.html" target="_blank">wizard</a></small>
-  <button class="ui basic button"  style="float: right;" onclick="parent.hideSideWrapper();"><i class="remove icon"></i> Cancel</button>
+  <small>首次配置 HTTPS？<br>可尝试 <a href="../tools/https.html" target="_blank">向导</a></small>
+  <button class="ui basic button"  style="float: right;" onclick="parent.hideSideWrapper();"><i class="remove icon"></i> 取消</button>
   <br><br><br><br>
   </div>
 
@@ -256,7 +256,7 @@
             parent.msgbox(data.error, false, 5000);
 
           }else{
-            parent.msgbox("Email updated");
+            parent.msgbox("邮箱已更新");
             $(btn).html(`<i class="green check icon"></i>`);
             $(btn).addClass("disabled");
             setTimeout(function(){
@@ -341,7 +341,7 @@
       if (Object.keys(domainFileList).length == 0){
         //No certificate in this system
         tableBody.append(`<tr>
-          <td colspan="3"><i class="ui green circle check icon"></i> No certificate in use</td>
+          <td colspan="3"><i class="ui green circle check icon"></i> 当前未使用证书</td>
         </tr>`);
       }
     }
@@ -520,7 +520,7 @@
         //if there are only 1 domain
         filename = domains;
       }else if (filename == "" && domains.includes(",")){
-        parent.msgbox("Filename cannot be empty for certs containing multiple domains.", false, 5000);
+        parent.msgbox("包含多个域名的证书不能使用空文件名。", false, 5000);
         $("#obtainButton").removeClass("loading").removeClass("disabled");
         return;
       }
@@ -585,7 +585,7 @@
           } else {
             console.log("Certificate EAB updated successfully");
             // Show success message
-            parent.msgbox("Certificate EAB updated successfully");
+            parent.msgbox("证书 EAB 已更新成功");
             
             // Renew the parent certificate list
             parent.initManagedDomainCertificateList();
@@ -597,7 +597,7 @@
         error: function(error) {
           //$("#obtainButton").removeClass("loading").removeClass("disabled");
           console.log("Failed to update EAB configuration:", error);
-          parent.msgbox("Failed to update EAB configuration");
+          parent.msgbox("EAB 配置更新失败");
           if (callback != undefined){
               callback(false);
             }
@@ -665,7 +665,7 @@
       dnsCredentials = readDnsCredentials();
 
       if(dnsProvider == "") {
-        parent.msgbox("DNS Provider cannot be empty", false, 5000);
+        parent.msgbox("请选择 DNS 服务商", false, 5000);
         $("#obtainButton").removeClass("loading").removeClass("disabled");
         if (callback != undefined){
           callback(false);
@@ -675,7 +675,7 @@
 
       var filename = getFilename();
       if (filename == '') {
-        parent.msgbox("Domain to renew cannot be empty", false, 5000);
+        parent.msgbox("续期域名不能为空", false, 5000);
         if (callback != undefined){
           callback(false);
         }
@@ -702,7 +702,7 @@
           } else {
             console.log("Certificate DNS Credentials updated successfully");
             // Show success message
-            parent.msgbox("Certificate DNS Credentials updated successfully");
+            parent.msgbox("证书 DNS 凭据已更新成功");
             if (callback != undefined){
               callback(true);
             }
@@ -711,7 +711,7 @@
         error: function(error) {
           //$("#obtainButton").removeClass("loading").removeClass("disabled");
           console.log("Failed to update DNS configuration:", error);
-          parent.msgbox("Failed to update DNS configuration");
+          parent.msgbox("DNS 配置更新失败");
           if (callback != undefined){
             callback(false);
           }
@@ -725,14 +725,14 @@
       var filename = getFilename();
       if (filename == '') {
         if (callback != undefined){
-          parent.msgbox("Domain to obtain certificate cannot be empty", false)
+          parent.msgbox("申请证书的域名不能为空", false)
           callback(false);
         }
         return;
       }
       var email = $("#caRegisterEmail").val();
       if (email == ""){
-        parent.msgbox("ACME renew email is not set", false)
+        parent.msgbox("未设置 ACME 续期邮箱", false)
         if (callback != undefined){callback(false);}
         return;
       }
@@ -771,7 +771,7 @@
           } else {
             console.log("Certificate renewed successfully");
             // Show success message
-            parent.msgbox("Certificate renewed successfully");
+            parent.msgbox("证书续期成功");
             // Renew the parent certificate list
             parent.initManagedDomainCertificateList();
 
@@ -883,7 +883,7 @@
       }
 
       if (!longestSuffix.includes(".")){
-        parent.msgbox("Auto Detect failed: Multiple Domains", false, 5000);
+        parent.msgbox("自动检测失败：多个域名", false, 5000);
         return;
       }
       $("#filenameInput").val(longestSuffix);
@@ -929,7 +929,7 @@
           method: "POST",
           data: {opr: "setAuto"},
           success: function(data){
-            parent.msgbox("Renew policy rule updated")
+            parent.msgbox("续期策略已更新")
           }
         });
       }else{
@@ -943,7 +943,7 @@
           method: "POST",
           data: {opr: "setSelected", domains: JSON.stringify(checkedNames)},
           success: function(data){
-            parent.msgbox("Renew policy rule updated")
+            parent.msgbox("续期策略已更新")
           }
         });
       }

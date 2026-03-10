@@ -14,47 +14,47 @@
         <script src="../script/darktheme.js"></script>
         <br>
         <div class="ui container">
-            <h3 class="ui header">Basic Auth Credential</h3>
+            <h3 class="ui header">基础认证凭据</h3>
             <div class="scrolling content ui form">
                 <div id="inlineEditBasicAuthCredentials" class="field">
-                    <p>Enter the username and password for allowing them to access this proxy endpoint</p>
+                    <p>输入允许访问此代理端点的用户名和密码</p>
                     <table class="ui basic very compacted unstackable celled table">
                         <thead>
                         <tr>
-                            <th>Username</th>
-                            <th>Password</th>
-                            <th>Remove</th>
+                            <th>用户名</th>
+                            <th>密码</th>
+                            <th>移除</th>
                         </tr></thead>
                         <tbody id="inlineEditBasicAuthCredentialTable">
                         <tr>
-                            <td colspan="3"><i class="ui green circle check icon"></i> No Entered Credential</td>
+                            <td colspan="3"><i class="ui green circle check icon"></i> 未添加凭据</td>
                         </tr>
                         </tbody>
                     </table>
                     <div class="three small fields credentialEntry">
                         <div class="field">
-                            <input id="inlineEditBasicAuthCredUsername" type="text" placeholder="Username" autocomplete="off">
+                            <input id="inlineEditBasicAuthCredUsername" type="text" placeholder="用户名" autocomplete="off">
                         </div>
                         <div class="field">
-                            <input id="inlineEditBasicAuthCredPassword" type="password" placeholder="Password" autocomplete="off">
+                            <input id="inlineEditBasicAuthCredPassword" type="password" placeholder="密码" autocomplete="off">
                         </div>
                         <div class="field" >
-                            <button class="ui basic button" onclick="addCredentialsToEditingList();"><i class="green add icon"></i> Add Credential</button>
+                            <button class="ui basic button" onclick="addCredentialsToEditingList();"><i class="green add icon"></i> 添加凭据</button>
                         </div>
                         <div class="ui divider"></div>
                     </div>
                 </div>
             </div>
             <div class="ui divider"></div>
-            <h3 class="ui header">Authentication Exclusion</h3>
+            <h3 class="ui header">认证排除</h3>
             <div class="scrolling content ui form">
-                <p>Exclude <b>specific directories which contains the following subpath prefix</b> or <b>IP / CIDR</b> from authentication. Useful if you are hosting services require remote API access.</p>
+                <p>将<b>包含以下路径前缀的目录</b>或<b>IP/CIDR</b>排除在认证之外，适用于需远程 API 访问的服务。</p>
                 <table class="ui basic very compacted unstackable celled table">
                     <thead>
                     <tr>
-                        <th>Exception Type</th>
-                        <th>Path Prefix / CIDR</th>
-                        <th>Remove</th>
+                        <th>排除类型</th>
+                        <th>路径前缀 / CIDR</th>
+                        <th>移除</th>
                     </tr></thead>
                     <tbody id="exclusionPaths">
                     <tr>

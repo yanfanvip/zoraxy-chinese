@@ -1,134 +1,134 @@
 <div class="standardContainer">
     <div class="ui basic segment">
-        <h2>Utilities</h2>
-        <p>You might find these tools or information helpful when setting up your gateway server</p>
+        <h2>实用工具</h2>
+        <p>配置网关时可能用到的工具与信息</p>
     </div>
     <div class="ui top attached tabular menu">
-        <a class="utils item active" data-tab="utiltab1"><i class="ui user circle blue icon"></i> Accounts</a>
-        <a class="utils item" data-tab="utiltab2"><i class="ui grey file alternate outline icon"></i> Logger</a>
-        <a class="utils item" data-tab="utiltab3">Toolbox</a>
-        <a class="utils item" data-tab="utiltab4">System</a>
+        <a class="utils item active" data-tab="utiltab1"><i class="ui user circle blue icon"></i> 账户</a>
+        <a class="utils item" data-tab="utiltab2"><i class="ui grey file alternate outline icon"></i> 日志</a>
+        <a class="utils item" data-tab="utiltab3">工具箱</a>
+        <a class="utils item" data-tab="utiltab4">系统</a>
     </div>
 
     <div class="ui bottom attached tab segment utilitiesTabs active" data-tab="utiltab1">
         <div class="extAuthOnly" style="display:none;">
             <div class="ui basic segment">
-                <i class="ui green circle check icon"></i> Account options are not available due to -noauth flag is set to true.
+                <i class="ui green circle check icon"></i> 已启用 -noauth，账户选项不可用。
             </div>
         </div>
         <div class="selfauthOnly">
-            <h3>Change Password</h3>
-            <p>Update the current account credentials</p>
+            <h3>修改密码</h3>
+            <p>更新当前账户凭据</p>
             <div class="ui basic segment">
-                <h5><i class="chevron down icon"></i> Change Password</h5>
+                <h5><i class="chevron down icon"></i> 修改密码</h5>
                 <div class="ui form">
                     <div class="field">
-                        <label>Current Password</label>
-                        <input type="password" name="oldPassword" placeholder="Current Password">
+                        <label>当前密码</label>
+                        <input type="password" name="oldPassword" placeholder="当前密码">
                     </div>
                     <div class="field">
-                        <label>New Password</label>
-                        <input type="password" name="newPassword" placeholder="New Password">
+                        <label>新密码</label>
+                        <input type="password" name="newPassword" placeholder="新密码">
                     </div>
                     <div class="field">
-                        <label>Confirm New Password</label>
-                        <input type="password" name="confirmNewPassword" placeholder="Confirm New Password">
+                        <label>确认新密码</label>
+                        <input type="password" name="confirmNewPassword" placeholder="确认新密码">
                     </div>
-                    <button class="ui basic button" onclick="changePassword()"><i class="ui teal key icon"></i> Change Password</button>
+                    <button class="ui basic button" onclick="changePassword()"><i class="ui teal key icon"></i> 修改密码</button>
                 </div>
     
                 <div id="passwordChangeSuccMsg" class="ui green message" style="display:none;">
-                    <i class="ui circle checkmark green icon "></i> Password Updated
+                    <i class="ui circle checkmark green icon "></i> 密码已更新
                 </div>
             </div>
             <div class="ui divider"></div>
-            <h3>Forget Password Email</h3>
-            <p>The following SMTP settings help you to reset your password in case you have lost your management account.</p>
+            <h3>忘记密码邮件</h3>
+            <p>以下 SMTP 设置用于在忘记管理账户时发送重置链接。</p>
             <form id="email-form" class="ui form">
                 <div class="field">
-                    <label>Sender Address</label>
-                    <input type="text" name="senderAddr" placeholder="E.g. noreply@zoraxy.aroz.org">
+                    <label>发件人地址</label>
+                    <input type="text" name="senderAddr" placeholder="例如 noreply@zoraxy.aroz.org">
                 </div>
                 <div class="field">
-                    <p><i class="caret down icon"></i> Connection setup for email service provider</p>
+                    <p><i class="caret down icon"></i> 邮件服务连接设置</p>
                     <div class="fields">
                         <div class="twelve wide field">
-                            <label>SMTP Provider Hostname</label>
-                            <input type="text" name="hostname" placeholder="E.g. mail.gandi.net">
+                            <label>SMTP 主机名</label>
+                            <input type="text" name="hostname" placeholder="例如 mail.gandi.net">
                         </div>
             
                         <div class="four wide field">
-                            <label>Port</label>
-                            <input type="number" name="port" placeholder="E.g. 587" value="587">
+                            <label>端口</label>
+                            <input type="number" name="port" placeholder="例如 587" value="587">
                         </div>
                     </div>
                 </div>
     
                 <div class="field">
-                    <p><i class="caret down icon"></i> Credentials for SMTP server authentications</p>
+                    <p><i class="caret down icon"></i> SMTP 认证凭据</p>
                     <div class="field">
-                        <label>Sender Username / Email</label>
-                        <input type="text" name="username" placeholder="e.g. admin or admin@mydomain.com">
+                        <label>发件人用户名 / 邮箱</label>
+                        <input type="text" name="username" placeholder="例如 admin 或 admin@mydomain.com">
                     </div>
                 </div>
                 <div class="field">
-                    <label>Sender Password</label>
-                    <input type="password" name="password" placeholder="Password of the email account">
-                    <small>Leave empty to use the old password</small>
+                    <label>发件人密码</label>
+                    <input type="password" name="password" placeholder="邮箱账户密码">
+                    <small>留空则沿用原密码</small>
                 </div>
                
-                <p> <i class="caret down icon"></i> Email for sending account reset link</p>
+                <p> <i class="caret down icon"></i> 用于发送账户重置链接的邮箱</p>
                 <div class="field">
-                    <label>Admin / Receiver Address</label>
-                    <input type="text" name="recvAddr" placeholder="E.g. personalEmail@gmail.com">
+                    <label>管理员/接收邮箱</label>
+                    <input type="text" name="recvAddr" placeholder="例如 personalEmail@gmail.com">
                 </div>
                 
-                <button class="ui basic button" type="submit"><i class="blue save icon"></i> Set SMTP Configs</button>
-                <button class="ui basic button" onclick="event.preventDefault(); sendTestEmail(this);"><i class="teal mail icon"></i> Send Test Email</button>
+                <button class="ui basic button" type="submit"><i class="blue save icon"></i> 保存 SMTP 配置</button>
+                <button class="ui basic button" onclick="event.preventDefault(); sendTestEmail(this);"><i class="teal mail icon"></i> 发送测试邮件</button>
             </form>
         </div>
     </div>
     <div class="ui bottom attached tab segment utilitiesTabs" data-tab="utiltab2">
         <!-- Log Settings -->
-        <h3>Log Settings</h3>
-        <p>Configure log rotation settings for the system logger</p>
+        <h3>日志设置</h3>
+        <p>配置系统日志轮转</p>
         <div class="ui basic segment">
             <form id="log-settings-form" class="ui form">
                 <div class="field">
                     <div class="ui toggle checkbox">
                         <input type="checkbox" id="logRotationEnabled" name="enabled">
-                        <label>Enable Log Rotation</label>
+                        <label>启用日志轮转</label>
                     </div>
                 </div>
                 <div class="field">
-                    <label>Maximum Log File Size</label>
+                    <label>单日志文件最大大小</label>
                     <div class="ui right labeled input">
-                        <input type="text" id="logMaxSize" name="maxSize" placeholder="e.g. 200M, 10K, 500" value="0">
-                        <div class="ui basic label">bytes</div>
+                        <input type="text" id="logMaxSize" name="maxSize" placeholder="例如 200M, 10K, 500" value="0">
+                        <div class="ui basic label">字节</div>
                     </div>
-                    <small>Enter size with suffix (K, M, G) or plain number. Set to 0 to disable.</small>
+                    <small>支持 K、M、G 后缀或纯数字，设为 0 表示不限制。</small>
                 </div>
                 <div class="field">
-                    <label>Maximum Backup Files</label>
+                    <label>保留备份文件数量</label>
                     <input type="number" id="logMaxBackups" name="maxBackups" placeholder="10" min="1" value="16">
-                    <small>Maximum number of rotated log files to keep.</small>
+                    <small>轮转后保留的旧日志文件数量上限。</small>
                 </div>
                 <div class="field">
                     <div class="ui checkbox">
                         <input type="checkbox" id="logCompressionEnabled" name="compress">
-                        <label>Enable Log Compression</label>
+                        <label>启用日志压缩</label>
                     </div>
                     <br>
-                    <small>When enabled, rotated log files will be compressed using ZIP format.</small>
+                    <small>启用后，轮转出的旧日志将使用 ZIP 压缩。</small>
                 </div>
                 <button class="ui basic button" type="submit">
-                    <i class="green save icon"></i> Save Settings
+                    <i class="green save icon"></i> 保存设置
                 </button>
                 <button class="ui basic button" id="rotateLogBtn" onclick="triggerLogRotation(event)">
-                    <i class="yellow archive icon" ></i> Rotate Log Now
+                    <i class="yellow archive icon" ></i> 立即轮转日志
                 </button>
                 <div id="logSettingsSuccessMsg" class="ui green message" style="display:none;">
-                    <i class="checkmark icon"></i> Log settings updated successfully
+                    <i class="checkmark icon"></i> 日志设置已更新
                 </div>
                 <div id="logSettingsErrorMsg" class="ui red message" style="display:none;">
                     <i class="exclamation triangle icon"></i> <span id="logSettingsErrorText"></span>
@@ -138,84 +138,84 @@
         <div class="ui divider"></div>
 
         <!-- Log Viewer -->
-        <h3>System Log Viewer</h3>
-        <p>View and download Zoraxy log</p>
-        <a class="ui basic button" href="snippet/logview.html" target="_blank"><i class="ui blue file icon"></i> Open Log Viewer</a>
+        <h3>系统日志查看</h3>
+        <p>查看与下载 Zoraxy 日志</p>
+        <a class="ui basic button" href="snippet/logview.html" target="_blank"><i class="ui blue file icon"></i> 打开日志查看器</a>
         <div class="ui divider"></div>
     </div>
     <div class="ui bottom attached tab segment utilitiesTabs" data-tab="utiltab3">
-        <h3> IP Address to CIDR</h3>
-        <p>No experience with CIDR notations? Here are some tools you can use to make setting up easier.</p>
+        <h3>IP 与 CIDR 工具</h3>
+        <p>不熟悉 CIDR？可使用下列工具简化配置。</p>
         <div class="ui basic segment">
-            <h5><i class="chevron down icon"></i> IP Range to CIDR Conversion</h5>
+            <h5><i class="chevron down icon"></i> IP 范围转 CIDR</h5>
             <div class="ui message">
-                <i class="info circle icon"></i> Note that the CIDR generated here covers additional IP address before or after the given range. If you need more details settings, please use CIDR with a smaller range and add additional IPs for detail range adjustment.
+                <i class="info circle icon"></i> 生成的 CIDR 可能覆盖给定范围之外的 IP。若需更精细，请使用更小范围的 CIDR 或单独添加 IP。
             </div>
             <div class="ui input">
-                <input type="text" placeholder="Start IP" id="startIpInput">
+                <input type="text" placeholder="起始 IP" id="startIpInput">
             </div>
             <div class="ui input">
-                <input type="text" placeholder="End IP" id="endIpInput">
+                <input type="text" placeholder="结束 IP" id="endIpInput">
             </div>
             <br>
-            <button style="margin-top: 0.6em;" class="ui basic button" onclick="convertToCIDR()">Convert</button>
-            <p>Results: <div id="cidrOutput">N/A</div></p>
+            <button style="margin-top: 0.6em;" class="ui basic button" onclick="convertToCIDR()">转换</button>
+            <p>结果：<div id="cidrOutput">N/A</div></p>
         </div>
     
         <div class="ui basic segment">
-            <h5><i class="chevron down icon"></i> CIDR to IP Range Conversion</h5>
+            <h5><i class="chevron down icon"></i> CIDR 转 IP 范围</h5>
             <div class="ui action input">
                 <input type="text" placeholder="CIDR" id="cidrInput">
-                <button class="ui basic button" onclick="convertToIPRange()">Convert</button>
+                <button class="ui basic button" onclick="convertToIPRange()">转换</button>
             </div>
-            <p>Results: <div id="ipRangeOutput">N/A</div></p>
+            <p>结果：<div id="ipRangeOutput">N/A</div></p>
         </div>
         <div class="ui divider"></div>
     </div>
     <div class="ui bottom attached tab segment utilitiesTabs" data-tab="utiltab4">
         <!-- Config Tools -->
-        <h3>System Backup & Restore</h3>
-        <p>Options related to system backup, migrate and restore.</p>
-        <button class="ui basic button" onclick="showSideWrapper('snippet/configTools.html');"><i class="ui green undo icon icon"></i> Open Config Tools</button>
+        <h3>系统备份与恢复</h3>
+        <p>系统备份、迁移与恢复相关选项。</p>
+        <button class="ui basic button" onclick="showSideWrapper('snippet/configTools.html');"><i class="ui green undo icon icon"></i> 打开配置工具</button>
         <div class="ui divider"></div>
         
         <!-- Statistic Reset or Export -->
-        <h3>Advanced Statistics Operations</h3>
-        <p>Export or reset the statistics collected by Zoraxy within a selected time range</p>
-        <button class="ui basic red button" onclick="handleResetAllStats();"><i class="trash icon"></i> RESET ALL STATISTICS</button>
+        <h3>高级统计操作</h3>
+        <p>导出或重置指定时间范围内的 Zoraxy 统计数据</p>
+        <button class="ui basic red button" onclick="handleResetAllStats();"><i class="trash icon"></i> 重置全部统计</button>
         <div class="ui divider"></div>
         
             <!-- System Information -->
         <div id="zoraxyinfo">
             <h3 class="ui header">
-                System Information
+                系统信息
             </h3>
-            <p>Basic information about this zoraxy host</p>
+            <p>本机 Zoraxy 基本信息</p>
             <table class="ui very basic collapsing celled table">
                 <tbody>
                     <tr>
-                        <td>Host UUID</td>
+                        <td>主机 UUID</td>
                         <td class="uuid"></td>
                     </tr>
                     <tr>
-                        <td>Version</td>
+                        <td>版本</td>
                         <td class="version"></td>
                     </tr>
                     <tr>
-                        <td>Build</td>
+                        <td>构建</td>
                         <td class="development"></td>
                     </tr>
                     <tr>
-                        <td>Running Since</td>
+                        <td>运行时长</td>
                         <td class="boottime"></td>
                     </tr>
                     <tr>
-                        <td>Enable SSH Loopback</td>
+                        <td>SSH 回环</td>
                         <td class="sshlb"></td>
                     </tr>
                 </tbody>
             </table>
-            <p>Zoraxy is developed by tobychui for <a href="//imuslab.com" target="_blank">imuslab</a> and open source under <a href="https://www.gnu.org/licenses/agpl-3.0.txt">AGPL</a></p>
+            <p>Zoraxy 由 tobychui 为 <a href="//imuslab.com" target="_blank">imuslab</a> 开发，基于 <a href="https://www.gnu.org/licenses/agpl-3.0.txt">AGPL</a> 开源</p>
         </div>
     </div>
     <br>
@@ -264,20 +264,20 @@
             var m = Math.floor(seconds % 3600 / 60);
             var s = Math.floor(seconds % 60);
 
-            var dDisplay = d > 0 ? d + (d == 1 ? " day, " : " days, ") : "";
-            var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
-            var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
-            var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+            var dDisplay = d > 0 ? d + (d == 1 ? " 天 " : " 天 ") : "";
+            var hDisplay = h > 0 ? h + (h == 1 ? " 小时 " : " 小时 ") : "";
+            var mDisplay = m > 0 ? m + (m == 1 ? " 分钟 " : " 分钟 ") : "";
+            var sDisplay = s > 0 ? s + (s == 1 ? " 秒" : " 秒") : "";
             return dDisplay + hDisplay + mDisplay + sDisplay;
         }
 
         console.log(data);
         $("#zoraxyinfo .uuid").text(data.NodeUUID);
-        $("#zoraxyinfo .development").text(data.Development?"Development":"Release");
+        $("#zoraxyinfo .development").text(data.Development?"开发版":"正式版");
         $("#zoraxyinfo .version").text(data.Version);
         $(".zrversion").text("v." + data.Version); //index footer
-        $("#zoraxyinfo .boottime").text(timeConverter(data.BootTime) + ` ( ${secondsToDhms(parseInt(Date.now()/1000) - data.BootTime)} ago)`);
-        $("#zoraxyinfo .sshlb").html(data.EnableSshLoopback?`<i class="ui yellow exclamation triangle icon"></i> Enabled`:`Disabled`);
+        $("#zoraxyinfo .boottime").text(timeConverter(data.BootTime) + `（已运行 ${secondsToDhms(parseInt(Date.now()/1000) - data.BootTime)}）`);
+        $("#zoraxyinfo .sshlb").html(data.EnableSshLoopback?`<i class="ui yellow exclamation triangle icon"></i> 已启用`:`未启用`);
     });
 
     function changePassword() {
@@ -304,7 +304,7 @@
                 }
             },
             error: function (xhr, status, error) {
-                alert("Error changing password: " + error);
+                alert("修改密码失败：" + error);
             },
         });
     }
@@ -335,7 +335,7 @@
                if (data.error != undefined){
                     msgbox(data.error, false, 5000);
                }else{
-                    msgbox("SMTP Account Updated")
+                    msgbox("SMTP 账户已更新")
                }
             },
             error: function(xhr, status, error) {
@@ -365,7 +365,7 @@
             if (data.error !== undefined){
                 msgbox(data.error, false, 5000);
             }else{
-                msgbox("Test Email Sent")
+                msgbox("测试邮件已发送")
             }
             $(btn).removeClass("loading").removeClass("disabled");
         })
@@ -427,7 +427,7 @@
       const cidrOutput = document.getElementById('cidrOutput');
       const cidr = ipRangeToCIDR(startIp, endIp);
       const ipRange = cidrToRange(cidr);
-      cidrOutput.innerHTML = `CIDR: ${cidr} <br> (Cover range: ${ipRange[0]} to ${ipRange[1]})`;
+      cidrOutput.innerHTML = `CIDR: ${cidr} <br>（范围：${ipRange[0]} 至 ${ipRange[1]}）`;
     }
 
     // CIDR to IP Range Conversion
@@ -435,7 +435,7 @@
       const cidr = document.getElementById('cidrInput').value.trim();
       const ipRangeOutput = document.getElementById('ipRangeOutput');
       const ipRange = cidrToRange(cidr);
-      ipRangeOutput.innerHTML = `Start IP: ${ipRange[0]}<br>End IP: ${ipRange[1]}`;
+      ipRangeOutput.innerHTML = `起始 IP：${ipRange[0]}<br>结束 IP：${ipRange[1]}`;
     }
 
     //Ip conversion function
@@ -604,7 +604,7 @@
         // Show loading state on button
         const rotateBtn = $('#rotateLogBtn');
         const originalText = rotateBtn.html();
-        rotateBtn.html('<i class="spinner loading icon"></i> Rotating...').addClass('loading disabled');
+        rotateBtn.html('<i class="spinner loading icon"></i> 轮转中...').addClass('loading disabled');
 
         $.get("/api/log/rotate/trigger", function(data) {
             if (data.error) {
@@ -612,7 +612,7 @@
             } else {
                 showLogSettingsSuccess();
                 // Update success message for rotation
-                $("#logSettingsSuccessMsg").html('<i class="archive icon"></i> Log rotation triggered successfully').stop().finish().slideDown("fast").delay(3000).slideUp("fast");
+                $("#logSettingsSuccessMsg").html('<i class="archive icon"></i> 日志轮转已触发').stop().finish().slideDown("fast").delay(3000).slideUp("fast");
             }
         }).fail(function(xhr, status, error) {
             showLogSettingsError("Failed to rotate log: " + error);
@@ -635,7 +635,7 @@
         Statistics Operations
     */
     function handleResetAllStats(){
-        if (confirm("Confirm remove ALL statistics from the system? This action is irreversible.")){
+        if (confirm("确认清除系统中全部统计数据？此操作不可恢复。")){
             $.cjax({
                 url: "/api/analytic/resetAll",
                 method: "POST",
@@ -643,7 +643,7 @@
                     if (data.error != undefined){
                         msgbox(data.error, false, 5000);
                     }else{
-                        msgbox("All Statistics Cleared");
+                        msgbox("全部统计数据已清除");
                     }
                 }
             })

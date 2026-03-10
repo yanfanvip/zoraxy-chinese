@@ -5,20 +5,20 @@
     </div>
     <div class="ui divider"></div>
     <div class="ui top attached tabular menu ssoTabs">
-        <a class="item active" data-tab="forward_auth_tab">Forward Auth</a>
+        <a class="item active" data-tab="forward_auth_tab">转发认证</a>
         <a class="item" data-tab="oauth2_tab">OAuth 2.0</a>
         <a class="item" data-tab="zoraxy_sso_tab">Zoraxy Auth</a>
         </div>
         <div class="ui bottom attached tab segment active" data-tab="forward_auth_tab">
         <!-- Forward Auth -->
-        <h2>Forward Auth</h2>
-        <p>Configuration settings for the Forward Auth provider.</p>
-        <p>The Forward Auth provider makes a subrequest to an authorization server that supports Forward Auth, then either:</p>
+        <h2>转发认证</h2>
+        <p>转发认证（Forward Auth）提供方的配置。</p>
+        <p>转发认证会向支持该协议的认证服务器发起子请求，然后：</p>
         <ul>
-            <li>Allows the request to flow through to the backend when the authorization server responds with a 200-299 status code.</li>
-            <li>Responds with the response from the authorization server.</li>
+            <li>认证服务器返回 200–299 时，放行请求到后端。</li>
+            <li>否则返回认证服务器的响应。</li>
         </ul>
-        <p>Example authorization servers that support this:</p>
+        <p>支持此方式的认证服务器示例：</p>
         <ul>
             <li><a href="https://www.authelia.com" rel=”noopener noreferrer” target="_blank">Authelia</a></li>
             <li><a href="https://goauthentik.io/" rel=”noopener noreferrer” target="_blank">Authentik</a></li>
@@ -26,91 +26,90 @@
         </ul>
         <form class="ui form" action="#" id="forwardAuthSettings">
             <div class="field">
-                <label for="forwardAuthAddress">Address</label>
-                <input type="text" id="forwardAuthAddress" name="forwardAuthAddress" placeholder="Enter Forward Auth Address">
-                <small>The full remote address or URL of the authorization servers forward auth endpoint. <strong>Example:</strong> http://127.0.0.1:9091/authz/forward-auth</small>
+                <label for="forwardAuthAddress">地址</label>
+                <input type="text" id="forwardAuthAddress" name="forwardAuthAddress" placeholder="输入 Forward Auth 地址">
+                <small>认证服务器 Forward Auth 端点的完整地址或 URL。<strong>示例：</strong> http://127.0.0.1:9091/authz/forward-auth</small>
             </div>
             <div class="ui basic segment advanceoptions" style="margin-top:0.6em;">
                 <div class="ui advancedSSOForwardAuthOptions accordion">
                     <div class="title">
                         <i class="dropdown icon"></i>
-                        Advanced Options
+                        高级选项
                     </div>
                     <div class="content">
                         <div class="field">
-                            <label for="forwardAuthResponseHeaders">Response Headers</label>
-                            <input type="text" id="forwardAuthResponseHeaders" name="forwardAuthResponseHeaders" placeholder="Enter Forward Auth Response Headers">
+                            <label for="forwardAuthResponseHeaders">响应头</label>
+                            <input type="text" id="forwardAuthResponseHeaders" name="forwardAuthResponseHeaders" placeholder="输入要复制到后端的响应头">
                             <small>
-                                Comma separated list of case-insensitive headers to copy from the authorization servers response to the request sent to the backend. If not set no headers are copied. <br>
-                                <strong>Example:</strong> <code>Remote-User,Remote-Groups,Remote-Email,Remote-Name</code>
+                                从认证服务器响应复制到后端请求的头（逗号分隔，不区分大小写）。未设置则不复制。<br>
+                                <strong>示例：</strong> <code>Remote-User,Remote-Groups,Remote-Email,Remote-Name</code>
                             </small>
                         </div>
                         <div class="field">
-                            <label for="forwardAuthResponseClientHeaders">Response Client Headers</label>
-                            <input type="text" id="forwardAuthResponseClientHeaders" name="forwardAuthResponseClientHeaders" placeholder="Enter Forward Auth Response Client Headers">
+                            <label for="forwardAuthResponseClientHeaders">响应客户端头</label>
+                            <input type="text" id="forwardAuthResponseClientHeaders" name="forwardAuthResponseClientHeaders" placeholder="输入要复制到客户端的响应头">
                             <small>
-                                Comma separated list of case-insensitive headers to copy from the authorization servers response to the <b><i>response sent to the client</i></b>. If not set no headers are copied. <br>
-                                <strong>Example:</strong> <code>Set-Cookie,WWW-Authenticate</code>
+                                从认证服务器响应复制到<b><i>返回客户端的响应</i></b>的头（逗号分隔）。未设置则不复制。<br>
+                                <strong>示例：</strong> <code>Set-Cookie,WWW-Authenticate</code>
                             </small>
                         </div>
                         <div class="field">
-                            <label for="forwardAuthRequestHeaders">Request Headers</label>
-                            <input type="text" id="forwardAuthRequestHeaders" name="forwardAuthRequestHeaders" placeholder="Enter Forward Auth Request Headers">
+                            <label for="forwardAuthRequestHeaders">请求头</label>
+                            <input type="text" id="forwardAuthRequestHeaders" name="forwardAuthRequestHeaders" placeholder="输入发往认证服务器的请求头">
                             <small>
-                                Comma separated list of case-insensitive headers to copy from the original request to the <b><i>request made to the authorization server</i></b>. If not set all headers are copied. <br>
-                                <strong>Recommendation:</strong> Generally it's recommended to leave this blank or use the below example for predictable results. <br>
-                                <strong>Example:</strong> <code>Accept,X-Requested-With,Cookie,Authorization,Proxy-Authorization</code>
+                                从原始请求复制到<b><i>发往认证服务器的请求</i></b>的头（逗号分隔）。未设置则复制全部。建议留空或使用下方示例。<br>
+                                <strong>示例：</strong> <code>Accept,X-Requested-With,Cookie,Authorization,Proxy-Authorization</code>
                             </small>
                         </div>
                         <div class="field">
-                            <label for="forwardAuthRequestIncludedCookies">Request Included Cookies</label>
-                            <input type="text" id="forwardAuthRequestIncludedCookies" name="forwardAuthRequestIncludedCookies" placeholder="Enter Forward Auth Request Included Cookies">
+                            <label for="forwardAuthRequestIncludedCookies">请求包含的 Cookie</label>
+                            <input type="text" id="forwardAuthRequestIncludedCookies" name="forwardAuthRequestIncludedCookies" placeholder="输入要包含的 Cookie 名称">
                             <small>
-                                Comma separated list of case-sensitive cookie names to copy from the original request to the <b><i>request made to the authorization server</i></b>. If not set all cookies are included. This allows omitting all cookies not required by the authorization server.<br>
-                                <strong>Example:</strong> <code>authelia_session,another_session</code>
+                                从原始请求复制到<b><i>发往认证服务器</i></b>的 Cookie 名称（逗号分隔，区分大小写）。未设置则包含全部。<br>
+                                <strong>示例：</strong> <code>authelia_session,another_session</code>
                             </small>
                         </div>
                         <div class="field">
-                            <label for="forwardAuthRequestExcludedCookies">Request Excluded Cookies</label>
-                            <input type="text" id="forwardAuthRequestExcludedCookies" name="forwardAuthRequestExcludedCookies" placeholder="Enter Forward Auth Request Excluded Cookies">
+                            <label for="forwardAuthRequestExcludedCookies">请求排除的 Cookie</label>
+                            <input type="text" id="forwardAuthRequestExcludedCookies" name="forwardAuthRequestExcludedCookies" placeholder="输入要从后端请求中排除的 Cookie">
                             <small>
-                                Comma separated list of case-sensitive cookie names to exclude from the <b><i>request made to the backend application</i></b>. If not set no cookies are excluded. This allows omitting the cookie intended only for the authorization server.<br>
-                                <strong>Example:</strong> <code>authelia_session,another_session</code>
+                                从<b><i>发往后端应用的请求</i></b>中排除的 Cookie 名称（逗号分隔）。用于排除仅给认证服务器使用的 Cookie。<br>
+                                <strong>示例：</strong> <code>authelia_session,another_session</code>
                             </small>
                         </div>
                         <div class="ui checkbox">
                             <input type="checkbox" id="forwardAuthRequestIncludeBody" name="forwardAuthRequestIncludeBody" value="Forward Auth Request Include Request Body">
-                            <label for="forwardAuthRequestIncludeBody">Forward Auth Request Include Request Body<br><small>This allows the request body from the <b><i>request made from the client</i></b> to be included in the <b><i>request made to the authorization server</i></b>. Generally this should not be enabled.</small></label>
+                            <label for="forwardAuthRequestIncludeBody">Forward Auth 请求包含请求体<br><small>将<b><i>客户端请求</i></b>的请求体一并发送给<b><i>认证服务器</i></b>。一般不建议启用。</small></label>
                         </div>
                         <div class="ui checkbox">
                             <input type="checkbox" id="forwardAuthRequestUseXOriginalHeaders" name="forwardAuthRequestUseXOriginalHeaders" value="Use X-Original-* Headers">
-                            <label for="forwardAuthRequestUseXOriginalHeaders">Use X-Original-* Headers<br><small>This is used for implementations which do not use the X-Forwarded-* headers. In addition if the authorization server responds with a 401 and Location header the status will be changed to 302.</small></label>
+                            <label for="forwardAuthRequestUseXOriginalHeaders">使用 X-Original-* 头<br><small>用于不使用 X-Forwarded-* 的实现。若认证服务器返回 401 且带 Location 头，状态码将改为 302。</small></label>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="ui basic button" type="submit"><i class="green check icon"></i> Apply Change</button>
-            <button class="ui basic button" type="button" id="forwardAuthClear"><i class="red trash icon"></i> Clear</button>
+            <button class="ui basic button" type="submit"><i class="green check icon"></i> 应用更改</button>
+            <button class="ui basic button" type="button" id="forwardAuthClear"><i class="red trash icon"></i> 清空</button>
         </form>
         </div>
         <div class="ui bottom attached tab segment" data-tab="oauth2_tab">
         <!-- OAuth 2.0 -->
         <h2>OAuth 2.0</h2>
-        <p>Configuration settings for OAuth 2.0 authentication provider.</p>
+        <p>OAuth 2.0 认证提供方配置。</p>
 
         <form class="ui form" action="#" id="oauth2Settings">
             <div class="field">
-                <label for="oauth2ClientId">Client ID</label>
-                <input type="text" id="oauth2ClientId" name="oauth2ClientId" placeholder="Enter Client ID">
-                <small>Public identifier of the OAuth2 application</small>
+                <label for="oauth2ClientId">客户端 ID</label>
+                <input type="text" id="oauth2ClientId" name="oauth2ClientId" placeholder="输入客户端 ID">
+                <small>OAuth2 应用的公开标识</small>
             </div>
             <div class="field">
-                <label for="oauth2ClientSecret">Client Secret</label>
-                <input type="password" id="oauth2ClientSecret" name="oauth2ClientSecret" placeholder="Enter Client Secret">
-                <small>Secret key of the OAuth2 application</small>
+                <label for="oauth2ClientSecret">客户端密钥</label>
+                <input type="password" id="oauth2ClientSecret" name="oauth2ClientSecret" placeholder="输入客户端密钥">
+                <small>OAuth2 应用的密钥</small>
             </div>
             <div class="field">
-                <label for="oauth2CodeChallengeMethod">Code Challenge Method</label>
+                <label for="oauth2CodeChallengeMethod">Code Challenge 方式</label>
 
                 <div class="ui selection dropdown" id="oauth2CodeChallengeMethod">
                     <input type="hidden" name="oauth2CodeChallengeMethod">
@@ -122,80 +121,80 @@
                         <div class="item" data-value="PKCE_S256">PKCE (S256)</div>
                     </div>
                 </div>
-                <small>Options: <br>
-                    Plain: No code challenge is used.<br>
-                    PKCE: Uses a code challenge for added security.<br>
-                    PKCE (S256): Uses a hashed code challenge (SHA-256) for maximum protection.<br>
-                    <strong>Note:</strong> PKCE (especially S256) is recommended for better security.
+                <small>选项：<br>
+                    Plain：不使用 code challenge。<br>
+                    PKCE：使用 code challenge 增强安全。<br>
+                    PKCE (S256)：使用 SHA-256 哈希的 code challenge。<br>
+                    <strong>建议：</strong> 推荐使用 PKCE（尤其是 S256）。
                 </small>
             </div>
             <div class="field">
                 <label for="oauth2WellKnownUrl">Discovery URL</label>
-                <input type="text" id="oauth2WellKnownUrl" name="oauth2WellKnownUrl" placeholder="Enter Well-Known URL">
-                <small>URL to the OpenID Connect 1.0 Discovery document (usually ending with /.well-known/openid-configuration). Used to automatically fetch provider settings.</small>
+                <input type="text" id="oauth2WellKnownUrl" name="oauth2WellKnownUrl" placeholder="输入 Well-Known URL">
+                <small>OpenID Connect 1.0 Discovery 文档地址（通常以 /.well-known/openid-configuration 结尾），用于自动获取提供方配置。</small>
             </div>
 
             <div class="field">
-                <label for="oauth2ServerUrl">Authorization URL</label>
-                <input type="text" id="oauth2ServerUrl" name="oauth2ServerUrl" placeholder="Enter Authorization URL">
-                <small>URL used to authenticate against the OAuth2 provider. Will redirect the user to the OAuth2 provider login view. Optional if Well-Known url is configured.</small>
+                <label for="oauth2ServerUrl">授权 URL</label>
+                <input type="text" id="oauth2ServerUrl" name="oauth2ServerUrl" placeholder="输入授权 URL">
+                <small>用于向 OAuth2 提供方发起认证的 URL，将跳转用户到提供方登录页。已配置 Well-Known 时可留空。</small>
             </div>
 
             <div class="field">
                 <label for="oauth2TokenUrl">Token URL</label>
-                <input type="text" id="oauth2TokenUrl" name="oauth2TokenUrl" placeholder="Enter Token URL">
-                <small>URL used by Zoraxy to exchange a valid OAuth2 authentication code for an access token. Optional if Well-Known url is configured.</small>
+                <input type="text" id="oauth2TokenUrl" name="oauth2TokenUrl" placeholder="输入 Token URL">
+                <small>Zoraxy 用认证码换取访问令牌的 URL。已配置 Well-Known 时可留空。</small>
             </div>
 
             <div class="field">
-                <label for="oauth2UserInfoURL">User Info URL</label>
-                <input type="text" id="oauth2UserInfoURL" name="oauth2UserInfoURL" placeholder="Enter User Info URL">
-                <small>URL used by the OAuth2 provider to validate generated token. Optional if Well-Known url is configured.</small>
+                <label for="oauth2UserInfoURL">用户信息 URL</label>
+                <input type="text" id="oauth2UserInfoURL" name="oauth2UserInfoURL" placeholder="输入用户信息 URL">
+                <small>OAuth2 提供方用于校验令牌的 URL。已配置 Well-Known 时可留空。</small>
             </div>
 
             <div class="field">
                 <label for="oauth2Scopes">Scopes</label>
-                <input type="text" id="oauth2Scopes" name="oauth2Scopes" placeholder="Enter Scopes">
-                <small>Scopes required by the OAuth2 provider to retrieve information about the authenticated user. Refer to your OAuth2 provider documentation for more information about this. Optional if Well-Known url is configured.</small>
+                <input type="text" id="oauth2Scopes" name="oauth2Scopes" placeholder="输入 Scopes">
+                <small>获取已认证用户信息所需的 scope，详见提供方文档。已配置 Well-Known 时可留空。</small>
             </div>
 
             <div class="field">
-                <label for="oauth2ConfigurationCacheTime">Configuration cache time</label>
-                <input type="text" id="oauth2ConfigurationCacheTime" name="oauth2ConfigurationCacheTime" placeholder="Enter Configuration Cache Time">
-                <small>Time to cache OAuth2 configuration before refresh. Accepts Go time.Duration format (e.g. 1m, 10m, 1h). Defaults to 60s.</small>
+                <label for="oauth2ConfigurationCacheTime">配置缓存时间</label>
+                <input type="text" id="oauth2ConfigurationCacheTime" name="oauth2ConfigurationCacheTime" placeholder="例如 1m, 10m, 1h">
+                <small>刷新前缓存 OAuth2 配置的时长，支持 Go time.Duration 格式（如 1m、10m、1h），默认 60s。</small>
             </div>
 
-            <button class="ui basic button" type="submit"><i class="green check icon"></i> Apply Change</button>
-            <button class="ui basic button" type="button" id="oauth2Clear"><i class="red trash icon"></i> Clear</button>
+            <button class="ui basic button" type="submit"><i class="green check icon"></i> 应用更改</button>
+            <button class="ui basic button" type="button" id="oauth2Clear"><i class="red trash icon"></i> 清空</button>
         </form>
         </div>
         <div class="ui bottom attached tab segment" data-tab="zoraxy_sso_tab">
             <!-- Zoraxy Auth -->
             <h2>Zoraxy Auth</h2>
-            <p>Zoraxy Auth is a built-in SSO authentication system that allows you to manage users directly within Zoraxy.</p>
+            <p>Zoraxy Auth 为内置 SSO 认证系统，可在 Zoraxy 内直接管理用户。</p>
             <!-- Setup Instructions -->
             <div class="ui accordion zorxAuthGatewayInstructions">
                 <div class="title">
                     <i class="dropdown icon"></i>
-                    Setup Instructions
+                    配置说明
                 </div>
                 <div class="content">
                     <div class="ui segment">
-                        <p>To use Zoraxy Auth, you will need to configure the gateway settings below.</p>
+                        <p>使用 Zoraxy Auth 前请按以下步骤配置网关。</p>
                         <ol>
-                            <li>Enable the Zoraxy Auth Gateway by toggling the switch below.</li>
-                            <li>Set up an HTTP proxy rule to forward the SSO domain to the Zoraxy Auth SSO port. <br>
-                                e.g. <code>auth.example.com → localhost:5489</code></li>
-                            <li>Configure the SSO Redirect URL in the settings below to point to the SSO domain.<br>
-                                e.g. <code>https://auth.example.com</code></li>
+                            <li>在下方开启 Zoraxy Auth 网关。</li>
+                            <li>添加 HTTP 代理规则，将 SSO 域名转发到 Zoraxy Auth SSO 端口。<br>
+                                例如 <code>auth.example.com → localhost:5489</code></li>
+                            <li>在下方将 SSO 重定向 URL 配置为 SSO 域名。<br>
+                                例如 <code>https://auth.example.com</code></li>
                         </ol>
                         <br>
-                        <p><b>Logout Instructions</b></p>
-                        <p>If your site uses Zoraxy Auth for SSO, for better UX, add a hyperlink to the logout URL in your application's navigation or user menu.</p>
+                        <p><b>退出登录说明</b></p>
+                        <p>若站点使用 Zoraxy Auth 做 SSO，建议在应用导航或用户菜单中加入退出链接。</p>
                         <ol>
-                            <li>To logout from SSO, navigate to the SSO domain and append <code>/logout</code> to the URL.<br>
-                                e.g. <code>https://auth.example.com/logout</code></li>
-                            <li>Click the "Logout from All Services" button to end your session across all connected services.</li>
+                            <li>访问 SSO 域名并在 URL 后加 <code>/logout</code>。<br>
+                                例如 <code>https://auth.example.com/logout</code></li>
+                            <li>点击「从所有服务退出」可结束所有已连接服务的会话。</li>
                         </ol>
                     </div>
                 </div>
@@ -205,8 +204,8 @@
             <h4 class="ui header" id="zorxAuthGatewayRunningState">
                     <i class="white circle check icon"></i>
                     <div class="content">
-                        <span class="zorxAuthGateway_status">Running</span>
-                        <div class="sub header">Listen port :<span class="zorxAuthGateway_port">5489</span></div>
+                        <span class="zorxAuthGateway_status">运行中</span>
+                        <div class="sub header">监听端口：<span class="zorxAuthGateway_port">5489</span></div>
                     </div>
                 </h4>
             </div>
@@ -214,86 +213,86 @@
                  <div class="field" style="margin-top: 2em;">
                     <div class="ui toggle checkbox">
                         <input type="checkbox" id="zorxAuthGatewayEnabled" name="gatewayEnabled">
-                        <label for="zorxAuthGatewayEnabled">Enable Zoraxy Auth Gateway<br>
-                        <small>Enable or disable the Zoraxy Auth Gateway (login interface) web request handling. Already authentication sessions will remain active until they expire</small></label>
+                        <label for="zorxAuthGatewayEnabled">启用 Zoraxy Auth 网关<br>
+                        <small>开启或关闭 Zoraxy Auth 网关（登录界面）的 Web 请求处理。已存在的认证会话在过期前仍有效</small></label>
                     </div>
                  </div>
                 <div class="field" style="margin-top: 1.4em;">
-                    <label for="zorxAuthGatewayPort">Gateway Port</label>
+                    <label for="zorxAuthGatewayPort">网关端口</label>
                     <input type="number" id="zorxAuthGatewayPort" name="gatewayPort" placeholder="5489" min="1" max="65535" value="5489">
-                    <small>Port number for the Zoraxy Auth Gateway to listen on</small>
+                    <small>Zoraxy Auth 网关监听端口</small>
                 </div>
-                <button class="ui basic button" type="submit"><i class="green check icon"></i> Apply Change</button>
-                <button class="ui basic button" type="button" onclick="openZorxAuthUserEditor();"><i class="ui green users icon"></i> Manage Users</button>
-                <button class="ui basic red button" type="button" onclick="logoutAllUsers();"><i class="ui sign-out icon"></i> Logout All Users</button>
+                <button class="ui basic button" type="submit"><i class="green check icon"></i> 应用更改</button>
+                <button class="ui basic button" type="button" onclick="openZorxAuthUserEditor();"><i class="ui green users icon"></i> 用户管理</button>
+                <button class="ui basic red button" type="button" onclick="logoutAllUsers();"><i class="ui sign-out icon"></i> 强制所有用户退出</button>
             </form>
             <div class="ui divider"></div>
             <!-- SSO Settings -->
             <form class="ui form" action="#" id="zorxAuthSettings">
-                <h3>SSO Behavior</h3>
-                <p>Configure the behavior of the Zoraxy SSO authentication system.</p>
+                <h3>SSO 行为</h3>
+                <p>配置 Zoraxy SSO 认证系统的行为。</p>
                 <div class="field">
-                    <label for="zorxAuthSSORedirectURL">SSO Redirect URL</label>
+                    <label for="zorxAuthSSORedirectURL">SSO 重定向 URL</label>
                     <input type="text" id="zorxAuthSSORedirectURL" name="ssoRedirectURL" placeholder="https://auth.example.com">
-                    <small>URL of the SSO authentication endpoint where unauthenticated users will be redirected. <br><b>Remember to include protocol (e.g., https://) in the URL</b></small>
+                    <small>未认证用户将被重定向到的 SSO 认证地址。<br><b>URL 中请包含协议（如 https://）</b></small>
                 </div>
                 <div class="ui message">
-                    <p>Logged in users can logout by navigating to: <code id="logoutUrlDisplay">N/A</code></p>
+                    <p>已登录用户可访问以下地址退出：<code id="logoutUrlDisplay">N/A</code></p>
                 </div>
                 <div class="ui basic segment advanceoptions" style="margin-top:0.6em;">
                     <div class="ui advancedSSOZorxAuthOptions accordion">
                         <div class="title">
                             <i class="dropdown icon"></i>
-                            Advanced Options
+                            高级选项
                         </div>
                         <div class="content">
                             <br>
                             <div class="field">
-                                <label for="zorxAuthSSOSessionSetURL">Session Set URL</label>
+                                <label for="zorxAuthSSOSessionSetURL">会话设置 URL</label>
                                 <input type="text" id="zorxAuthSSOSessionSetURL" name="ssoSessionSetURL" placeholder="/.wellknown/zorxauth/session/set">
-                                <small>URL that will be called by the SSO endpoint after successful authentication to set the session ID.</small>
+                                <small>认证成功后 SSO 端点用于设置会话 ID 的 URL。</small>
                             </div>
                             <div class="ui divider"></div>
-                            <b>Cookie Settings</b>
+                            <b>Cookie 设置</b>
                             <br><br>
                             <div class="field">
-                                <label for="zorxAuthCookieName">Cookie Name</label>
+                                <label for="zorxAuthCookieName">Cookie 名称</label>
                                 <input type="text" id="zorxAuthCookieName" name="cookieName" placeholder="zr_xauth_session">
-                                <small>Name of the cookie to store the session ID. Default: zr_xauth_session</small>
+                                <small>用于存储会话 ID 的 Cookie 名称，默认：zr_xauth_session</small>
                             </div>
                             <div class="field">
-                                <label for="zorxAuthCookieDuration">Cookie Duration (seconds)</label>
+                                <label for="zorxAuthCookieDuration">Cookie 有效期（秒）</label>
                                 <input type="number" id="zorxAuthCookieDuration" name="cookieDuration" placeholder="3600" min="60">
-                                <small>Duration in seconds for the session cookie. Default: 3600 (1 hour)</small>
+                                <small>会话 Cookie 有效期（秒），默认：3600（1 小时）</small>
                             </div>
                             <div class="field">
-                                <label for="zorxAuthCookieDurationRememberMe">Cookie Duration (seconds) - Remember Me</label>
+                                <label for="zorxAuthCookieDurationRememberMe">Cookie 有效期（秒）- 记住我</label>
                                 <input type="number" id="zorxAuthCookieDurationRememberMe" name="cookieDurationRememberMe" placeholder="604800" min="60">
-                                <small>Duration in seconds for the session cookie when user selected Remember Me. Default: 604800 (7 days)</small>
+                                <small>勾选「记住我」时的会话 Cookie 有效期（秒），默认：604800（7 天）</small>
                             </div>
                             <div class="ui divider"></div>
-                            <b>Rate Limiting</b>
+                            <b>速率限制</b>
                             <br><br>
                             <div class="ui checkbox" style="margin-bottom: 1em;">
                                 <input type="checkbox" id="zorxAuthEnableRateLimit" name="enableRateLimit">
-                                <label>Enable Rate Limiting<br><small>Limit authentication attempts per IP address to prevent brute force attacks</small></label>
+                                <label>启用速率限制<br><small>按 IP 限制认证尝试次数，防止暴力破解</small></label>
                             </div>
                             <div class="field">
-                                <label for="zorxAuthRateLimitPerIp">Rate Limit Per IP (attempts/minute)</label>
+                                <label for="zorxAuthRateLimitPerIp">每 IP 速率限制（次/分钟）</label>
                                 <input type="number" id="zorxAuthRateLimitPerIp" name="rateLimitPerIp" placeholder="60" min="1">
-                                <small>Number of allowed authentication attempts per minute per IP. Default: 60</small>
+                                <small>每 IP 每分钟允许的认证尝试次数，默认：60</small>
                             </div>
                             <div class="ui checkbox">
                                 <input type="checkbox" id="zorxAuthUseExpotentialBackoff" name="useExpotentialBackoff">
-                                <label>Use Exponential Backoff<br><small>Increase delay between failed authentication attempts exponentially</small></label>
+                                <label>指数退避<br><small>认证失败后延迟时间指数增加</small></label>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div style="margin-top: 1.5em;">
-                    <button class="ui basic button" type="submit"><i class="green check icon"></i> Apply Change</button>
-                    <button class="ui basic button" type="button" id="zorxAuthClear"><i class="red trash icon"></i> Clear</button></div>
+                    <button class="ui basic button" type="submit"><i class="green check icon"></i> 应用更改</button>
+                    <button class="ui basic button" type="button" id="zorxAuthClear"><i class="red trash icon"></i> 清空</button></div>
                 </div>
             </form>
             <br>
@@ -412,7 +411,7 @@
                     msgbox(data.error, false);
                     return;
                 }
-                msgbox('Forward Auth settings updated', true);
+                msgbox('转发认证设置已更新', true);
                 console.log('Forward Auth settings updated:', data);
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -435,12 +434,12 @@
 
                 getForwardAuthSettings();
 
-                msgbox('Forward Auth settings cleared', true);
+                msgbox('转发认证设置已清空', true);
                 console.log('Forward Auth settings cleared:', data);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error clearing Forward Auth settings:', textStatus, errorThrown);
-                msgbox('Error clearing Forward Auth settings, check console', false);
+                msgbox('清空转发认证设置失败，请查看控制台', false);
             }
         });
     });
@@ -477,14 +476,14 @@
         event.preventDefault();
 
         if ($('#oauth2ClientId').val().length === 0 || $('#oauth2ClientSecret').val().length === 0) {
-            msgbox("You must specify the Client ID and Client Secret.", false);
+            msgbox("请填写 Client ID 与 Client Secret。", false);
 
             return;
         }
 
         if ($('#oauth2WellKnownUrl').val().length === 0) {
             if ($('#oauth2ServerUrl').val().length === 0 || $('#oauth2TokenUrl').val().length === 0 || $('#oauth2UserInfoURL').val().length === 0 || $('#oauth2Scopes').val().length === 0) {
-                msgbox("You must specify either the Well Known URL or configure the Authorization URL, Token URL, User Info URL, and Scopes.", false);
+                msgbox("请填写 Well Known URL，或配置 Authorization URL、Token URL、User Info URL 与 Scopes。", false);
 
                 return;
             }
@@ -499,12 +498,12 @@
                     msgbox(data.error, false);
                     return;
                 }
-                msgbox('OAuth2 settings updated', true);
+                msgbox('OAuth2 设置已更新', true);
                 console.log('OAuth2 settings updated:', data);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error updating OAuth2 settings:', textStatus, errorThrown);
-                msgbox('Error updating OAuth2 settings, check console', false);
+                msgbox('更新 OAuth2 设置失败，请查看控制台', false);
             }
         });
     });
@@ -523,12 +522,12 @@
 
                 getOAuth20Settings();
 
-                msgbox('OAuth2 settings cleared', true);
+                msgbox('OAuth2 设置已清空', true);
                 console.log('OAuth2 settings cleared:', data);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error clearing OAuth2 settings:', textStatus, errorThrown);
-                msgbox('Error clearing OAuth2 settings, check console', false);
+                msgbox('清空 OAuth2 设置失败，请查看控制台', false);
             }
         });
     });
@@ -624,12 +623,12 @@
                     msgbox(data.error, false);
                     return;
                 }
-                msgbox('Zoraxy Auth settings updated', true);
+                msgbox('Zoraxy Auth 设置已更新', true);
                 console.log('Zoraxy Auth settings updated:', data);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error updating Zoraxy Auth settings:', textStatus, errorThrown);
-                msgbox('Error updating Zoraxy Auth settings, check console', false);
+                msgbox('更新 Zoraxy Auth 设置失败，请查看控制台', false);
             }
         });
     });
@@ -648,12 +647,12 @@
 
                 getZorxAuthSettings();
 
-                msgbox('Zoraxy Auth settings cleared', true);
+                msgbox('Zoraxy Auth 设置已清空', true);
                 console.log('Zoraxy Auth settings cleared:', data);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error clearing Zoraxy Auth settings:', textStatus, errorThrown);
-                msgbox('Error clearing Zoraxy Auth settings, check console', false);
+                msgbox('清空 Zoraxy Auth 设置失败，请查看控制台', false);
             }
         });
     });
@@ -732,7 +731,7 @@
                     msgbox(data.error, false);
                     return;
                 }
-                msgbox('Zoraxy Auth Gateway settings updated', true);
+                msgbox('Zoraxy Auth 网关设置已更新', true);
                 console.log('Zoraxy Auth Gateway settings updated:', data);
                 
                 // Reload settings to update running status
@@ -742,7 +741,7 @@
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error updating Zoraxy Auth Gateway settings:', textStatus, errorThrown);
-                msgbox('Error updating Zoraxy Auth Gateway settings, check console', false);
+                msgbox('更新 Zoraxy Auth 网关设置失败，请查看控制台', false);
             }
         });
     });
@@ -754,7 +753,7 @@
         Logout all users handler.
     */
     function logoutAllUsers() {
-        if (!confirm("Are you sure you want to logout ALL users? This will terminate all active sessions and cannot be undone.")) {
+        if (!confirm("确定要登出所有用户吗？将终止所有活跃会话且不可恢复。")) {
             return;
         }
 
@@ -766,12 +765,12 @@
                     msgbox(data.error, false);
                     return;
                 }
-                msgbox('All users have been logged out successfully', true);
+                msgbox('所有用户已登出', true);
                 console.log('All users logged out:', data);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error logging out all users:', textStatus, errorThrown);
-                msgbox('Error logging out all users, check console', false);
+                msgbox('登出所有用户失败，请查看控制台', false);
             }
         });
     }

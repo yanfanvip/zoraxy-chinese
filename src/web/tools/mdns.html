@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="theme-color" content="#4b75ff">
         <link rel="icon" type="image/png" href="./favicon.png" />
-        <title>mDNS Discovery | Zoraxy</title>
+        <title>mDNS 发现 | Zoraxy</title>
         <link rel="stylesheet" href="../script/semantic/semantic.min.css">
         <script src="../script/jquery-3.6.0.min.js"></script>
         <script src="../../script/ao_module.js"></script>
@@ -25,25 +25,25 @@
         <link rel="stylesheet" href="../darktheme.css">
         <script src="../script/darktheme.js"></script>
         <div id="mdns-hosts">
-            <span><i class="ui loading spinner icon"></i> Loading</span>
+            <span><i class="ui loading spinner icon"></i> 加载中</span>
         </div>
         <br>
         <div class="ui container">
-            <h4>Scan with custom domain filter</h4>
+            <h4>按域名筛选扫描</h4>
             <div class="ui form">
                 <div class="field">
-                    <label for="domain">Domain</label>
+                    <label for="domain">域名</label>
                     <input type="text" id="domain" name="domain" placeholder="domain.example.com"/>
                 </div>
-                <button id="discover" class="ui basic button">Discover</button>
+                <button id="discover" class="ui basic button">发现</button>
                 <small><span id="countdownTimer"></span></small>
             </div>
             <br>
         </div>
         
         <div style="float: right;">
-            <button class="ui basic button"  onclick="initMDNSScan()"><i class="ui green refresh icon"></i> Refresh</button>
-            <button class="ui basic button" style="margin-right: 1em;" onclick="window.open('', '_self', ''); window.close();"><i class="ui red remove icon"></i> Close</button>
+            <button class="ui basic button"  onclick="initMDNSScan()"><i class="ui green refresh icon"></i> 刷新</button>
+            <button class="ui basic button" style="margin-right: 1em;" onclick="window.open('', '_self', ''); window.close();"><i class="ui red remove icon"></i> 关闭</button>
         </div>
         <br><br><br>
         <script>

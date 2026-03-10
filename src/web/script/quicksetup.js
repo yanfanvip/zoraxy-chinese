@@ -114,7 +114,7 @@ function hideSideWrapperInTourMode(){
 
 function startQuickStartTour(){
     if (currentQuickSetupClass == ""){
-        msgbox("No selected setup service tour", false);
+        msgbox("请先选择要进行的配置向导", false);
         return;
     }   
     //Show the tour modal
@@ -123,8 +123,8 @@ function startQuickStartTour(){
     if (tourSteps[currentQuickSetupClass] == undefined || tourSteps[currentQuickSetupClass].length == 0){
         //This tour is not defined or empty
         let notFound = tourStepFactory({
-            title: "😭 Tour not found",
-            desc: "Seems you are requesting a tour that has not been developed yet. Check back on later!"
+            title: "😭 未找到导览",
+            desc: "您请求的导览尚未开发，请稍后再试！"
         });
         notFound();
 
@@ -218,19 +218,19 @@ var tourSteps = {
     //Homepage steps
     "homepage": [
         tourStepFactory({
-            title: "🎉 Congratulation on your first site!",
-            desc: "In this tour, you will be guided through the steps required to setup a basic static website using your own domain name with Zoraxy."
+            title: "🎉 恭喜，开始搭建你的第一个站点！",
+            desc: "本向导将引导你使用自己的域名在 Zoraxy 上搭建一个基础静态网站。"
         }),
         tourStepFactory({
-            title: "👉 Pointing domain DNS to Zoraxy's IP",
-            desc: `Setup a DNS A Record that points your domain name to this Zoraxy instances public IP address. <br>
-            Assume your public IP is 93.184.215.14, you should have an A record like this.
+            title: "👉 将域名 DNS 指向 Zoraxy 的 IP",
+            desc: `添加一条 DNS A 记录，将你的域名指向本 Zoraxy 实例的公网 IP。<br>
+            假设公网 IP 为 93.184.215.14，可参考如下 A 记录：
             <table class="ui celled collapsing basic striped table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Value</th>
+                        <th>名称</th>
+                        <th>类型</th>
+                        <th>值</th>
                     </tr>   
                 </thead>
                 <tbody>
@@ -241,7 +241,7 @@ var tourSteps = {
                     </tr>
                 </tbody>
             </table>
-            <br>If the IP of Zoraxy start from 192.168, you might want to use your router's public IP address and setup port forward for both port 80 and 443 as well.`,
+            <br>若 Zoraxy 的 IP 以 192.168 开头，请使用路由器公网 IP，并做好 80 和 443 端口转发。`,
             callback: function(){
                 $.get("/api/acme/wizard?step=10", function(data){
                     if (data.error == undefined){
@@ -255,30 +255,30 @@ var tourSteps = {
             }
         }),
         tourStepFactory({
-            title: "🏠 Setup Default Site",
-            desc: `If you already have an apache or nginx web server running, use "Reverse Proxy Target" and enter your current web server IP address. <br>Otherwise, pick "Internal Static Web Server" and click "Apply Change"`,
+            title: "🏠 设置默认站点",
+            desc: `若已有 Apache 或 Nginx 在运行，选择「反向代理目标」并填入当前 Web 服务器地址。<br>否则选择「内置静态 Web 服务器」并点击「应用更改」。`,
             tab: "setroot",
             element: "#setroot",
             pos: "bottomright"
         }),
         tourStepFactory({
-            title: "🌐 Enable Static Web Server",
-            desc: `Enable the static web server if it is not already enabled. Skip this step if you are using external web servers like Apache or Nginx.`,
+            title: "🌐 启用静态 Web 服务器",
+            desc: `若尚未启用，请启用静态 Web 服务器。若使用 Apache、Nginx 等外部服务器可跳过此步。`,
             tab: "webserv",
             element: "#webserv",
             pos: "bottomright"
         }),
         tourStepFactory({
-            title: "📤 Upload Static Website",
-            desc: `Upload your static website files (e.g. HTML files) to the web directory. If remote access is not avaible, you can also upload it with the web server file manager here.`,
+            title: "📤 上传静态网站",
+            desc: `将静态网站文件（如 HTML）上传到 Web 目录。若无法远程访问，也可使用本页的文件管理器上传。`,
             tab: "webserv",
             element: "#webserv_dirManager",
             pos: "bottomright",
             scrollto: "#webserv_dirManager"
         }),
         tourStepFactory({
-            title: "💡 Start Zoraxy HTTP listener",
-            desc: `Start Zoraxy (if it is not already running) by pressing the "Start Service" button.<br>You should now be able to visit your domain and see the static web server contents show up in your browser.`,
+            title: "💡 启动 Zoraxy HTTP 监听",
+            desc: `点击「启动服务」按钮启动 Zoraxy（若尚未运行）。<br>此时访问你的域名即可在浏览器中看到静态网站内容。`,
             tab: "status",
             element: "#status .poweroptions",
             pos: "bottomright",
@@ -288,20 +288,20 @@ var tourSteps = {
     //Subdomains tour steps
     "subdomain":[
         tourStepFactory({
-            title: "🎉 Creating your first subdomain",
-            desc: "Seems you are now ready to expand your site with more services! To do so, you can create a new subdomain for your new web services. <br><br>In this tour, you will be guided through the steps to setup a new subdomain reverse proxy.",
+            title: "🎉 创建你的第一个子域名",
+            desc: "准备为站点扩展更多服务时，可以为新服务创建子域名。<br><br>本向导将引导你配置一个新的子域名反向代理。",
             pos: "center"
         }),
         tourStepFactory({
-            title: "👉 Pointing subdomain DNS to Zoraxy's IP",
-            desc: `Setup a DNS CNAME Record that points your subdomain to your root domain. <br>
-            Assume your public IP is 93.184.215.14, you should have an CNAME record like this.
+            title: "👉 将子域名 DNS 指向 Zoraxy",
+            desc: `添加一条 DNS CNAME 记录，将子域名指向根域名。<br>
+            假设公网 IP 为 93.184.215.14，可参考如下记录：
             <table class="ui celled collapsing basic striped table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Value</th>
+                        <th>名称</th>
+                        <th>类型</th>
+                        <th>值</th>
                     </tr>   
                 </thead>
                 <tbody>
@@ -330,33 +330,33 @@ var tourSteps = {
             }
         }),
         tourStepFactory({
-            title: "➕ Create New Proxy Rule",
-            desc: `Next, you can now move on to create a proxy rule that reverse proxy your new subdomain in Zoraxy. You can easily add new rules using the "New Proxy Rule" web form.`,
+            title: "➕ 新建代理规则",
+            desc: `接下来创建一条代理规则，将新子域名做反向代理。可在「新建代理规则」表单中轻松添加。`,
             tab: "rules",
             pos: "topright"
         }),
         tourStepFactory({
-            title: "🌐 Matching Keyword / Domain",
-            desc: `Fill in your new subdomain in the "Matching Keyword / Domain" field.<br> e.g. sub.example.com`,
+            title: "🌐 匹配关键词 / 域名",
+            desc: `在「匹配关键词 / 域名」中填写新子域名。<br>例如：sub.example.com`,
             element: "#rules .field[tourstep='matchingkeyword']",
             pos: "bottomright"
         }),
         tourStepFactory({
-            title: "🖥️ Target IP Address or Domain Name with port",
-            desc: `Fill in the Reverse Proxy Destination. e.g. localhost:8080 or 192.168.1.100:9096. <br><br>Please make sure your web services is accessible by Zoraxy.`,
+            title: "🖥️ 目标 IP 或域名及端口",
+            desc: `填写反向代理目标，如 localhost:8080 或 192.168.1.100:9096。<br><br>请确保该服务可从 Zoraxy 访问。`,
             element: "#rules .field[tourstep='targetdomain']",
             pos: "bottomright"
         }),
         tourStepFactory({
-            title: "🔐 Proxy Target require TLS Connection",
-            desc: `If your upstream service only accept https connection, select this option.`,
+            title: "🔐 代理目标需要 TLS",
+            desc: `若上游服务仅接受 HTTPS，请勾选此项。`,
             element: "#rules .field[tourstep='requireTLS']",
             pos: "bottomright",
            
         }),
         tourStepFactory({
-            title: "🔓 Ignore TLS Validation Error",
-            desc: `Some open source projects like Proxmox or NextCloud use self-signed certificate to serve its web UI. If you are proxying services like that, enable this option. `,
+            title: "🔓 忽略 TLS 验证错误",
+            desc: `Proxmox、NextCloud 等使用自签名证书的 Web 界面，若需代理此类服务，请启用此项。`,
             element: "#rules #advanceProxyRules .field[tourstep='skipTLSValidation']",
             scrollto: "#rules #advanceProxyRules",
             pos: "bottomright",
@@ -364,29 +364,28 @@ var tourSteps = {
             callback: function(){
                 $("#advanceProxyRules").accordion();
                 if (!$("#rules #advanceProxyRules .content").is(":visible")){
-                    //Open up the advance config menu
                     $("#rules #advanceProxyRules .title")[0].click()
                 }
             }
         }),
         tourStepFactory({
-            title: "💾 Save New Proxy Rule",
-            desc: `Now, click "Create Endpoint" to add this reverse proxy rule to runtime.`,
+            title: "💾 保存新代理规则",
+            desc: `点击「创建端点」将此反向代理规则加入运行配置。`,
             element: "#rules div[tourstep='newProxyRule']",
             scrollto: "#rules div[tourstep='newProxyRule']",
             pos: "topright",
         }),
         tourStepFactory({
-            title: "🎉 New Proxy Rule Setup Completed!",
-            desc: `You can continue to add more subdomains or alias domain using this web form. To view the created reverse proxy rules, you can navigate to the HTTP Proxy tab.`,
+            title: "🎉 新代理规则已就绪！",
+            desc: `可继续在此表单添加更多子域名或别名。在「HTTP 代理」标签页可查看已创建的规则。`,
             element: "#rules",
             tab: "rules",
             pos: "bottomright",
         }),
         tourStepFactory({
-            title: "🌲 HTTP Proxy List",
-            desc: `In this tab, you will see all the created HTTP proxy rules and edit them if needed. You should see your newly created HTTP proxy rule in the above list. <Br><Br>
-                    This is the end of this tour. If you want further documentation on how to setup access control filters or load balancer, check out our Github Wiki page.`,
+            title: "🌲 HTTP 代理列表",
+            desc: `本页展示所有 HTTP 代理规则并可编辑。你新建的规则应出现在上方列表中。<br><br>
+                    本向导到此结束。访问控制、负载均衡等说明请参阅 Github Wiki。`,
             element: "#httprp",
             tab: "httprp",
             pos: "bottomright",
@@ -396,96 +395,88 @@ var tourSteps = {
     //TLS and ACME tour steps
     "tls":[
         tourStepFactory({
-            title: "🔐 Enable HTTPS (TLS) for your site",
-            desc: `Some technologies only work with HTTPS for security reasons. In this tour, you will be guided through the steps to enable HTTPS in Zoraxy.`,
+            title: "🔐 为站点启用 HTTPS (TLS)",
+            desc: `部分技术因安全要求仅支持 HTTPS。本向导将引导你在 Zoraxy 中启用 HTTPS。`,
             pos: "center",
         }),
         tourStepFactory({
-            title: "➡️ Change Listening Port",
-            desc: `HTTPS listen on port 443 instead of 80. If your Zoraxy is currently listening to ports other than 443, change it to 443 in incoming port option and click "Apply"`,
+            title: "➡️ 修改监听端口",
+            desc: `HTTPS 使用 443 端口。若当前监听的不是 443，请在「入站端口」中改为 443 并点击「应用」。`,
             tab: "status",
             element: "#status div[tourstep='incomingPort']",
             scrollto: "#status div[tourstep='incomingPort']",
             pos: "bottomright",
         }),
         tourStepFactory({
-            title: "🔑 Enable TLS Serving",
-            desc: `Next, you can enable TLS by checking the "Use TLS to serve proxy request"`,
+            title: "🔑 启用 TLS 服务",
+            desc: `勾选「使用 TLS 处理代理请求」以启用 TLS。`,
             element: "#tls",
             scrollto: "#tls",
             pos: "bottomright",
         }),
         tourStepFactory({
-            title: "💻 Enable HTTP Server on Port 80",
-            desc: `As we might want some proxy rules to be accessible by HTTP, turn on the HTTP server listener on port 80 as well.`,
+            title: "💻 在 80 端口启用 HTTP",
+            desc: `若希望部分规则仍可通过 HTTP 访问，请同时开启 80 端口的 HTTP 监听。`,
             element: "#listenP80",
             scrollto: "#tls",
             pos: "bottomright",
         }),
         tourStepFactory({
-            title: "↩️ Force redirect HTTP request to HTTPS",
-            desc: `By default, if a HTTP host-name is not found, 404 error page will be returned. However, in common scenerio for self-hosting, you might want to redirect that request to your HTTPS server instead. <br><br>Enabling this option allows such redirection to be done automatically.`,
+            title: "↩️ 强制将 HTTP 重定向到 HTTPS",
+            desc: `默认情况下，未匹配的 HTTP 请求会返回 404。自建场景下通常希望自动重定向到 HTTPS。<br><br>启用此选项即可自动重定向。`,
             element: "#status div[tourstep='forceHttpsRedirect']",
             scrollto: "#tls",
             pos: "bottomright",
         }),
         tourStepFactory({
-            title: "🎉 HTTPS Enabled!",
-            desc: `Now, your Zoraxy instance is ready to serve HTTPS requests. 
-            <br><br>By default, Zoraxy serve all your host-names by its internal self-signed certificate which is not a proper setup. That is why you will need to request a proper certificate for your site from your ISP or CA. `,
+            title: "🎉 HTTPS 已启用！",
+            desc: `当前 Zoraxy 已可处理 HTTPS 请求。<br><br>默认使用内置自签名证书，不适合正式环境。请向 CA 或服务商申请正式证书。`,
             tab: "status",
             pos: "center",
         }),
         tourStepFactory({
-            title: "🔐 TLS / SSL Certificates",
-            desc: `Zoraxy come with a simple and handy TLS management interface, where you can upload or request your certificates with a web form. You can click "TLS / SSL Certificate" from the side menu to open this page.`,
+            title: "🔐 TLS / SSL 证书",
+            desc: `Zoraxy 提供证书管理界面，可上传或申请证书。从侧栏点击「TLS/SSL 证书」进入本页。`,
             tab: "cert",
             element: "#mainmenu",
             pos: "center",
         }),
         tourStepFactory({
-            title: "⚙️ Setup ACME",
-            desc: `If you didn't want to pay for a certificate, there are free CA where you can use to obtain a certificate. By default, Let's Encrypt is used and in order to use their service, you will need to fill in your webmin contact email in the "ACME EMAIL" field.
-            <br><br> After you are done, click "Save Settings" and continue.`,
+            title: "⚙️ 配置 ACME",
+            desc: `若不想付费购买证书，可使用免费 CA。默认使用 Let's Encrypt，需在「ACME 邮箱」中填写联系邮箱。<br><br>填写后点击「保存设置」并继续。`,
             element: "#cert div[tourstep='acmeSettings']",
             scrollto: "#cert div[tourstep='acmeSettings']",
             pos: "bottomright",
         }),
         tourStepFactory({
-            title: "👉 Open ACME Tool",
-            desc: `Open the ACME Tool by pressing the button below the ACME settings. You will see a tool window popup from the side.`,
+            title: "👉 打开 ACME 工具",
+            desc: `点击 ACME 设置下方的按钮打开 ACME 工具，侧边会弹出工具窗口。`,
             element: ".sideWrapper",
             pos: "center",
             callback: function(){
-                //Call to function in cert.html
                 openACMEManager();
             }
         }),
         tourStepFactory({
-            title: "📃 Obtain Certificate with ACME",
-            desc: `Now, we can finally start requesting a free certificate from the selected CA. Fill in the "Generate New Certificate" web-form and click <b>"Get Certificate"</b>.
-            This usually will takes a few minutes. Wait until the spinning icon disappear before moving on the next step. 
-            <br><br>Tips: You can check the "Use DNS Challenge" if you are trying to request a certificate containing wildcard character (*).`,
+            title: "📃 通过 ACME 申请证书",
+            desc: `在「生成新证书」表单中填写信息并点击 <b>「获取证书」</b>，向所选 CA 申请免费证书。通常需等待数分钟，待加载图标消失后再进行下一步。<br><br>提示：申请含通配符 (*) 的证书可勾选「使用 DNS 验证」。`,
             element: ".sideWrapper",
             pos: "topleft",
         }),
         tourStepFactory({
-            title: "🔄 Enable Auto Renew",
-            desc:`Free certificate only last for a few months. If you want Zoraxy to help you automate the certificate renew process, enable "Auto Renew" by clicking the <b>"Enable Certificate Auto Renew"</b> toggle switch.
-            <br><br>You can fine tune which certificate to renew in the "Advance Renew Policy" dropdown.`,
+            title: "🔄 启用自动续期",
+            desc:`免费证书有效期较短。若希望 Zoraxy 自动续期，请点击 <b>「启用证书自动续期」</b> 开关。<br><br>可在「高级续期策略」中细调要续期的证书。`,
             element: ".sideWrapper",
             pos: "bottomleft",
             callback: function(){
-                //If the user arrive this step from "Back"
                 if (!$(".sideWrapper").is(":visible")){
                     openACMEManager();
                 }
             }
         }),
         tourStepFactory({
-            title: "🎉 Certificate Installed!",
-            desc:`Now, your certificate is loaded into the database and it is ready to use! In Zoraxy, you do not need to manually assign the certificate to a domain. Zoraxy will do that automatically for you. 
-                <br><br>Now, you can try to visit your website with https:// and see your green lock shows up next to your domain name!`,
+            title: "🎉 证书已安装！",
+            desc: `证书已写入并可使用。Zoraxy 会自动为域名匹配证书，无需手动绑定。<br><br>现在可用 https:// 访问站点，地址栏会显示绿色锁标。`,
             element: "#cert div[tourstep='certTable']",
             scrollto: "#cert div[tourstep='certTable']",
             pos: "bottomright",

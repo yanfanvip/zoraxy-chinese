@@ -15,86 +15,82 @@
 <script src="script/jsrsasign-all-min.js"></script>
 <div class="standardContainer">
     <div class="ui basic segment">
-        <h2>TLS / SSL Certificates</h2>
-        <p>Setup TLS cert for different domains of your reverse proxy server names</p>
+        <h2>TLS / SSL 证书</h2>
+        <p>为反向代理的各个域名配置 TLS 证书</p>
     </div>
     
     <div class="ui divider"></div>
-    <h3>Hosts Certificates</h3>
-    <p>Provide certificates for multiple domains reverse proxy</p>
+    <h3>主机证书</h3>
+    <p>为多域名反向代理提供证书</p>
     <div class="ui fluid form">
         <div class="three fields">
             <div class="field">
-            <label>Server Name (Domain)</label>
+            <label>服务器名称（域名）</label>
             <input type="text" id="certdomain" placeholder="">
-            <small><i class="exclamation circle yellow icon"></i> Match the server name with your CN/DNS entry in certificate for faster resolve time</small>
+            <small><i class="exclamation circle yellow icon"></i> 与证书中的 CN/DNS 一致可加快解析</small>
             </div>
             <div class="field">
-                <label>Public Key (.pem)</label>
+                <label>公钥 (.pem)</label>
                 <input type="file" id="pubkeySelector" onchange="handleFileSelect(event, 'pub')">
-                <small>or .crt files in order systems</small>
+                <small>或系统下的 .crt 文件</small>
             </div>
             <div class="field">
-                <label>Private Key (.key)</label>
+                <label>私钥 (.key)</label>
                 <input type="file" id="prikeySelector" onchange="handleFileSelect(event, 'pri')">
             </div>
         </div>
-        <button id="certUploadBtn" class="ui basic button showOnlyInCertUploadMode" onclick="handleDomainUploadByKeypress();"><i class="ui teal upload icon"></i> Upload</button>
-        <button id="certPasteBtn" class="ui basic button showOnlyInCertUploadMode" onclick="togglePasteCertInterface();"><i class="ui yellow paste icon"></i> Paste Cert Directly</button>
+        <button id="certUploadBtn" class="ui basic button showOnlyInCertUploadMode" onclick="handleDomainUploadByKeypress();"><i class="ui teal upload icon"></i> 上传</button>
+        <button id="certPasteBtn" class="ui basic button showOnlyInCertUploadMode" onclick="togglePasteCertInterface();"><i class="ui yellow paste icon"></i> 直接粘贴证书</button>
         <br class="showOnlyInCertUploadMode">
-        <small class="showOnlyInCertUploadMode">You have intermediate certificate? <a style="cursor:pointer;" onclick="showSideWrapper('snippet/intermediateCertConv.html');">Open Conversion Tool</a></small>
+        <small class="showOnlyInCertUploadMode">有中间证书？<a style="cursor:pointer;" onclick="showSideWrapper('snippet/intermediateCertConv.html');">打开转换工具</a></small>
     </div>
     <div id="certPasteArea" style="display:none;">
         <!-- Paste cert function implementation -->
         <div class="ui fluid form" style="margin-top: 1em;">
             <div class="two fields">
                 <div class="field">
-                    <label>Public Key Content (.pem / .crt)</label>
-                    <textarea id="pubkeyPasteContent" rows="8" placeholder="Paste your public key / certificate content here..." oninput="extractCommonNameFromPastedCert();"></textarea>
+                    <label>公钥内容 (.pem / .crt)</label>
+                    <textarea id="pubkeyPasteContent" rows="8" placeholder="在此粘贴公钥/证书内容..." oninput="extractCommonNameFromPastedCert();"></textarea>
                 </div>
                 <div class="field">
-                    <label>Private Key Content (.key)</label>
-                    <textarea id="prikeyPasteContent" rows="8" placeholder="Paste your private key content here..."></textarea>
+                    <label>私钥内容 (.key)</label>
+                    <textarea id="prikeyPasteContent" rows="8" placeholder="在此粘贴私钥内容..."></textarea>
                 </div>
             </div>
-            <button class="ui basic button" onclick="handlePasteInBrowserAndUpload();"><i class="ui teal upload icon"></i> Upload from Pasted Content</button>
-            <button class="ui basic button" onclick="togglePasteCertInterface();"><i class="ui grey cancel icon"></i> Cancel</button>
+            <button class="ui basic button" onclick="handlePasteInBrowserAndUpload();"><i class="ui teal upload icon"></i> 从粘贴内容上传</button>
+            <button class="ui basic button" onclick="togglePasteCertInterface();"><i class="ui grey cancel icon"></i> 取消</button>
         </div>
     </div>
     <div id="certUploadSuccMsg" class="ui green message" style="display:none;">
-        <i class="ui checkmark icon"></i> Certificate for domain <span id="certUploadingDomain"></span> uploaded.
+        <i class="ui checkmark icon"></i> 域名 <span id="certUploadingDomain"></span> 的证书已上传。
     </div>
     <div class="ui message">
-        <h4>Tips about Server Names & SNI</h4>
+        <h4>关于服务器名称与 SNI</h4>
         <div class="ui bulleted list">
             <div class="item">
-                If you have two subdomains like <code>a.example.com</code> and <code>b.example.com</code> ,
-                for faster response speed, you might want to setup them one by one (i.e. having two seperate certificate for 
-                <code>a.example.com</code> and <code>b.example.com</code>).
+                若有 <code>a.example.com</code> 和 <code>b.example.com</code> 等子域名，为加快响应可分别配置证书。
             </div>
             <div class="item">
-                If you have a wildcard certificate that covers <code>*.example.com</code>, 
-                you can just enter <code>example.com</code> as server name to add a certificate.
+                若有覆盖 <code>*.example.com</code> 的通配符证书，只需将服务器名称填为 <code>example.com</code> 即可添加。
             </div>
             <div class="item">
-                If you have a certificate contain multiple host, you can enter the first domain in your certificate 
-                and Zoraxy will try to match the remaining CN/DNS for you.
+                若证书包含多个主机名，可只填证书中的第一个域名，Zoraxy 会尝试匹配其余 CN/DNS。
             </div>
         </div>
     </div>
-    <p>Current list of loaded certificates</p>
+    <p>当前已加载的证书列表</p>
     <div tourstep="certTable" style="width: 100%; overflow-x: auto; padding-bottom: 1em;">
         <div style="min-width: 960px; max-width: 100%;  ">
             <table class="ui unstackable basic celled table">
                 <thead>
                 <tr>
-                    <th>Domain</th>
-                    <th>Filename</th>
-                    <th>Last Update</th>
-                    <th>Expire At</th>
-                    <th>Fallback</th>
-                    <th>DNS Challenge</th>
-                    <th class="no-sort" tourstep="defaultCertificate">Actions</th>
+                    <th>域名</th>
+                    <th>文件名</th>
+                    <th>最后更新</th>
+                    <th>到期时间</th>
+                    <th>回退证书</th>
+                    <th>DNS 验证</th>
+                    <th class="no-sort" tourstep="defaultCertificate">操作</th>
                 </tr></thead>
             <tbody id="certifiedDomainList">
     
@@ -102,22 +98,22 @@
             </table>
         </div>
         <br>
-        <button class="ui basic button" onclick="initManagedDomainCertificateList();"><i class="green refresh icon"></i> Refresh List</button>
+        <button class="ui basic button" onclick="initManagedDomainCertificateList();"><i class="green refresh icon"></i> 刷新列表</button>
         <br>
         <div class="ui blue message">
-            <h4>What is a Fallback Certificate?</h4>
-            <p>A fallback certificate is used when the reverse proxy cannot find a matching certificate for the requested server name. If you are using CloudFlare full strict mode, you can also upload the CloudFlare certificate as fallback certificate.</p>
+            <h4>什么是回退证书？</h4>
+            <p>当反向代理无法为请求的服务器名称找到匹配证书时，将使用回退证书。若使用 CloudFlare 完全严格模式，可将 CloudFlare 证书上传为回退证书。</p>
         </div>
     </div>
     <div class="ui divider"></div>
     <div tourstep="acmeSettings">
-        <h3>Certificate Authority (CA) and Auto Renew (ACME)</h3>
-        <p>Management features regarding CA and ACME</p>
-        <h4>Prefered Certificate Authority</h4>
-        <p>The default CA to use when create a new subdomain proxy endpoint with TLS certificate</p>
+        <h3>证书颁发机构 (CA) 与自动续期 (ACME)</h3>
+        <p>CA 与 ACME 相关管理功能</p>
+        <h4>首选证书颁发机构</h4>
+        <p>新建带 TLS 证书的子域名代理端点时使用的默认 CA</p>
         <div class="ui fluid form">
             <div class="field">
-                <label>Preferred CA</label>
+                <label>首选 CA</label>
                 <div class="ui selection dropdown" id="defaultCA">
                     <input type="hidden" name="defaultCA">
                     <i class="dropdown icon"></i>
@@ -130,23 +126,23 @@
                 </div>
             </div>
             <div class="field">
-                <label>ACME Email</label>
-                <input id="prefACMEEmail" type="text" placeholder="ACME Email">
+                <label>ACME 邮箱</label>
+                <input id="prefACMEEmail" type="text" placeholder="ACME 邮箱">
             </div>
-            <button class="ui basic icon button" onclick="saveDefaultCA();"><i class="ui blue save icon"></i> Save Settings</button>
+            <button class="ui basic icon button" onclick="saveDefaultCA();"><i class="ui blue save icon"></i> 保存设置</button>
         </div><br>
-        <h5>Certificate Renew / Generation (ACME) Settings</h5>
+        <h5>证书续期 / 申请（ACME）</h5>
         <div class="ui basic segment acmeRenewStateWrapper">
             <h4 class="ui header" id="acmeAutoRenewer">
                 <i class="white remove icon"></i>
                 <div class="content">
-                    <span id="acmeAutoRenewerStatus">Disabled</span>
-                    <div class="sub header">ACME Auto-Renewer</div>
+                    <span id="acmeAutoRenewerStatus">未启用</span>
+                    <div class="sub header">ACME 自动续期</div>
                 </div>
             </h4>
         </div>
-        <p>This tool provide you a graphical interface to setup auto certificate renew on your (sub)domains. You can also manually generate a certificate if one of your domain do not have certificate.</p>
-        <button class="ui basic button" tourstep="openACMEManager" onclick="openACMEManager();"><i class="yellow external icon"></i> Open ACME Tool</button>
+        <p>本工具提供图形界面，用于为（子）域名配置自动证书续期；也可在域名尚未有证书时手动申请。</p>
+        <button class="ui basic button" tourstep="openACMEManager" onclick="openACMEManager();"><i class="yellow external icon"></i> 打开 ACME 工具</button>
     </div>
 </div>
 <script>
@@ -159,7 +155,7 @@
         const fileInput = document.getElementById('pubkeySelector');
         const file = fileInput.files[0];
         if (!file) {
-            msgbox("No certificate file selected", false, 4000);
+            msgbox("未选择证书文件", false, 4000);
             return;
         }
         const reader = new FileReader();
@@ -197,13 +193,13 @@
                 if (data.error !== undefined) {
                     msgbox(data.error, false, 5000);
                 } else {
-                    msgbox('Fallback certificate set successfully!');
+                    msgbox('回退证书已设置成功');
                     initManagedDomainCertificateList();
                     initDefaultKeypairCheck();
                 }
             },
             error: function(xhr) {
-                msgbox('Failed to set fallback certificate', false, 5000);
+                msgbox('设置回退证书失败', false, 5000);
             }
         });
     }
@@ -215,7 +211,7 @@
             defaultCA = "Let's Encrypt";
         }
         //Get a new cert using ACME
-        msgbox("Requesting certificate via " + defaultCA  +"...");
+        msgbox("正在通过 " + defaultCA + " 申请证书...");
 
         //Request ACME for certificate
         let buttonOriginalHTML = "";
@@ -238,9 +234,9 @@
                 }else{
                     //Show error or success icon with text
                     if (succ){
-                        $(btn).html(`<i class="ui green check icon"></i> Requested`);
+                        $(btn).html(`<i class="ui green check icon"></i> 已申请`);
                     }else{
-                        $(btn).html(`<i class="ui red times icon"></i> Error`);
+                        $(btn).html(`<i class="ui red times icon"></i> 失败`);
                     }
                 }
 
@@ -272,7 +268,7 @@
             let filename = "";
             let email = acmeEmail;
             if (acmeEmail == ""){
-                msgbox("Unable to obtain certificate: ACME email not set", false, 8000);
+                msgbox("无法申请证书：未设置 ACME 邮箱", false, 8000);
                 if (callback != undefined){
                     callback(false);
                 }
@@ -287,7 +283,7 @@
                 //if there are only 1 domain
                 filename = domains;
             }else{
-                msgbox("Filename cannot be empty for certs containing multiple domains.")
+                msgbox("包含多个域名的证书不能使用空文件名。")
                 if (callback != undefined){
                     callback(false);
                 }
@@ -317,7 +313,7 @@
                     } else {
                         console.log("Certificate installed successfully");
                         // Show success message
-                        msgbox("Certificate installed successfully");
+                        msgbox("证书已安装成功");
                         
                         if (callback != undefined){
                             callback(true);
@@ -334,7 +330,7 @@
 
     //Delete the certificate by its domain
     function deleteCertificate(domain){
-        if (confirm("Confirm delete certificate for " + domain + " ?")){
+        if (confirm("确认删除证书 " + domain + "？")){
             $.cjax({
                 url: "/api/cert/delete",
                 method: "POST",
@@ -374,7 +370,7 @@
     }
     //Set the status of the acme enable icon
     function setACMEEnableStates(enabled){
-        $("#acmeAutoRenewerStatus").text(enabled?"Enabled":"Disabled");
+        $("#acmeAutoRenewerStatus").text(enabled?"已启用":"未启用");
         if (enabled){
             $(".acmeRenewStateWrapper").addClass("enabled");
         }else{
@@ -390,7 +386,7 @@
         let newDefaultCA = $("#defaultCA").dropdown("get value");
 
         if (newDefaultEmail == ""){
-            msgbox("Invalid acme email given", false);
+            msgbox("ACME 邮箱无效", false);
             return;
         }
 
@@ -419,7 +415,7 @@
             }
         });
 
-        msgbox("Settings updated");
+        msgbox("设置已更新");
 
     }
 
@@ -509,7 +505,7 @@
             }
 
             if (domain == undefined || domain.trim() == "") {
-                msgbox("Missing domain", false, 5000);
+                msgbox("未填写域名", false, 5000);
                 return;
             }
         }
@@ -528,7 +524,7 @@
             publicKeyRequest.onreadystatechange = function() {
             if (publicKeyRequest.readyState === XMLHttpRequest.DONE) {
                 if (publicKeyRequest.status !== 200) {
-                    msgbox('Error uploading public key: ' + publicKeyRequest.statusText, false, 5000);
+                    msgbox('公钥上传失败：' + publicKeyRequest.statusText, false, 5000);
                 }
 
                 if (callback != undefined){
@@ -545,7 +541,7 @@
             privateKeyRequest.onreadystatechange = function() {
             if (privateKeyRequest.readyState === XMLHttpRequest.DONE) {
                 if (privateKeyRequest.status !== 200) {
-                    msgbox('Error uploading private key: ' + privateKeyRequest.statusText, false, 5000);
+                    msgbox('私钥上传失败：' + privateKeyRequest.statusText, false, 5000);
                 }
                 if (callback != undefined){
                     callback();
@@ -554,7 +550,7 @@
             };
             privateKeyRequest.send(privateKeyForm);
         } else {
-            msgbox('One or both of the files is missing or not a file object');
+            msgbox('未选择文件或所选不是有效文件');
         }
     }
 
@@ -606,7 +602,7 @@
             .then(response => {
                 initDefaultKeypairCheck();
                 if (response.ok) {
-                    msgbox('File upload successful!');
+                    msgbox('文件上传成功');
                 } else {
                     response.text().then(text => {
                         msgbox(text, false, 5000);
@@ -616,7 +612,7 @@
                 }
                 })
             .catch(error => {
-                msgbox('An error occurred while uploading the file.', false, 5000);
+                msgbox('文件上传时发生错误', false, 5000);
                 console.error(error);
             });
         });
@@ -649,7 +645,7 @@
             })
             .then(response => {
                 if (response.ok) {
-                    msgbox('File upload successful!');
+                    msgbox('文件上传成功');
                     initDefaultKeypairCheck();
                 } else {
                     response.text().then(text => {
@@ -660,7 +656,7 @@
                 }
                 })
             .catch(error => {
-                msgbox('An error occurred while uploading the file.', false, 5000);
+                msgbox('文件上传时发生错误', false, 5000);
                 console.error(error);
             });
         });
@@ -740,7 +736,7 @@
         
         // Validate inputs
         if (pubkeyContent === '' || prikeyContent === '') {
-            msgbox('Please paste both public key and private key content', false, 5000);
+            msgbox('请同时粘贴公钥和私钥内容', false, 5000);
             return;
         }
         
@@ -751,7 +747,7 @@
             if ($("#certdomain").attr("placeholder").trim() !== '') {
                 domain = $("#certdomain").attr("placeholder").trim();
             } else {
-                msgbox("Missing domain", false, 5000);
+                msgbox("未填写域名", false, 5000);
                 return;
             }
         }

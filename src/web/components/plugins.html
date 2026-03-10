@@ -102,25 +102,25 @@
 </style>
 <div class="standardContainer">
     <div class="ui basic segment">
-        <h2>Plugins</h2>
-        <p>Add custom features to your Zoraxy!</p>
+        <h2>插件</h2>
+        <p>为 Zoraxy 添加自定义功能</p>
     </div>
     <div class="ui yellow message">
-      <div class="header">Experimental Feature</div>
-      <p>This feature is experimental and may not work as expected. Use with caution.</p>
+      <div class="header">实验性功能</div>
+      <p>该功能为实验性，可能不如预期稳定，请谨慎使用。</p>
     </div>
     <h4 class="ui header">
-      Plugin Map
-     <div class="sub header">Assigning a plugin to a tag will make the plugin available to the HTTP Proxy rule with the same tag.</div>
+      插件映射
+     <div class="sub header">将插件绑定到标签后，带有相同标签的 HTTP 代理规则即可使用该插件。</div>
     </h4>
     <br>
     <div class="ui stackable grid">
       <div class="seven wide column">
         <!-- Selectable plugin list -->
-        <div class="selectColTitle">Unassigned Plugins</div>
+        <div class="selectColTitle">未分配插件</div>
         <div id="selectablePluginList" class="ui relaxed divided list" style="border: 1px solid var(--divider_color);">
           <div class="item" style="pointer-events: none; user-select: none; opacity: 0.6;">
-            <i class="ui green check circle icon"></i> No selected tag
+            <i class="ui green check circle icon"></i> 未选择标签
           </div>
         </div>
       </div>
@@ -128,20 +128,20 @@
         <!-- Add and Remove button -->
         <div>
           <div class="wideViewOnly">
-            <button class="ui basic red icon button removeSelectedPluginFromTagBtn" title="Remove selected plugin from tag">
+            <button class="ui basic red icon button removeSelectedPluginFromTagBtn" title="从标签中移除所选插件">
               <i class="left arrow icon"></i>
             </button>
             <br>
-            <button class="ui basic green icon button addSelectedPluginTotagBtn" title="Add selected plugin to tag" style="margin-top: 0.4em;">
+            <button class="ui basic green icon button addSelectedPluginTotagBtn" title="将所选插件加入标签" style="margin-top: 0.4em;">
               <i class="right arrow icon"></i>
             </button>
           </div>
           <div class="mobileViewOnly">
-            <button class="ui basic red icon button removeSelectedPluginFromTagBtn" title="Remove selected plugin from tag">
+            <button class="ui basic red icon button removeSelectedPluginFromTagBtn" title="从标签中移除所选插件">
               <i class="up arrow icon"></i>
             </button>
             <br>
-            <button class="ui basic green icon button addSelectedPluginTotagBtn" title="Add selected plugin to tag" style="margin-top: 0.4em;">
+            <button class="ui basic green icon button addSelectedPluginTotagBtn" title="将所选插件加入标签" style="margin-top: 0.4em;">
               <i class="down arrow icon"></i>
             </button>
           </div>
@@ -152,17 +152,17 @@
         <div class="ui fluid selection dropdown" id="pluginTagList">
           <input type="hidden" name="tag">
           <i class="dropdown icon"></i>
-          <div class="default text">Select Tag</div>
+          <div class="default text">选择标签</div>
           <div class="menu">
             <!-- <div class="item" data-value="tag1">Tag 1</div> -->
           </div>
         </div>
-        <button class="ui basic fluid button" onclick="loadTags();" style="margin-top: 0.4em;"><i class="ui green refresh icon"></i> Refresh Tag List</button>
+        <button class="ui basic fluid button" onclick="loadTags();" style="margin-top: 0.4em;"><i class="ui green refresh icon"></i> 刷新标签列表</button>
         <div class="ui divider"></div>
-        <div class="selectColTitle">Assigned Plugins</div>
+        <div class="selectColTitle">已分配插件</div>
         <div id="selectedTagPluginList" class="ui relaxed divided list" style="border: 1px solid var(--divider_color);">
             <div class="item" style="pointer-events: none; user-select: none; opacity: 0.6;">
-            <i class="ui arrow up icon"></i> Select a tag to view assigned plugins
+            <i class="ui arrow up icon"></i> 选择标签以查看已分配插件
             </div>
         </div>
       </div>
@@ -170,16 +170,16 @@
     <br>
     <div class="ui divider"></div>
     <h4 class="ui header">
-       Plugin List
-      <div class="sub header">A list of installed plugins and their enable state</div>
+       插件列表
+      <div class="sub header">已安装插件及其启用状态</div>
     </h4>
     <table class="ui basic celled table">
         <thead>
           <tr>
-            <th>Plugin Name</th>
-            <th>Descriptions</th>
-            <th>Category</th>
-            <th>Action</th>
+            <th>插件名称</th>
+            <th>描述</th>
+            <th>分类</th>
+            <th>操作</th>
         </tr></thead>
         <tbody id="pluginTable">
           
@@ -189,12 +189,12 @@
           <div class="ui accordion advanceSettings">
               <div class="title">
                 <i class="dropdown icon"></i>
-                  Developer Settings
+                  开发者设置
               </div>
               <div class="content ui form">
                 <div class="ui inverted message" style="margin-top: 0.6em;">
-                  <div class="header">Developer Only</div>
-                  <p>These functions are intended for developers only. Enabling them may add latency to plugin loading & routing. Proceed with caution.<br>
+                  <div class="header">仅限开发者</div>
+                  <p>以下功能仅供开发者使用，启用可能增加插件加载与路由延迟，请谨慎操作。<br>
                   <b>Tips: You can start zoraxy with -dev=true to enable auto-reload when start</b></p>
                 </div>
                 <br>
@@ -367,11 +367,11 @@ function bindTagAssignButtonEvents(){
     const selectedPlugin = $(".selectablePluginItem.active");
     const selectedTag = $("#pluginTagList").dropdown("get value");
     if (selectedPlugin.length == 0){
-      msgbox("Please select a plugin to add", false);
+      msgbox("请先选择要添加的插件", false);
       return;
     }
     if (selectedTag == ""){
-      msgbox("Please select a tag to add the plugin to", false);
+      msgbox("请先选择要添加到的标签", false);
       return;
     }
     const pluginId = selectedPlugin.attr("pluginid");
@@ -382,11 +382,11 @@ function bindTagAssignButtonEvents(){
     const selectedPlugin = $(".selectedPluginItem.active");
     const selectedTag = $("#pluginTagList").dropdown("get value");
     if (selectedPlugin.length == 0){
-      msgbox("Please select a plugin to remove", false);
+      msgbox("请先选择要移除的插件", false);
       return;
     }
     if (selectedTag == ""){
-      msgbox("Please select a tag to remove the plugin from", false);
+      msgbox("请先选择要移除插件的标签", false);
       return;
     }
     const pluginId = selectedPlugin.attr("pluginid");
@@ -404,7 +404,7 @@ function addPluginToTag(pluginId, tag){
       if (data.error != undefined){
         msgbox(data.error, false);
       }else{
-        msgbox("Plugin added to tag", true);
+        msgbox("插件已添加到标签", true);
       }
       loadPluginsForTag(tag);
     }
@@ -420,7 +420,7 @@ function removePluginFromTag(pluginId, tag){
       if (data.error != undefined){
         msgbox(data.error, false);
       }else{
-        msgbox("Plugin removed from tag", true);
+        msgbox("插件已从标签移除", true);
       }
       loadPluginsForTag(tag);
     }
@@ -448,7 +448,7 @@ function initPluginSideMenu(){
     if (enabledPluginCount == 0){
       $("#pluginMenu").append(`
          <a class="item" style="pointer-events: none; user-select: none; opacity: 0.6;">
-            <i class="green circle check icon"></i> No Plugins Installed
+            <i class="green circle check icon"></i> 未安装插件
         </a>
       `);
     }
@@ -552,7 +552,7 @@ initiatePluginList();
 /* Plugin Lifecycle */
 function startPlugin(pluginId, btn=undefined){
   if (btn) {
-    $(btn).html('<i class="spinner loading icon"></i> Starting');
+    $(btn).html('<i class="spinner loading icon"></i> 启动中');
     $(btn).addClass('disabled');
   }
   $.cjax({
@@ -563,7 +563,7 @@ function startPlugin(pluginId, btn=undefined){
       if (data.error != undefined){
         msgbox(data.error, false);
       }else{
-        msgbox("Plugin started", true);
+        msgbox("插件已启动", true);
       }
       initiatePluginList();
       initPluginSideMenu();
@@ -573,7 +573,7 @@ function startPlugin(pluginId, btn=undefined){
 
 function stopPlugin(pluginId, btn=undefined) {
   if (btn) {
-    $(btn).html('<i class="spinner loading icon"></i> Stopping');
+    $(btn).html('<i class="spinner loading icon"></i> 停止中');
     $(btn).addClass('disabled');
   }
   $.cjax({
@@ -584,7 +584,7 @@ function stopPlugin(pluginId, btn=undefined) {
       if (data.error != undefined){
         msgbox(data.error, false);
       }else{
-        msgbox("Plugin stopped", true);
+        msgbox("插件已停止", true);
       }
       initiatePluginList();
       initPluginSideMenu();
@@ -594,7 +594,7 @@ function stopPlugin(pluginId, btn=undefined) {
 
 function rebuildPlugin(pluginId, btn=undefined) {
   if (btn) {
-    $(btn).html('<i class="spinner loading icon"></i> Rebuilding');
+    $(btn).html('<i class="spinner loading icon"></i> 重建中');
     $(btn).addClass('disabled');
   }
   $.cjax({
@@ -606,7 +606,7 @@ function rebuildPlugin(pluginId, btn=undefined) {
         // Show build error with detailed output
         showBuildErrorDialog(data.error);
       }else{
-        msgbox("Plugin rebuilt successfully", true);
+        msgbox("插件重建成功", true);
       }
       initiatePluginList();
       initPluginSideMenu();
@@ -619,11 +619,11 @@ function showBuildErrorDialog(errorMessage) {
   let modalHtml = `
     <div id="buildErrorModal" class="ui modal">
       <div class="header">
-        <i class="exclamation triangle icon"></i> Plugin Build Failed
+        <i class="exclamation triangle icon"></i> 插件构建失败
       </div>
       <div class="content">
         <div class="description">
-          <p>The plugin build process encountered an error. Please review the build output below:</p>
+          <p>插件构建过程出错，请查看下方构建输出：</p>
           <div class="ui form">
             <div class="field">
               <textarea id="buildErrorOutput" readonly style="background-color: #000000; color: #ffffff; font-family: monospace; min-height: 300px; resize: vertical;">${errorMessage}</textarea>
@@ -632,7 +632,7 @@ function showBuildErrorDialog(errorMessage) {
         </div>
       </div>
       <div class="actions">
-        <div class="ui button" onclick="$('#buildErrorModal').modal('hide');">Close</div>
+        <div class="ui button" onclick="$('#buildErrorModal').modal('hide');">关闭</div>
       </div>
     </div>
   `;
@@ -657,7 +657,7 @@ function openPluginStore(){
 }
 
 function uninstallPlugin(pluginId, pluginName, btn=undefined) {
-      if (confirm("Are you sure you want to remove " + pluginName + " plugin?")) {
+      if (confirm("确定要卸载插件 " + pluginName + " 吗？")) {
           if (btn) {
               $(btn).html('<i class="spinner loading icon"></i>');
               $(btn).addClass('disabled');
@@ -670,7 +670,7 @@ function uninstallPlugin(pluginId, pluginName, btn=undefined) {
                   if (data.error != undefined) {
                       msgbox(data.error, false);
                   } else {
-                      msgbox(pluginName + " uninstalled successfully", true);
+                      msgbox(pluginName + " 已卸载", true);
                       initiatePluginList();
                       initPluginSideMenu();
                   }
@@ -725,7 +725,7 @@ function uninstallPlugin(pluginId, pluginName, btn=undefined) {
             if (data.error != undefined) {
               msgbox(data.error, false);
             } else {
-              msgbox("Plugin Auto Reload enabled", true);
+              msgbox("插件自动重载已启用", true);
             }
           }
         });
@@ -739,7 +739,7 @@ function uninstallPlugin(pluginId, pluginName, btn=undefined) {
             if (data.error != undefined) {
               msgbox(data.error, false);
             } else {
-              msgbox("Plugin Auto Reload disabled", true);
+              msgbox("插件自动重载已禁用", true);
             }
           }
         });
@@ -749,7 +749,7 @@ function uninstallPlugin(pluginId, pluginName, btn=undefined) {
     $("#autoreload-interval").on("change", function() {
       const interval = $(this).val();
       if (interval < 1 || interval > 60) {
-        msgbox("Interval must be between 1 and 60 seconds", false);
+        msgbox("间隔须在 1～60 秒之间", false);
         return;
       }
       $.cjax({
@@ -760,7 +760,7 @@ function uninstallPlugin(pluginId, pluginName, btn=undefined) {
           if (data.error != undefined) {
             msgbox(data.error, false);
           } else {
-            msgbox("Auto Reload Interval updated to " + interval + " seconds", true);
+            msgbox("自动重载间隔已更新为 " + interval + " 秒", true);
           }
         }
       });

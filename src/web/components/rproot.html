@@ -1,47 +1,47 @@
 <div class="standardContainer">
     <div class="ui basic segment">
-        <h2>Default Site</h2>
-        <p>Default routing options for inbound traffic</p>
+        <h2>默认站点</h2>
+        <p>入站流量的默认路由选项</p>
         <div class="ui form">
             <div class="grouped fields">
-                <label>What to show when Zoraxy is hit with an unknown Host?</label>
+                <label>当 Zoraxy 收到未知 Host 时显示什么？</label>
                 <div class="field">
                     <div class="ui radio defaultsite checkbox">
                         <input type="radio" name="defaultsiteOption" checked="checked" value="webserver">
-                        <label>Internal Static Web Server<br>
-                            <small>Check this if you prefer a more Apache / Nginx like experience</small>
+                        <label>内置静态 Web 服务器<br>
+                            <small>若需要类似 Apache/Nginx 的体验可勾选此项</small>
                         </label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui radio defaultsite checkbox">
                         <input type="radio" name="defaultsiteOption" value="proxy">
-                        <label>Reverse Proxy Target<br>
-                            <small>Proxy the request to a target IP / domain</small>
+                        <label>反向代理目标<br>
+                            <small>将请求代理到指定 IP/域名</small>
                         </label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui radio defaultsite checkbox">
                         <input type="radio" name="defaultsiteOption" value="redirect">
-                        <label>Redirect<br>
-                            <small>Redirect the user to a new location</small>
+                        <label>重定向<br>
+                            <small>将用户重定向到新地址</small>
                         </label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui radio defaultsite checkbox">
                         <input type="radio" name="defaultsiteOption" value="notfound">
-                        <label>Show 404 NOT FOUND<br>
-                            <small>Respond to request with a 404 page</small>
+                        <label>显示 404 未找到<br>
+                            <small>以 404 页面响应请求</small>
                         </label>
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui radio defaultsite checkbox">
                         <input type="radio" name="defaultsiteOption" value="closeresp">
-                        <label>Close Connection<br>
-                            <small>Close the connection without any response</small>
+                        <label>关闭连接<br>
+                            <small>直接关闭连接，不返回任何响应</small>
                         </label>
                     </div>
                 </div>
@@ -52,14 +52,14 @@
         <div id="defaultSiteProxyOptions" class="ui basic segment advanceoptions defaultSiteOptionDetails" style="display:none; ">
             <div class="ui form">
                 <div class="field">
-                        <label>Reverse Proxy Target</label>
+                        <label>反向代理目标</label>
                         <input type="text" id="proxyRoot" onchange="checkRootRequireTLS(this.value);">
-                        <small>e.g. localhost:8080 / 192.168.0.100:80 / example.com</small>
+                        <small>例如 localhost:8080 / 192.168.0.100:80 / example.com</small>
                 </div>
                 <div class="field">
                     <div class="ui checkbox">
                         <input type="checkbox" id="rootReqTLS">
-                        <label>Reverse proxy target require TLS connection <br><small>Check this if your proxy target URL require connection with https://</small></label>
+                        <label>反向代理目标需要 TLS 连接 <br><small>若目标地址为 https:// 请勾选</small></label>
                     </div>
                 </div>
             </div>
@@ -69,11 +69,11 @@
         <div id="defaultSiteRedirectOptions" class="ui basic segment advanceoptions defaultSiteOptionDetails" style="display:none;"">
             <div class="ui form">
                 <div class="field">
-                    <label>Redirect target domain</label>
+                    <label>重定向目标域名</label>
                     <div class="ui input">
                         <input id="redirectDomain" type="text" placeholder="http://example.com">
                     </div>
-                    <small>Unset subdomain will be redirected to the link above. Remember to include the protocol (e.g. http:// or https://)</small>
+                    <small>未匹配的子域名将重定向到上述链接。请包含协议（如 http:// 或 https://）</small>
                 </div>
             </div>
         </div>
@@ -132,7 +132,7 @@
     function initRootInfo(callback=undefined){
         $.get("/api/proxy/list?type=root", function(data){
             if (data == null){
-                msgbox("Default site load failed", false);
+                msgbox("默认站点加载失败", false);
             }else{
                 var $radios = $('input:radio[name=defaultsiteOption]');
                 let proxyType = data.DefaultSiteOption;
@@ -270,7 +270,7 @@
                                 setWebServerRunningState(true);
                             }
                             
-                            msgbox("Default Site Updated");
+                            msgbox("默认站点已更新");
                         })
                     });
                     
@@ -281,7 +281,7 @@
                 }
             },
             error: function(){
-                msgbox("Unknown error occured", false);
+                msgbox("发生未知错误", false);
             }
         });
 

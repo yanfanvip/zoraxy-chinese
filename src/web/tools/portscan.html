@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"/>
     <meta name="theme-color" content="#4b75ff">
     <link rel="icon" type="image/png" href="./favicon.png" />
-    <title>Port Scanner | Zoraxy</title>
+    <title>端口扫描 | Zoraxy</title>
     <link rel="stylesheet" href="../script/semantic/semantic.min.css">
     <script src="../script/jquery-3.6.0.min.js"></script>
     <script src="../script/semantic/semantic.min.js"></script>
@@ -23,17 +23,17 @@
     <div class="ui container">
         <br>
             <div class="ui segment">
-                <p>Enter the IP address you want to scan for open ports. This tool only scans for open TCP ports.</p>
+                <p>输入要扫描开放端口的 IP 地址。本工具仅扫描 TCP 端口。</p>
                 <div class="ui fluid action input">
-                    <input id="scanningIP" type="text" placeholder="IP Address">
-                    <button class="ui basic blue button" onclick="startScan()">Start Scan</button>
+                    <input id="scanningIP" type="text" placeholder="IP 地址">
+                    <button class="ui basic blue button" onclick="startScan()">开始扫描</button>
                 </div>
                 <div class="ui yellow message">
                     <h4 class="ui header">
                         <i class="exclamation triangle icon"></i>
                         <div class="content">
-                            Port Scan Warning
-                            <div class="sub header">Please ensure that you only scan IP addresses that you own or have explicit permission to scan. Unauthorized scanning may be considered a network attack and could result in legal consequences.</div>
+                            端口扫描提示
+                            <div class="sub header">请仅扫描您拥有或已获明确授权的 IP。未经授权的扫描可能被视为网络攻击并承担法律后果。</div>
                         </div>
                     </h4>
                 </div>
@@ -41,18 +41,18 @@
                 <table class="ui celled compact table">
                     <thead>
                         <tr>
-                            <th>Port</th>
-                            <th>TCP Port Open</th>
-                            <th>Full Path</th>
+                            <th>端口</th>
+                            <th>TCP 端口开放</th>
+                            <th>完整路径</th>
                         </tr>
                     </thead>
                     <tbody id="resultTable">
                         <tr>
-                            <td colspan="3"><i class="ui green circle check icon"></i> Click the "Start Scan" to start port scan on given IP address</td>
+                            <td colspan="3"><i class="ui green circle check icon"></i> 点击「开始扫描」对指定 IP 进行端口扫描</td>
                         </tr>
                     </tbody>
                 </table>
-                <button class="ui right floated basic button" onclick="exitTool();">Exit</button>
+                <button class="ui right floated basic button" onclick="exitTool();">退出</button>
                 <br><br>
             </div>
         </div>

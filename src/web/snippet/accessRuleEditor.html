@@ -24,75 +24,75 @@
     <div class="ui container">
         <div class="ui header">
             <div class="content">
-                Access Rule Editor
-                <div class="sub header">Create, Edit or Remove Access Rules</div>
+                访问规则编辑器
+                <div class="sub header">创建、编辑或删除访问规则</div>
             </div>
         </div>
         <div class="ui divider"></div>
         <div class="ui top attached tabular menu">
-            <a class="active item" data-tab="new"><i class="ui green add icon"></i> New</a>
-            <a class="item" data-tab="edit"><i class="ui grey edit icon"></i> Edit</a>
+            <a class="active item" data-tab="new"><i class="ui green add icon"></i> 新建</a>
+            <a class="item" data-tab="edit"><i class="ui grey edit icon"></i> 编辑</a>
         </div>
         <div class="ui bottom attached active tab segment" data-tab="new">
-            <p>Create a new Access Rule</p>
+            <p>新建访问规则</p>
             <form class="ui form" id="accessRuleForm">
                 <div class="field">
-                    <label>Rule Name</label>
-                    <input type="text" name="accessRuleName" placeholder="Rule Name" required>
+                    <label>规则名称</label>
+                    <input type="text" name="accessRuleName" placeholder="规则名称" required>
                 </div>
                 <div class="field">
-                    <label>Description</label>
-                    <textarea name="description" placeholder="Description"></textarea>
+                    <label>描述</label>
+                    <textarea name="description" placeholder="描述"></textarea>
                 </div>
                 <div class="ui toggle checkbox">
                     <input type="checkbox" id="newRuleTrustProxy">
-                    <label>Enable Trusted Proxy Gating<br>
-                        <small>Only trust X-Real-IP or X-Forwarded-For headers from trusted proxy listed in the whitelist advanced settings</small></label>
+                    <label>启用受信任代理校验<br>
+                        <small>仅信任高级设置白名单中受信任代理的 X-Real-IP 或 X-Forwarded-For 头</small></label>
                 </div>
                 <div class="ui divider"></div>
-                <button class="ui basic button" type="submit"><i class="ui green add icon"></i> Create</button>
+                <button class="ui basic button" type="submit"><i class="ui green add icon"></i> 创建</button>
             </form>
         <br>
         </div>
         <div class="ui bottom attached tab segment" data-tab="edit">
-            <p>Select an Access Rule to edit</p>
+            <p>选择要编辑的访问规则</p>
             <button id="refreshAccessRuleListBtn" class="ui circular basic icon button" onclick="reloadAccessRuleList()"><i class="ui green refresh icon"></i></button>
             <div class="ui selection fluid dropdown" id="accessRuleSelector">
                 <input type="hidden" name="targetAccessRule" value="default">
                 <i class="dropdown icon"></i>
                 <div class="default text"></div>
                 <div class="menu" id="accessRuleList">
-                    <div class="item" data-value="default"><i class="ui yellow star icon"></i> Default</div>
+                    <div class="item" data-value="default"><i class="ui yellow star icon"></i> 默认</div>
                 </div>
             </div>
             <br>
             <form class="ui form" id="modifyRuleInfo">
                 <div class="disabled field">
-                    <label>Rule ID</label>
+                    <label>规则 ID</label>
                     <input type="text" name="accessRuleUUID">
                 </div>
                 <div class="field">
-                    <label>Rule Name</label>
-                    <input type="text" name="accessRuleName" placeholder="Rule Name" required>
+                    <label>规则名称</label>
+                    <input type="text" name="accessRuleName" placeholder="规则名称" required>
                 </div>
                 <div class="field">
-                    <label>Description</label>
-                    <textarea name="description" placeholder="Description"></textarea>
+                    <label>描述</label>
+                    <textarea name="description" placeholder="描述"></textarea>
                 </div>
                  <div class="ui toggle checkbox" id="trustedProxyGatingToggle">
                     <input type="checkbox" id="enableWhitelistTrustedProxy">
-                    <label>Enable Trusted Proxy Gating<br>
-                        <small>Only trust X-Real-IP or X-Forwarded-For headers from trusted proxy listed in the whitelist advanced settings</small></label>
+                    <label>启用受信任代理校验<br>
+                        <small>仅信任高级设置白名单中受信任代理的 X-Real-IP 或 X-Forwarded-For 头</small></label>
                 </div>
                 <div class="ui divider"></div>
-                <button class="ui basic button" type="submit"><i class="ui green save icon"></i> Save Changes</button>
-                <button class="ui basic button" onclick="removeAccessRule(event);"><i class="ui red trash icon"></i> Remove Rule</button>
+                <button class="ui basic button" type="submit"><i class="ui green save icon"></i> 保存更改</button>
+                <button class="ui basic button" onclick="removeAccessRule(event);"><i class="ui red trash icon"></i> 删除规则</button>
             </form>
           
            
         </div>
         <br>
-        <button class="ui basic button"  style="float: right;" onclick="parent.hideSideWrapper();"><i class="remove icon"></i> Close</button>
+        <button class="ui basic button"  style="float: right;" onclick="parent.hideSideWrapper();"><i class="remove icon"></i> 关闭</button>
         <br><br><br>
   </div>
 
@@ -128,7 +128,7 @@
                 if (data.error != undefined){
                     parent.msgbox(data.error, false);
                 }else{
-                    parent.msgbox("Access Rule Created", true);
+                    parent.msgbox("访问规则已创建", true);
                     reloadAccessRuleList();
                     if (parent != undefined && parent.reloadAccessRules != undefined){
                         parent.reloadAccessRules();
@@ -208,7 +208,7 @@
             data: { enable: isChecked, id: ruleID},
             success: function(data){
                 if (data.error != undefined){
-                    parent.msgbox("Failed to update trusted proxy gating: " + data.error, false);
+                    parent.msgbox("更新受信任代理门控失败：" + data.error, false);
                     //Revert the checkbox state
                     if (isChecked){
                         $('#enableWhitelistTrustedProxy').parent().checkbox("set unchecked");
@@ -218,7 +218,7 @@
                     return;
                 }else{
                     //Show success indicator
-                    parent.msgbox("Trusted proxy gating " + (isChecked ? "enabled" : "disabled"), true);
+                    parent.msgbox("受信任代理门控已" + (isChecked ? "启用" : "禁用"), true);
                 }
             }
         });
@@ -249,7 +249,7 @@
                 if (data.error != undefined){
                     parent.msgbox(data.error, false);
                 }else{
-                    parent.msgbox("Access rule updated", true);
+                    parent.msgbox("访问规则已更新", true);
                     initAccessRuleList(function(){
                         $("#accessRuleSelector").dropdown("set selected", accessRuleUUID);
                         loadAccessRuleInfoIntoEditFields(accessRuleUUID);
@@ -308,11 +308,11 @@
             return;
         }
         if (accessRuleUUID == "default"){
-            parent.msgbox("Default access rule cannot be removed", false);
+            parent.msgbox("默认访问规则不可删除", false);
             return;
         }
         let accessRuleName = $("#modifyRuleInfo input[name='accessRuleName']").val();
-        if (confirm("Confirm removing access rule " + accessRuleName + "?")){
+        if (confirm("确认删除访问规则 " + accessRuleName + "？")){
             $.cjax({
                 url: "/api/access/remove",
                 data: {
@@ -323,7 +323,7 @@
                     if (data.error != undefined){
                         parent.msgbox(data.error, false);
                     }else{
-                        parent.msgbox("Access rule removed", true);
+                        parent.msgbox("访问规则已删除", true);
                         reloadAccessRuleList();
                         if (parent != undefined && parent.reloadAccessRules != undefined){
                             parent.reloadAccessRules();

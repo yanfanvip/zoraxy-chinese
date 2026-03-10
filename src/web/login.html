@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="zh-CN">
     <head>
     <meta charset="UTF-8">
     <meta name="robots" content="noindex" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="zoraxy.csrf.Token" content="{{.csrfToken}}">
     <link rel="icon" type="image/png" href="./favicon.png" />
-    <title>Login | Zoraxy</title>
+    <title>登录 | Zoraxy</title>
     <link rel="stylesheet" href="script/semantic/semantic.min.css">
     <link href="script/aos.css" rel="stylesheet">
     <script src="script/aos.js"></script>
@@ -171,36 +171,36 @@
                 <form class="ui large form content">
                     <div class="ui basic segment">
                         <img class="ui fluid image" src="img/public/logo.svg" style="pointer-events:none;">
-                        <p class="registerOnly">Account Setup</p>
+                        <p class="registerOnly">账户设置</p>
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="user icon"></i>
-                                <input id="username" type="text" name="username" placeholder="Username">
+                                <input id="username" type="text" name="username" placeholder="用户名">
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="lock icon"></i>
-                                <input id="magic" type="password" name="password" placeholder="Password">
+                                <input id="magic" type="password" name="password" placeholder="密码">
                             </div>
                         </div>
                         <div class="field registerOnly">
                             <div class="ui left icon input">
                                 <i class="lock icon"></i>
-                                <input id="repeatMagic" type="password" name="passwordconfirm" placeholder="Confirm Password" >
+                                <input id="repeatMagic" type="password" name="passwordconfirm" placeholder="确认密码" >
                             </div>
                         </div>
                         <div class="field loginOnly" style="text-align: left;">
                             <div class="ui checkbox">
                             <input id="rmbme" type="checkbox" tabindex="0" class="hidden">
-                            <label>Remember Me</label>
+                            <label>记住我</label>
                             </div>
                         </div>
-                        <div id="loginbtn" class="ui fluid basic button loginOnly"> <i class="ui blue sign-in icon"></i> Login</div>
-                        <div id="regsiterbtn" class="ui fluid basic button registerOnly"><i class="ui green checkmark icon"></i> Confirm</div>
+                        <div id="loginbtn" class="ui fluid basic button loginOnly"> <i class="ui blue sign-in icon"></i> 登录</div>
+                        <div id="regsiterbtn" class="ui fluid basic button registerOnly"><i class="ui green checkmark icon"></i> 确认</div>
                         <div id="errmsg"></div>
                         <div id="forgetPassword" class="field loginOnly" style="text-align: right; margin-top: 2em;">
-                            <a href="#" onclick="sendResetAccountEmail();">Forget Password</a>
+                            <a href="#" onclick="sendResetAccountEmail();">忘记密码</a>
                         </div>
                     </div>
                 </form>
@@ -222,7 +222,7 @@
             </svg>
         </div>
         <div class="wavebase">
-            <p>Proudly powered by <a href="https://zoraxy.aroz.org" target="_blank">Zoraxy</a></p>
+            <p>由 <a href="https://zoraxy.aroz.org" target="_blank">Zoraxy</a> 驱动</p>
         </div>
     <script>
         AOS.init();
@@ -314,7 +314,7 @@
             let repeatMagic = $("#repeatMagic").val();
             let csrfToken = document.querySelector('meta[name="zoraxy.csrf.Token"]').getAttribute("content");
             if (magic !== repeatMagic) {
-                alert("Password does not match");
+                alert("两次输入的密码不一致");
                 return;
             }
 
@@ -344,11 +344,11 @@
 
         //Send account reset email to preset admin account  
         function sendResetAccountEmail(){
-            $("#forgetPassword").html(`<i class="ui loading spinner icon"></i> Sending Email`);
+            $("#forgetPassword").html(`<i class="ui loading spinner icon"></i> 正在发送邮件`);
             $("#forgetPassword").css("opacity", "0.8");
             $.get("/api/account/reset", function(data){
                 if (data.error !== undefined){
-                    $("#forgetPassword").html(`<a href="#" onclick="sendResetAccountEmail();">Forget Password</a>`);
+                    $("#forgetPassword").html(`<a href="#" onclick="sendResetAccountEmail();">忘记密码</a>`);
                     alert(data.error);
                 }else{
                     window.location.href = "/web/reset.html"
@@ -396,7 +396,7 @@
                     $("input").removeClass('disabled');
                 },
                 error: function(){
-                    alert("Something went wrong.")
+                    alert("发生错误，请重试。")
                 }
             });
 

@@ -97,7 +97,7 @@
                     $('input[name="username"]').val(c.username);
                     connectSSH();
                 }catch(ex){
-                    alert("invalid usage")
+                    alert("用法无效")
                 }
             }
 
@@ -144,7 +144,7 @@
                 $("#connectionSettings").hide();
                 var count = 3;
                 var interval = setInterval(function() {
-                    $("#counter").html("ETA " + count + " seconds");
+                    $("#counter").html(count + " 秒后跳转");
                         count--;
                         if (count === 0) {
                         clearInterval(interval);

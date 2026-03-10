@@ -553,7 +553,7 @@
 			function deleteUser(buttonObject){
 				const row = $(buttonObject).closest('.userRow');
 				const username = row.attr('data-username');
-				if (!confirm('Delete user "' + username + '"?')){
+				if (!confirm('确定删除用户 "' + username + '"？')){
 					return;
 				}
 
@@ -739,7 +739,7 @@
 				const row = $(btn).closest('.gpRow');
 				const name = row.attr('data-name');
 				const id = row.attr('data-id');
-				if (!confirm('Delete group policy "' + name + '"? Users assigned to this policy will fall back to their own allowed hosts.')){
+				if (!confirm('确定删除组策略 "' + name + '"？该策略下的用户将回退到其各自允许的主机。')){
 					return;
 				}
 

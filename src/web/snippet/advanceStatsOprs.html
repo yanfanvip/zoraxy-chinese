@@ -49,7 +49,7 @@
             }
 
             function handleResetStats(){
-                if (confirm("Confirm remove statistics from " + startDate + " to " + endDate +"?")){
+                if (confirm("确认删除 " + startDate + " 至 " + endDate + " 的统计数据？")){
                     $.cjax({
                         url: "/api/analytic/resetRange?start=" + startDate + "&end=" + endDate,
                         method: "DELETE",
@@ -57,7 +57,7 @@
                             if (data.error != undefined){
                                 parent.msgbox(data.error, false, 5000);
                             }else{
-                                parent.msgbox("Statistic Cleared");
+                                parent.msgbox("统计数据已清除");
                                 parent.hideSideWrapper();
                             }
                         }
@@ -77,12 +77,12 @@
 
                         //Check if they are valid dates
                         if (!isValidDateFormat(startDate)){
-                            alert("Start date is not a valid date: " + startDate);
+                            alert("起始日期无效：" + startDate);
                             return
                         }
 
                         if (!isValidDateFormat(endDate)){
-                            alert("End date is not a valid date: " + endDate);
+                            alert("结束日期无效：" + endDate);
                             return
                         }
 
@@ -93,7 +93,7 @@
 
                         $("#daterange").html(startDate + ` <i class="arrow right icon" style="margin-right: 0;"></i> ` + endDate);
                     }catch(ex){
-                        alert("Invalid usage: Invalid date range given");
+                        alert("日期范围无效");
                     }
                 }
             }

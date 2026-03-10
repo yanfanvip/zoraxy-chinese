@@ -11,8 +11,8 @@
             <h1 class="ui header" style="margin-top: 1em; margin-left: 0.4em; padding-bottom: 1em;">
                 <i id="rpStatusIcon" class="loading spinner icon"></i>
                 <div class="content">
-                    <span id="statusTitle">Loading</span>
-                    <div class="sub header" id="statusText">Checking server status</div>
+<span id="statusTitle">加载中</span>
+                <div class="sub header" id="statusText">正在检查服务器状态</div>
                 </div>
             </h1>
             <div class="dot-container">
@@ -28,7 +28,7 @@
             <h5 class="ui header">
                 <i class="exchange icon"></i>
                 <div class="content">
-                    <span id="summaryTotalCount"></span> <small>Req. Today</small>
+                    <span id="summaryTotalCount"></span> <small>今日请求</small>
                     <div class="sub header" style="margin-top: 0.4em;">
                     <i class="green circle check icon"></i> <span id="summarySuccCount"></span>
                         / <i class="red red exclamation circle icon"></i> <span id="summaryErrCount"></span>
@@ -51,7 +51,7 @@
                 <div class="content">
                     <span id="country"></span>
                     <div class="sub header" id="countryList">
-                        <i class="ui loading circle notch icon"></i> Resolving GeoIP
+                        <i class="ui loading circle notch icon"></i> 正在解析 GeoIP
                     </div>
                 </div>
             </h5>
@@ -61,57 +61,57 @@
 <div class="standardContainer" style="padding-bottom: 0 !important;">
     <!-- Power Buttons-->
     <div class="poweroptions" style="display:inline-block;">
-        <button id="startbtn" class="ui basic button" onclick="startService();"><i class="ui green arrow alternate circle up icon"></i> Start Service</button>
-        <button id="stopbtn" class="ui basic notloopbackOnly disabled button" onclick="stopService();"><i class="ui red minus circle icon"></i> Stop Service</button>
+        <button id="startbtn" class="ui basic button" onclick="startService();"><i class="ui green arrow alternate circle up icon"></i> 启动服务</button>
+        <button id="stopbtn" class="ui basic notloopbackOnly disabled button" onclick="stopService();"><i class="ui red minus circle icon"></i> 停止服务</button>
     </div>
     <div class="ui divider"></div>
-    <h4>Network Status</h4>
-    <p>Overall Network I/O in Current Host Server</p>
+    <h4>网络状态</h4>
+    <p>当前主机的整体网络 I/O</p>
 </div>
 <div id="networkActWrapper" class="standardContainer" style="position: relative;">
     <canvas id="networkActivity"></canvas>
 </div>
 <div id="networkActivityPlaceHolder">
-    <p style="opacity: 0.5;"> Graph Render Paused</p>
+    <p style="opacity: 0.5;"> 图表渲染已暂停</p>
 </div>
 <div class="standardContainer">
     <div class="ui divider"></div>
-    <h4>Global Settings</h4>
-    <p>Inbound Port (Reverse Proxy Listening Port)</p>
+    <h4>全局设置</h4>
+    <p>入站端口（反向代理监听端口）</p>
     <div class="ui action fluid notloopbackOnly input" tourstep="incomingPort">
-        <small id="applyButtonReminder">Click "Apply" button to confirm listening port changes</small>
-        <input type="text" id="incomingPort" placeholder="Incoming Port" value="443">
-        <button class="ui green notloopbackOnly button" style="background: var(--theme_green);" onclick="handlePortChange();"><i class="ui checkmark icon"></i> Apply</button>
+        <small id="applyButtonReminder">点击「应用」按钮以确认监听端口变更</small>
+        <input type="text" id="incomingPort" placeholder="入站端口" value="443">
+        <button class="ui green notloopbackOnly button" style="background: var(--theme_green);" onclick="handlePortChange();"><i class="ui checkmark icon"></i> 应用</button>
     </div>
     <br>
     <div id="tls" class="ui toggle notloopbackOnly checkbox">
         <input type="checkbox">
-        <label>Use TLS to serve proxy request<br>
-        <small>Also known as HTTPS mode</small></label>
+        <label>使用 TLS 处理代理请求<br>
+        <small>即 HTTPS 模式</small></label>
     </div>
     <br>
     <div id="listenP80" class="ui toggle notloopbackOnly tlsEnabledOnly checkbox" style="margin-top: 0.4em;" >
         <input type="checkbox">
-        <label>Enable HTTP server on port 80<br>
-        <small>Accept HTTP requests even if you are using HTTPS mode</small></label>
+        <label>在 80 端口启用 HTTP 服务<br>
+        <small>即使使用 HTTPS 模式也接受 HTTP 请求</small></label>
     </div>
     <div id="port80Warning" class="ui tiny yellow message" style="display: none; margin-top: 0.5em; margin-bottom: 0.5em;">
         <i class="warning icon"></i>
-        Port 80 is occupied by another service and might not be working properly
+        80 端口已被其他服务占用，可能无法正常工作
     </div>
     <br>
     <div tourstep="forceHttpsRedirect" style="display: inline-block;">
         <div id="redirect" class="ui toggle notloopbackOnly tlsEnabledOnly checkbox" style="margin-top: 0.4em;">
             <input type="checkbox">
-            <label>Force redirect HTTP request to HTTPS<br>
-            <small>Redirect web traffic from port 80 to 443, require enabling HTTP server on port 80</small></label>
+            <label>强制将 HTTP 重定向到 HTTPS<br>
+            <small>将 80 端口流量重定向到 443，需先启用 80 端口 HTTP 服务</small></label>
         </div>
     </div>
     <div class="ui basic segment advanceoptions">
         <div class="ui accordion advanceSettings">
             <div class="title">
               <i class="dropdown icon"></i>
-                Advance Settings
+                高级设置
             </div>
             <div class="content">
                 <div id="tlsMinVer" class="ui notloopbackOnly tlsEnabledOnly" style="margin-top: 0.6em;">
@@ -123,22 +123,22 @@
                             <option value="1.3">TLS v1.3</option>
                         </select>
                         <p for="tlsVersionSelect" style="margin: 0;">
-                            Minimum TLS Version<br>
-                            <small>(Enhance security, but may not be compatible with legacy browsers)</small>
+                            最低 TLS 版本<br>
+                            <small>（提高安全性，但可能与旧版浏览器不兼容）</small>
                         </p>
                     </div>
                 </div>
                 <br>
                 <div id="developmentMode" class="ui toggle checkbox" style="margin-top: 0.6em;">
                     <input type="checkbox">
-                    <label>Development Mode<br>
-                    <small>(Set Cache-Control to no-store so browser will always fetch new contents from your sites)</small></label>
+                    <label>开发模式<br>
+                    <small>（将 Cache-Control 设为 no-store，浏览器始终从站点获取新内容）</small></label>
                 </div>
                 <br>
                 <div id="proxyProtocol" class="ui toggle notloopbackOnly tlsEnabledOnly checkbox" style="margin-top: 0.6em;">
                     <input type="checkbox">
-                    <label>Enable PROXY Protocol<br>
-                    <small>(Enable PROXY protocol v1/v2 support for TLS listener)</small></label>
+                    <label>启用 PROXY 协议<br>
+                    <small>（为 TLS 监听器启用 PROXY 协议 v1/v2 支持）</small></label>
                 </div>
                 <br>
             </div>
@@ -146,64 +146,64 @@
     </div>
    
     <div id="rploopbackWarning" class="ui segment" style="display:none;">
-        <b><i class="yellow warning icon"></i> Loopback Routing Warning</b><br>
-        <small>This management interface is a loopback proxied service. <br>If you want to shutdown the reverse proxy server, please remove the proxy rule for the management interface and refresh.</small>
+        <b><i class="yellow warning icon"></i> 回环路由警告</b><br>
+        <small>本管理界面为回环代理服务。<br>若要关闭反向代理服务，请先移除管理界面对应的代理规则并刷新页面。</small>
     </div>
     <div class="ui divider"></div>
-    <h4>Secondary Listening Ports</h4>
-    <p>Additional ports configured for specific proxy rules</p>
+    <h4>次要监听端口</h4>
+    <p>为特定代理规则配置的额外端口</p>
     <div id="secondaryListenersContainer">
         <table class="ui unstackable basic celled table">
             <thead>
                 <tr>
-                    <th>Listening Address</th>
-                    <th>Domains / Hostnames</th>
+                    <th>监听地址</th>
+                    <th>域名 / 主机名</th>
                 </tr>
             </thead>
             <tbody id="secondaryListenersTable">
                 <tr>
                     <td colspan="2" style="text-align: center;">
-                        <i class="ui loading circle notch icon"></i> Loading...
+                        <i class="ui loading circle notch icon"></i> 加载中...
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
     <br>
-    <button class="ui right floated basic button" onclick="loadSecondaryListeners();"><i class="green refresh icon"></i> Refresh</button>
+    <button class="ui right floated basic button" onclick="loadSecondaryListeners();"><i class="green refresh icon"></i> 刷新</button>
     <br><br>
     <div class="ui divider"></div>
     <div class="">
-    <h4>Statistic Overview</h4>
+    <h4>统计概览</h4>
     <div class="ui two column stackable grid">
         <div class="column">
-        <p>Visitor Counts</p>
+        <p>访客统计</p>
         <table class="ui unstackable very basic celled table">
             <thead>
             <tr>
-                <th style="padding: 0.4em;">Country ISO Code</th>
-                <th style="padding: 0.4em;">Unique Visitors</th>
+                <th style="padding: 0.4em;">国家/地区代码</th>
+                <th style="padding: 0.4em;">独立访客数</th>
             </tr>
             </thead>
             <tbody id="countryCodetable">
                 <tr>
-                    <td colspan="2">No Data</td>
+                    <td colspan="2">暂无数据</td>
                 </tr>
             </tbody>
         </table>
         </div>
         <div class="column">
-        <p>Proxy Request Types</p>
+        <p>代理请求类型</p>
         <table class="ui unstackable very basic celled table">
             <thead>
             <tr>
-                <th style="padding: 0.4em;">Proxy Type</th>
-                <th style="padding: 0.4em;">Count</th>
+                <th style="padding: 0.4em;">代理类型</th>
+                <th style="padding: 0.4em;">数量</th>
             </tr>
             </thead>
             <tbody id="forwardTypeTable">
                 <tr>
-                    <td colspan="2">No Data</td>
+                    <td colspan="2">暂无数据</td>
                 </tr>
             </tbody>
         </table>
@@ -211,7 +211,7 @@
     </div>
     </div>
     <br>
-    <button class="ui right floated basic button" onclick="getDailySummaryDetails();"><i class="green refresh icon"></i> Refresh</button>
+    <button class="ui right floated basic button" onclick="getDailySummaryDetails();"><i class="green refresh icon"></i> 刷新</button>
     <br><br>
 </div>
 <script>
@@ -241,15 +241,15 @@
                     $("#stopbtn").removeClass("disabled");
                 }
                 $("#serverstatus").addClass("green");
-                $("#statusTitle").text("Online");
+                $("#statusTitle").text("在线");
                 $("#rpStatusIcon").attr("class", "white circle check icon");
-                $("#statusText").text("Serving request on port: " + data.Option.Port);
+                $("#statusText").text("正在端口 " + data.Option.Port + " 处理请求");
             }else{
                 $("#startbtn").removeClass("disabled");
                 $("#stopbtn").addClass("disabled");
-                $("#statusTitle").text("Offline");
+                $("#statusTitle").text("离线");
                 $("#rpStatusIcon").attr("class", "yellow moon icon")
-                $("#statusText").text("Reverse proxy server is offline");
+                $("#statusText").text("反向代理服务已离线");
                 $("#serverstatus").removeClass("green");
             }
             $("#incomingPort").val(data.Option.Port);
@@ -288,7 +288,7 @@
 
         $.get("/api/stats/countries", function(data){
             data = sortObjectByValue(data);
-            $("#country").html((Object.keys(data)[0])?Object.keys(data)[0]:"No Data");
+            $("#country").html((Object.keys(data)[0])?Object.keys(data)[0]:"暂无数据");
             $("#countryList").html(`
             <div>
                 ${(Object.keys(data)[1])?Object.keys(data)[1]:"-"}<br>
@@ -311,7 +311,7 @@
 
             if (Object.keys(data).length == 0){
                 $("#countryCodetable").append(`<tr>
-                    <td colspan="2"><i class="ui green circle check icon"></i> No Data</td>
+                    <td colspan="2"><i class="ui green circle check icon"></i> 暂无数据</td>
                 </tr>`);
             }
             
@@ -330,7 +330,7 @@
 
         $.get("/api/stats/summary", function(data){
             data = sortObjectByValue(data.ForwardTypes);
-            $("#forwardtype").html((Object.keys(data)[0])?fft(Object.keys(data)[0]) + ": " + abbreviateNumber(data[Object.keys(data)[0]]):"No Data");
+            $("#forwardtype").html((Object.keys(data)[0])?fft(Object.keys(data)[0]) + ": " + abbreviateNumber(data[Object.keys(data)[0]]):"暂无数据");
             $("#forwardtypeList").html(`
             <div>
                 ${(Object.keys(data)[1])?fft(Object.keys(data)[1]) + ": " + abbreviateNumber(data[Object.keys(data)[1]]):"-"}<br>
@@ -348,7 +348,7 @@
 
             if (Object.keys(data).length == 0){
                 $("#forwardTypeTable").append(`<tr>
-                    <td colspan="2"><i class="ui green circle check icon"></i> No Data</td>
+                    <td colspan="2"><i class="ui green circle check icon"></i> 暂无数据</td>
                 </tr>`);
             }
         });
@@ -374,7 +374,7 @@
             if (!data || data.length === 0){
                 $("#secondaryListenersTable").append(`<tr>
                     <td colspan="2" style="text-align: center;">
-                        <i class="ui grey info circle icon"></i> No secondary listening ports configured
+                        <i class="ui grey info circle icon"></i> 未配置次要监听端口
                     </td>
                 </tr>`);
             } else {
@@ -385,7 +385,7 @@
                             `<span class="ui tiny label">${domain}</span>`
                         ).join(" ");
                     } else {
-                        domainsHTML = '<i style="opacity: 0.5;">No domains</i>';
+                        domainsHTML = '<i style="opacity: 0.5;">无域名</i>';
                     }
                     
                     $("#secondaryListenersTable").append(`<tr>
@@ -399,7 +399,7 @@
         }).fail(function(){
             $("#secondaryListenersTable").html(`<tr>
                 <td colspan="2" style="text-align: center;">
-                    <i class="ui red exclamation triangle icon"></i> Failed to load secondary listeners
+                    <i class="ui red exclamation triangle icon"></i> 加载次要监听端口失败
                 </td>
             </tr>`);
         });
@@ -455,11 +455,11 @@
                 if (enabled){
                     //$("#redirect").show();
                     $("#redirect").removeClass("disabled");
-                    msgbox("Port 80 listener enabled");
+                    msgbox("已启用 80 端口监听");
                 }else{
                     //$("#redirect").hide();
                     $("#redirect").addClass("disabled");
-                    msgbox("Port 80 listener disabled");
+                    msgbox("已关闭 80 端口监听");
                 }
                 initPort80ListenerSetting();
             }
@@ -471,7 +471,7 @@
     function handlePortChange(){
         var newPortValue = $("#incomingPort").val();
         if (isNaN(newPortValue - 1) || newPortValue < 1 || newPortValue > 65535){
-            msgbox("Invalid incoming port value", false, 5000);
+            msgbox("无效的入站端口", false, 5000);
             return;
         }
 
@@ -484,7 +484,7 @@
                     msgbox(data.error, false, 5000);
                     return;
                 }
-                msgbox("Listening Port Updated");
+                msgbox("监听端口已更新");
                 initRPStaste();
 
                 //Hide the reminder text
@@ -552,7 +552,7 @@
                                 });
                             }else{
                                 //Updated
-                                msgbox("Setting Updated");
+                                msgbox("设置已更新");
                                 initRPStaste();
                             }
                         }
@@ -579,7 +579,7 @@
                         if (data.error != undefined){
                             msgbox(data.error, false, 5000);
                         }else{
-                            msgbox("TLS minimum version updated");
+                            msgbox("TLS 最低版本已更新");
                         }
                     }
                 });
@@ -601,9 +601,9 @@
                 let enableDevMode = ($(this).find("input[type='checkbox']")[0].checked);
                 $.get("/api/proxy/developmentMode?enable=" + enableDevMode, function(data){
                     if (enableDevMode){
-                        msgbox("Development mode enabled");
+                        msgbox("已启用开发模式");
                     }else{
-                        msgbox("Development mode disabled");
+                        msgbox("已关闭开发模式");
                     }
                     
                 });
@@ -634,9 +634,9 @@
                         }
                     }else{
                         if (enableProxyProtocol){
-                            msgbox("PROXY protocol enabled");
+                            msgbox("已启用 PROXY 协议");
                         }else{
-                            msgbox("PROXY protocol disabled");
+                            msgbox("已关闭 PROXY 协议");
                         }
                     }
                 });
@@ -672,7 +672,7 @@
                             //Updated
                             //Check for case if the port is invalid default ports
                             if ($("#incomingPort").val() == "80" && thisValue == true){
-                                confirmBox("Change listen port to :443?", function(choice){
+                                confirmBox("将监听端口改为 :443？", function(choice){
                                     if (choice == true){
                                         $("#incomingPort").val("443");
                                         handlePortChange();
@@ -680,14 +680,14 @@
                                 });
                                    
                             }else if ($("#incomingPort").val() == "443" && thisValue == false){
-                                confirmBox("Change listen port to :80?", function(choice){
+                                confirmBox("将监听端口改为 :80？", function(choice){
                                     if (choice == true){
                                         $("#incomingPort").val("80");
                                         handlePortChange();
                                     }
                                 });
                             }else{
-                                msgbox("Setting Updated");
+                                msgbox("设置已更新");
                             }
 
                             initRPStaste();
@@ -805,7 +805,7 @@
                             },
                             title: {
                                 display: false,
-                                text: 'Network Statistic'
+                                text: '网络统计'
                             },
                         },
                         scales: {
@@ -816,7 +816,7 @@
                                 display: true,
                                 scaleLabel: {
                                 display: true,
-                                labelString: 'Value'
+                                labelString: '数值'
                                 },
                                 ticks: {
                                     stepSize: 10000000,
@@ -834,7 +834,7 @@
                         labels: timestamps,
                         datasets: [
                             {
-                                label: 'Inbound',
+                                label: '入站',
                                 data: rxValues,
                                 borderColor: "#484bb8",
                                 borderWidth: 1,
@@ -843,7 +843,7 @@
                                 pointStyle: false,
                             },
                             {
-                                label: 'Outbound',
+                                label: '出站',
                                 data: txValues,
                                 borderColor: '#02a9c1',
                                 borderWidth: 1,

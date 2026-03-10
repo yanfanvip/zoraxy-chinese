@@ -1,21 +1,21 @@
 
 <div class="standardContainer">
     <div class="ui basic segment">
-      <h2>Redirection Rules</h2>
-      <p>Add exception case for redirecting any matching URLs</p>
+      <h2>重定向规则</h2>
+      <p>为匹配的 URL 添加重定向规则</p>
     </div>
     <!-- Current list of redirection rules-->
     <div style="width: 100%; overflow-x: auto;">
         <table class="ui sortable unstackable celled table" >
           <thead>
               <tr>
-                  <th>Redirection URL</th>
-                  <th>Destination URL</th>
-                  <th class="no-sort">Copy Pathname</th>
-                  <th class="no-sort">Require Exact Match</th>
-                  <th class="no-sort">Device Type</th>
-                  <th class="no-sort">Status Code</th>
-                  <th class="no-sort">Actions</th>
+                  <th>重定向 URL</th>
+                  <th>目标 URL</th>
+                  <th class="no-sort">复制路径</th>
+                  <th class="no-sort">精确匹配</th>
+                  <th class="no-sort">设备类型</th>
+                  <th class="no-sort">状态码</th>
+                  <th class="no-sort">操作</th>
               </tr>
           </thead>
           <tbody id="redirectionRuleList">
@@ -29,28 +29,28 @@
       </table>
     </div>
     <div class="ui green message" id="delRuleSucc" style="display:none;">
-      <i class="ui green checkmark icon"></i> Redirection Rule Deleted
+      <i class="ui green checkmark icon"></i> 重定向规则已删除
     </div>
     <!-- Options -->
     <div class="ui basic segment advanceoptions">
       <div class="ui accordion advanceSettings">
           <div class="title">
             <i class="dropdown icon"></i>
-              Advance Settings
+              高级设置
           </div>
           <div class="content">
             <div class="ui basic segment">
               <div class="ui toggle checkbox">
                   <input id="redirectRegex" type="checkbox">
-                  <label>Enable Regular Expression Support<br>
-                  <small>Regular expression redirection check will noticeably slow down page load<br>
-                    Support <a href="https://yourbasic.org/golang/regexp-cheat-sheet/" target="_blank">Go style regex</a>. e.g. <code style="background-color: rgb(44, 44, 44); color: white">.\.redirect\.example\.com</code></small></label>
+                  <label>启用正则表达式<br>
+                  <small>正则匹配会明显增加页面加载时间<br>
+                    支持 <a href="https://yourbasic.org/golang/regexp-cheat-sheet/" target="_blank">Go 风格正则</a>，例如 <code style="background-color: rgb(44, 44, 44); color: white">.\.redirect\.example\.com</code></small></label>
               </div>
               <br>
               <div class="ui toggle checkbox" style="margin-top: 0.4em;">
                 <input id="redirectCaseSensitive" type="checkbox">
-                <label>Force Case Sensitive Check<br>
-                <small>If enabled, URL matching will be case sensitive</small></label>
+                <label>区分大小写<br>
+                <small>启用后 URL 匹配将区分大小写</small></label>
               </div>
             </div>
           </div>
@@ -59,76 +59,76 @@
 
     <!-- Add New Redirection Rules -->
     <div class="ui divider"></div>
-    <h4>Add Redirection Rule</h4>
+    <h4>添加重定向规则</h4>
     <div class="ui form">
         <div class="field">
-          <label>Redirection URL (From)</label>
-          <input type="text" id="rurl" name="redirection-url" placeholder="Redirection URL">
-          <small> Any matching prefix of the request URL will be redirected to the destination URL, e.g. redirect.example.com</small>
+          <label>重定向 URL（来源）</label>
+          <input type="text" id="rurl" name="redirection-url" placeholder="重定向 URL">
+          <small>请求 URL 的匹配前缀将重定向到目标 URL，例如 redirect.example.com</small>
         </div>
         <div class="field">
-          <label>Destination URL (To)</label>
-          <input type="text" name="destination-url" placeholder="Destination URL">
-          <small>The target URL request being redirected to, e.g. dest.example.com/mysite/ or dest.example.com/script.php, <b>sometime you might need to add tailing slash (/) to your URL depending on your use cases</b></small>
+          <label>目标 URL（去向）</label>
+          <input type="text" name="destination-url" placeholder="目标 URL">
+          <small>重定向到的目标地址，如 dest.example.com/mysite/ 或 dest.example.com/script.php，<b>部分场景需在 URL 末尾加斜杠 (/)</b></small>
         </div>
         <div class="field">
           <div class="ui checkbox">
             <input type="checkbox" name="require-exact-match" tabindex="0" class="hidden">
-            <label>Require Exact Match</label>
+            <label>精确匹配</label>
           </div>
           <br>
-          <small>If enabled, only exact URL matches will be redirected (no prefix matching)</small>
+          <small>启用后仅完全匹配的 URL 会重定向（不做前缀匹配）</small>
         </div>
         <div class="field">
           <div class="ui checkbox">
             <input type="checkbox" name="forward-childpath" tabindex="0" class="hidden" checked>
-            <label>Forward Pathname</label>
+            <label>转发路径</label>
           </div>
           <div class="ui message">
-            <p>Append the current pathname after the redirect destination</p>
+            <p>将当前路径追加到重定向目标之后</p>
             <i class="check square outline icon"></i> old.example.com<b>/blog?post=13</b> <i class="long arrow alternate right icon" style="margin-left: 1em;"></i> new.example.com<b>/blog?post=13</b> <br>
             <i class="square outline icon"></i> old.example.com<b>/blog?post=13</b> <i class="long arrow alternate right icon" style="margin-left: 1em;"></i> new.example.com
           </div>
         </div>
         <div class="grouped fields">
-            <label>Device Type Filters</label>
+            <label>设备类型筛选</label>
             <div class="field">
               <div class="ui radio checkbox">
                 <input type="radio" name="redirect-device" value="all" checked>
-                <label>All Devices<br><small>Apply this redirection rule to all devices</small></label>
+                <label>全部设备<br><small>此规则应用于所有设备</small></label>
               </div>
             </div>
             <div class="field">
               <div class="ui radio checkbox">
                 <input type="radio" name="redirect-device" value="desktop">
-                <label>Desktop Devices Only<br><small>Apply this redirection rule to desktop device only. Unknown device types will be treated as desktop</small></label>
+                <label>仅桌面设备<br><small>仅对桌面设备应用此规则，未知设备类型按桌面处理</small></label>
               </div>
             </div>
             <div class="field">
               <div class="ui radio checkbox">
                 <input type="radio" name="redirect-device" value="mobile">
-                <label>Mobile Devices Only<br><small>Apply this redirection rule to mobile devices only</small></label>
+                <label>仅移动设备<br><small>仅对移动设备应用此规则</small></label>
               </div>
             </div>
         </div>
         <div class="grouped fields">
-            <label>Redirection Status Code</label>
+            <label>重定向状态码</label>
             <div class="field">
               <div class="ui radio checkbox">
                 <input type="radio" name="redirect-type" value="307" checked>
-                <label>Temporary Redirect <br><small>Status Code: 307</small></label>
+                <label>临时重定向 <br><small>状态码：307</small></label>
               </div>
             </div>
             <div class="field">
               <div class="ui radio checkbox">
                 <input type="radio" name="redirect-type" value="301">
-                <label>Moved Permanently <br><small>Status Code: 301</small></label>
+                <label>永久移动 <br><small>状态码：301</small></label>
               </div>
             </div>
         </div>
-        <button class="ui basic button" onclick="addRules();"><i class="ui teal plus icon"></i> Add Redirection Rule</button>
+        <button class="ui basic button" onclick="addRules();"><i class="ui teal plus icon"></i> 添加重定向规则</button>
         <div class="ui green message" id="ruleAddSucc" style="display:none;">
-          <i class="ui green checkmark icon"></i> Redirection Rules Added
+          <i class="ui green checkmark icon"></i> 重定向规则已添加
         </div>
         <br><br>
     </div>
@@ -182,7 +182,7 @@
     function deleteRule(obj){
       let targetURL = $(obj).attr("rurl");
       targetURL = JSON.parse(decodeURIComponent(targetURL));
-      if (confirm("Confirm remove redirection from " + targetURL + " ?")){
+      if (confirm("确认删除重定向 " + targetURL + "？")){
         $.cjax({
               url: "/api/redirect/delete", 
               method: "POST",
@@ -305,7 +305,7 @@
             if (data.error != undefined){
               msgbox(data.error, false);
             }else{
-              msgbox("Redirection rule updated", true);
+              msgbox("重定向规则已更新", true);
               initRedirectionRuleList();
             }
         }
@@ -331,7 +331,7 @@
               if (data.error != undefined){
                 msgbox(data.error, false);
               }else{
-                msgbox("Regex redirect setting updated", true);
+                msgbox("正则重定向设置已更新", true);
               }
             }
           });
@@ -360,7 +360,7 @@
               if (data.error != undefined){
                 msgbox(data.error, false);
               }else{
-                msgbox("Case sensitive redirect setting updated", true);
+                msgbox("区分大小写重定向设置已更新", true);
               }
             }
           });

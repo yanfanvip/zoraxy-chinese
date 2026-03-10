@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="./favicon.png" />
-    <title>Account Reset | Zoraxy</title>
+    <title>账户重置 | Zoraxy</title>
     <link rel="stylesheet" href="script/semantic/semantic.min.css">
     <link href="script/aos.css" rel="stylesheet">
     <script src="script/aos.js"></script>
@@ -146,35 +146,35 @@
                 <form class="ui large form">
                     <div class="ui basic segment">
                         <img class="ui fluid image" src="img/public/logo.svg" style="pointer-events:none;">
-                        <p>Reset Password</p>
+                        <p>重置密码</p>
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="user icon"></i>
-                                <input id="username" type="text" name="username" placeholder="Username">
+                                <input id="username" type="text" name="username" placeholder="用户名">
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="ticket alternate icon"></i>
-                                <input id="token" type="text" name="token" placeholder="Token">
+                                <input id="token" type="text" name="token" placeholder="验证码">
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="lock icon"></i>
-                                <input id="magic" type="password" name="New password" placeholder="New Password">
+                                <input id="magic" type="password" name="New password" placeholder="新密码">
                             </div>
                         </div>
-                        <div id="resetBtn" class="ui fluid basic button"><i class="ui green lock open icon"></i> Reset Password</div>
+                        <div id="resetBtn" class="ui fluid basic button"><i class="ui green lock open icon"></i> 重置密码</div>
                         <div id="errmsg" class="ui red message" style="display: none;">
-                            <i class="red remove icon"></i> Unknown Error Occured
+                            <i class="red remove icon"></i> 发生未知错误
                         </div>
                         <div id="succmsg" class="ui message" style="display:none;">
-                            <i class="ui green check circle icon"></i> Password Updated. <br><small>Redirecting to <a href="/">login page</a> in 3 seconds</small>
+                            <i class="ui green check circle icon"></i> 密码已更新。<br><small>3 秒后跳转到 <a href="/">登录页</a></small>
                         </div>
                         <div id="countdown" class="ui message" style="color: grey;">
-                            <span id="countdownText"><i class="ui loading circle notch icon"></i> Resend email in <span id="countdown-num">30</span> seconds</span>
-                            <a href="#" id="resendEmailLink" onclick="sendResetAccountEmail();">Resend Email</a>
+                            <span id="countdownText"><i class="ui loading circle notch icon"></i> <span id="countdown-num">30</span> 秒后可重新发送邮件</span>
+                            <a href="#" id="resendEmailLink" onclick="sendResetAccountEmail();">重新发送邮件</a>
                         </div>
                     </div>
                 </form>

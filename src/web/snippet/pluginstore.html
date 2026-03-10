@@ -4,7 +4,7 @@
         <!-- Notes: This should be open in its original path-->
         <meta charset="utf-8">
         <meta name="zoraxy.csrf.Token" content="{{.csrfToken}}">
-        <title>Plugin Store</title>
+        <title>插件商店 | Zoraxy</title>
         <link rel="stylesheet" href="../script/semantic/semantic.min.css">
         <script src="../script/jquery-3.6.0.min.js"></script>
         <script src="../script/semantic/semantic.min.js"></script>
@@ -77,19 +77,19 @@
         <br>
         <div class="ui container">
             <div class="ui warning message">
-                <div class="header">Experimental Feature</div>
-                <p>The Plugin Store is an experimental feature. Use it at your own risk.</p>
+                <div class="header">实验性功能</div>
+                <p>插件商店为实验性功能，使用风险自负。</p>
             </div>
             <div class="ui fluid search">
                 <div class="ui fluid icon input">
-                    <input id="searchInput" class="prompt" type="text" placeholder="Search plugins">
+                    <input id="searchInput" class="prompt" type="text" placeholder="搜索插件">
                     <i class="search icon"></i>
                 </div>
             </div>
             <div class="ui divided items" id="pluginList">
                
             </div>
-            <button class="ui basic button" onclick="forceResyncPlugins();"><i class="ui green refresh icon"></i> Update Plugin List</button>
+            <button class="ui basic button" onclick="forceResyncPlugins();"><i class="ui green refresh icon"></i> 更新插件列表</button>
             <!-- <div class="ui divider"></div>
                 <div class="ui basic segment advanceoptions">
                     <div class="ui accordion advanceSettings">
@@ -115,7 +115,7 @@
             -->
             <div class="ui divider"></div>
             <div class="field" >
-                <button class="ui basic button"  style="float: right;" onclick="closeThisWrapper();">Close</button>
+                <button class="ui basic button"  style="float: right;" onclick="closeThisWrapper();">关闭</button>
             </div>
             <br><br><br><br>
         </div>
@@ -124,7 +124,7 @@
         <div class="ui modal" id="pluginInfoModal">
             <i class="close icon"></i>
             <div class="header">
-                Plugin Information
+                插件信息
             </div>
             <div class="content">
                 <table class="ui celled table">
@@ -133,7 +133,7 @@
                 </table>
             </div>
             <div class="actions">
-                <button class="ui button" onclick="$('#pluginInfoModal').modal('hide');">Close</button>
+                <button class="ui button" onclick="$('#pluginInfoModal').modal('hide');">关闭</button>
             </div>
         </div>
         
@@ -202,7 +202,7 @@
             });
 
             function forceResyncPlugins() {
-                parent.msgbox("Updating plugin list...", true);
+                parent.msgbox("正在更新插件列表...", true);
                 document.getElementById('searchInput').value = '';
                 $.cjax({
                     url: '/api/plugins/store/resync',
@@ -211,7 +211,7 @@
                         if (data.error != undefined) {
                             parent.msgbox(data.error, false);
                         } else {
-                            parent.msgbox("Plugin list updated successfully", true);
+                            parent.msgbox("插件列表已更新", true);
                             initStoreList();
                         }
                     }
@@ -245,8 +245,8 @@
                                 </div>
                                 <div class="action">
                                     ${thisPluginIsInstalled 
-                                        ? `<button class="ui basic circular disabled button">Installed</button>` 
-                                        : `<button class="ui basic circular button" onclick="installPlugin('${plugin.PluginIntroSpect.id}', this);",><i class="ui download icon"></i> Install</button>`}
+? `<button class="ui basic circular disabled button">已安装</button>`
+                                        : `<button class="ui basic circular button" onclick="installPlugin('${plugin.PluginIntroSpect.id}', this);",><i class="ui download icon"></i> 安装</button>`}
                                         <button class="ui basic circular icon button" onclick="showPluginInfo('${plugin.PluginIntroSpect.id}');"><i class="info icon"></i></button>
                                 </div>
                             </div>
@@ -279,7 +279,7 @@
                         if (data.error != undefined) {
                             parent.msgbox(data.error, false);
                         } else {
-                            parent.msgbox("Plugin installed successfully", true);
+                            parent.msgbox("插件安装成功", true);
                             initStoreList();
 
                             //Also reload the parent plugin list
@@ -290,7 +290,7 @@
                         if (btn !== undefined) {
                             $(btn).removeClass('loading').prop('disabled', false);
                         }
-                        parent.msgbox("An error occurred while installing the plugin", false);
+                        parent.msgbox("安装插件时发生错误", false);
                     }
                 });
             }
@@ -299,7 +299,7 @@
                 // Find the plugin by ID
                 const plugin = availablePlugins.find(p => p.PluginIntroSpect.id === pluginId);
                 if (!plugin) {
-                    parent.msgbox("Plugin not found", false);
+                    parent.msgbox("未找到该插件", false);
                     return;
                 }
 
@@ -309,26 +309,26 @@
 
                 // Build table rows with plugin information
                 const infoRows = [
-                    { label: 'Plugin ID', value: spec.id },
-                    { label: 'Name', value: spec.name },
-                    { label: 'Author', value: spec.author },
-                    { label: 'Author Contact', value: spec.author_contact || 'N/A' },
-                    { label: 'Description', value: spec.description },
-                    { label: 'URL', value: spec.url ? `<a href="${spec.url}" target="_blank">${spec.url}</a>` : 'N/A' },
-                    { label: 'Type', value: spec.type },
-                    { label: 'Version', value: `${spec.version_major}.${spec.version_minor}.${spec.version_patch}` },
-                    { label: 'Icon Path', value: plugin.IconPath || 'N/A' },
-                    { label: 'UI Path', value: spec.ui_path || 'N/A' },
-                    { label: 'Subscription Path', value: spec.subscription_path || 'N/A' },
-                    { label: 'Static Capture Ingress', value: spec.static_capture_ingress || 'N/A' },
-                    { label: 'Dynamic Capture Sniff', value: spec.dynamic_capture_sniff || 'N/A' },
-                    { label: 'Dynamic Capture Ingress', value: spec.dynamic_capture_ingress || 'N/A' }
+                    { label: '插件 ID', value: spec.id },
+                    { label: '名称', value: spec.name },
+                    { label: '作者', value: spec.author },
+                    { label: '作者联系', value: spec.author_contact || '无' },
+                    { label: '描述', value: spec.description },
+                    { label: 'URL', value: spec.url ? `<a href="${spec.url}" target="_blank">${spec.url}</a>` : '无' },
+                    { label: '类型', value: spec.type },
+                    { label: '版本', value: `${spec.version_major}.${spec.version_minor}.${spec.version_patch}` },
+                    { label: '图标路径', value: plugin.IconPath || '无' },
+                    { label: 'UI 路径', value: spec.ui_path || '无' },
+                    { label: '订阅路径', value: spec.subscription_path || '无' },
+                    { label: '静态捕获入口', value: spec.static_capture_ingress || '无' },
+                    { label: '动态捕获嗅探', value: spec.dynamic_capture_sniff || '无' },
+                    { label: '动态捕获入口', value: spec.dynamic_capture_ingress || '无' }
                 ];
 
                 // Add static capture paths if available
                 if (spec.static_capture_paths && spec.static_capture_paths.length > 0) {
                     infoRows.push({ 
-                        label: 'Static Capture Paths', 
+                        label: '静态捕获路径', 
                         value: spec.static_capture_paths.join(', ') 
                     });
                 }
@@ -336,7 +336,7 @@
                 // Add subscribed events if available
                 if (spec.subscriptions_events && spec.subscriptions_events.length > 0) {
                     infoRows.push({ 
-                        label: 'Subscribed Events', 
+                        label: '订阅事件', 
                         value: spec.subscriptions_events.join(', ') 
                     });
                 }
@@ -347,7 +347,7 @@
                         `<div><strong>${ep.method}</strong> ${ep.endpoint}${ep.reason ? ` - ${ep.reason}` : ''}</div>`
                     ).join('');
                     infoRows.push({ 
-                        label: 'Permitted API Endpoints', 
+                        label: '允许的 API 端点', 
                         value: endpoints 
                     });
                 }
@@ -358,7 +358,7 @@
                         `<div><strong>${platform}:</strong> <a href="${url}" target="_blank">${url}</a></div>`
                     ).join('');
                     infoRows.push({ 
-                        label: 'Download URLs', 
+                        label: '下载地址', 
                         value: downloadLinks 
                     });
                 }
@@ -394,7 +394,7 @@
                         if (data.error != undefined) {
                             parent.msgbox(data.error, false);
                         } else {
-                            parent.msgbox("URLs saved successfully", true);
+                            parent.msgbox("URL 已保存", true);
                         }
                     }
                 });

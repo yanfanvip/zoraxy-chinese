@@ -156,7 +156,7 @@
             function addSelectedTags() {
                 let tags = $('#tagsInput').val().split(',').map(tag => tag.trim());
                 if (tags.length == 0 || (tags.length == 1 && tags[0] == "")){
-                    parent.msgbox("Please enter at least one tag", false);
+                    parent.msgbox("请至少输入一个标签", false);
                     return;
                 }
                 tags.forEach(tag => {
@@ -172,7 +172,7 @@
 
             function joinSelectedTagGroups() {
                 if ($('#existingTagsInput').val() == ""){
-                    parent.msgbox("Please select at least one tag group to join", false);
+                    parent.msgbox("请至少选择一个要加入的标签组", false);
                     return;
                 }
                 let selectedTags = $('#existingTagsInput').val().split(',');
@@ -242,7 +242,7 @@
                         if (data.error != undefined){
                             parent.msgbox(data.error, false);
                         } else {
-                            parent.msgbox("Tags updated");
+                            parent.msgbox("标签已更新");
                             //Update the preview on parent page
                             parent.renderTagsPreview(editingEndpoint.ep, tags);
                             //parent.hideSideWrapper();

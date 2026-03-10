@@ -14,35 +14,35 @@
         <div class="ui container">
             <div class="ui header">
                 <div class="content">
-                    Intermediate Certificate Converter
-                    <div class="sub header">Convert .cer files to .pem</div>
+                    中间证书转换工具
+                    <div class="sub header">将 .cer 转为 .pem</div>
                 </div>
             </div>
             <div class="ui message">
                 <div class="header">
-                    Why I need this?
+                    为什么需要？
                 </div>
-                <p>If you have 3 certificate files (2 x .cer + 1 x .key) provided by your ISP, you will need to merge the root and intermediate certificates in order to upload it to Zoraxy. This tool will automate the process for you.</p>
+                <p>若运营商提供了 3 个证书文件（2 个 .cer + 1 个 .key），需先合并根证书与中间证书再上传到 Zoraxy。本工具可自动完成合并。</p>
             </div>
 
             <div class="ui form">
                 <div class="field">
-                    <label>Select Root Certificate</label>
+                    <label>选择根证书</label>
                     <input type="file" id="rootCertificateInput">
                 </div>
                 <div class="field">
-                    <label>Select Intermediate Certificate</label>
+                    <label>选择中间证书</label>
                     <input type="file" id="intermediateCertificateInput">
                 </div>
                 <div class="field">
-                    <label>Export File Name (Optional)</label>
+                    <label>导出文件名（可选）</label>
                     <input type="text" id="exportFilename" value="domain.pem">
                 </div>
-                <button class="ui basic button" onclick="convertCertificates()"> <i class="ui blue exchange icon"></i> Convert</button>
+                <button class="ui basic button" onclick="convertCertificates()"> <i class="ui blue exchange icon"></i> 转换</button>
             </div>
               
             <br>
-            <button class="ui basic button"  style="float: right;" onclick="parent.hideSideWrapper();"><i class="remove icon"></i> Cancel</button>
+            <button class="ui basic button"  style="float: right;" onclick="parent.hideSideWrapper();"><i class="remove icon"></i> 取消</button>
         </div>
         <script>
 

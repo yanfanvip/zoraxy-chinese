@@ -8,23 +8,23 @@
 </style>
 <div class="standardContainer">
     <div class="ui basic segment">
-        <h2>Access Control</h2>
-        <p>Setup blacklist or whitelist based on estimated IP geographic location or IP address. <br>
-            To apply access control to a proxy hosts, create a "Access Rule" below and apply it to the proxy hosts in the HTTP Proxy tab.</p>
+        <h2>访问控制</h2>
+        <p>根据 IP 地理位置或 IP 地址设置黑名单或白名单。<br>
+            要对代理主机应用访问控制，请先在此创建「访问规则」，再在 HTTP 代理页中应用到对应主机。</p>
     </div>
     <div id="currentEditingAccessRule" class="ui basic segment">
-        Select an access rule to start editing
+        请选择一条访问规则以开始编辑
     </div>
     <div class="ui stackable grid">
         <div class="four wide column">
-            <h4>Select a rule to configure</h4>
-            <p>All proxy hosts uses the "default" access rule if no rule is set.</p>
+            <h4>选择要配置的规则</h4>
+            <p>未设置时，所有代理主机使用「默认」访问规则。</p>
             <div class="ui selection fluid dropdown" id="accessRuleSelector">
                 <input type="hidden" name="targetAccessRule" value="default" onchange="handleSelectedAccessRuleChange(this.value);">
                 <i class="dropdown icon"></i>
                 <div class="default text"></div>
                 <div class="menu" id="accessRuleList">
-                  <div class="item" data-value="default"><i class="ui yellow star icon"></i> Default</div>
+                  <div class="item" data-value="default"><i class="ui yellow star icon"></i> 默认</div>
                 </div>
             </div>
             <div class="ui message">
@@ -33,46 +33,46 @@
             
             <div class="ui divider"></div>
             <div style="width: 100%;" align="center">
-                <button class="ui basic circular button" onclick="openAccessRuleEditor();" title="Edit Access Rules"><i class="ui edit icon"></i> Access Rule Editor</button>
+                <button class="ui basic circular button" onclick="openAccessRuleEditor();" title="编辑访问规则"><i class="ui edit icon"></i> 访问规则编辑器</button>
                 <button class="ui basic circular icon button" onclick="reloadAccessRulesWithFeedback();"><i class="ui green refresh icon"></i></button>
             </div>
             <div class="ui divider"></div>
             <div style="width: 100%;" align="center">
-                <button class="ui basic circular button" onclick="openTrustedProxyEditor();" title="Edit Trusted Proxy Settings"><i class="ui green shield icon"></i> Trusted Proxy Settings</button>
+                <button class="ui basic circular button" onclick="openTrustedProxyEditor();" title="编辑受信任代理"><i class="ui green shield icon"></i> 受信任代理设置</button>
             </div>
         </div>
         <div class="twelve wide column">
             <!-- Black / White list menu-->
             <div class="ui top attached tabular menu">
-                <a class="accesscontrol item active" data-tab="tab_blacklist"><i class="ui red circle times icon"></i> Blacklist</a>
-                <a class="accesscontrol item" data-tab="tab_whitelist"><i class="ui green check circle icon"></i> Whitelist</a>
-                <a class="accesscontrol item" data-tab="tab_quickban"><i class="ui red ban icon"></i> Quick Ban</a>
+                <a class="accesscontrol item active" data-tab="tab_blacklist"><i class="ui red circle times icon"></i> 黑名单</a>
+                <a class="accesscontrol item" data-tab="tab_whitelist"><i class="ui green check circle icon"></i> 白名单</a>
+                <a class="accesscontrol item" data-tab="tab_quickban"><i class="ui red ban icon"></i> 快速封禁</a>
             </div>
 
             <!-- Blacklist Conguration Menu-->
             <div class="ui bottom attached tab segment active" data-tab="tab_blacklist">
-                <h2>Blacklist</h2>
-                <p>Limit access from the following country or IP address<br>
-                <small>Tips: If you only want a few regions to access your site, use whitelist instead.</small></p>
+                <h2>黑名单</h2>
+                <p>限制以下国家或 IP 的访问<br>
+                <small>提示：若只允许少数地区访问，请使用白名单。</small></p>
                 <div class="ui divider"></div>
                 <div class="ui toggle checkbox">
                     <input type="checkbox" id="enableBlacklist">
-                    <label>Enable Blacklist</label>
+                    <label>启用黑名单</label>
                 </div>
                 <div class="toggleSucc" style="float: right; display:none; color: #2abd4d;" >
-                    <i class="ui green checkmark icon"></i> Setting Saved
+                    <i class="ui green checkmark icon"></i> 设置已保存
                 </div>
-                <h4>Country Blacklist</h4>
+                <h4>国家黑名单</h4>
                     <p><i class="yellow exclamation triangle icon"></i>
-                    This will block all requests from the selected country. The requester's location is estimated from their IP address and may not be 100% accurate.</p>
+                    将拦截所选国家的所有请求。访问者位置由 IP 估算，可能不完全准确。</p>
 
                 <div class="ui form">
                     <div class="field">
-                        <label>Select Country</label>
+                        <label>选择国家/地区</label>
                         <div id="countrySelector" class="ui fluid search multiple selection dropdown">
                             <input type="hidden" name="country">
                             <i class="dropdown icon"></i>
-                            <div class="default text">Select Country</div>
+                            <div class="default text">选择国家/地区</div>
                             <div class="menu">
                             <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
                             <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
@@ -319,13 +319,13 @@
                         </div>
                         </div>
                     </div>
-                    <button class="ui basic red button" id="ban-btn" onclick="addCountryToBlacklist();"><i class="ui red ban icon"></i> Blacklist Country</button>
+                    <button class="ui basic red button" id="ban-btn" onclick="addCountryToBlacklist();"><i class="ui red ban icon"></i> 加入国家黑名单</button>
                 </div>
                 <table class="ui unstackable basic celled table">
                     <thead>
                         <tr>
-                            <th>ISO Code</th>
-                            <th>Remove</th>
+                            <th>国家/地区代码</th>
+                            <th>移除</th>
                         </tr>
                     </thead>
                     <tbody id="banned-list">
@@ -333,30 +333,30 @@
                     </tbody>
                 </table>
 
-                <h4>IP Blacklist</h4>
-                <p>Block a certain IP or IP range</p>
+                <h4>IP 黑名单</h4>
+                <p>拦截指定 IP 或 IP 段</p>
                 <div class="ui form">
                     <div class="field">
-                    <label>IP Address</label>
-                    <input id="ipAddressInput" type="text" placeholder="IP Address">
+                    <label>IP 地址</label>
+                    <input id="ipAddressInput" type="text" placeholder="IP 地址">
                     </div>
                     <button id="addIpButton" onclick="addIpBlacklist();" class="ui basic red icon button">
-                    <i class="ban icon"></i> Blacklist IP
+                    <i class="ban icon"></i> 加入 IP 黑名单
                     </button>
                 </div>
                 <div class="ui message">
-                    <i class="ui info circle icon"></i> IP Address support the following formats
+                    <i class="ui info circle icon"></i> IP 地址支持以下格式
                     <div class="ui bulleted list">
-                        <div class="item">Fixed IP Address (e.g. 192.128.4.100 or fe80::210:5aff:feaa:20a2)</div>
-                        <div class="item">IP Wildcard (e.g. 172.164.*.*)</div>
-                        <div class="item">CIDR String (e.g. 128.32.0.1/16)</div>
+                        <div class="item">固定 IP（如 192.128.4.100 或 fe80::210:5aff:feaa:20a2）</div>
+                        <div class="item">IP 通配符（如 172.164.*.*）</div>
+                        <div class="item">CIDR（如 128.32.0.1/16）</div>
                     </div>
                 </div>
                 <table class="ui unstackable basic celled table">
                     <thead>
                     <tr>
-                        <th>IP Address</th>
-                        <th>Remove</th>
+                        <th>IP 地址</th>
+                        <th>移除</th>
                     </tr>
                     </thead>
                     <tbody id="blacklistIpTable">
@@ -367,44 +367,44 @@
 
             <!-- Whitelist Config Menu-->
             <div class="ui bottom attached tab segment" data-tab="tab_whitelist">
-                <h2>Whitelist</h2>
-                <p>Enable access from the following countries or IP. <br>
-                    Whitelist has lower priority than blacklist if both whitelist and blacklist are enabled <br>
-                    <small>Tips: You can use blacklist to fine tune whitelist coverage</small></p>
+                <h2>白名单</h2>
+                <p>允许以下国家或 IP 访问。<br>
+                    同时启用白名单与黑名单时，黑名单优先。<br>
+                    <small>提示：可用黑名单微调白名单范围</small></p>
                 <div class="ui divider"></div>
                 <div class="ui toggle checkbox">
                     <input type="checkbox" id="enableWhitelist">
-                    <label>Enable Whitelist</label>
+                    <label>启用白名单</label>
                 </div>
                 <div class="toggleSucc" style="float: right; display:none; color: #2abd4d;" >
-                    <i class="ui green checkmark icon"></i> Setting Saved
+                    <i class="ui green checkmark icon"></i> 设置已保存
                 </div>
                 <div class="ui basic segment advanceoptions">
                     <div class="ui accordion advanceSettings">
                         <div class="title">
                           <i class="dropdown icon"></i>
-                            Advance Settings
+                            高级设置
                         </div>
                         <div class="content">
                             <div class="ui toggle checkbox">
                                 <input type="checkbox" id="enableWhitelistLoopback">
-                                <label>Enable LAN and Loopback<br>
-                                    <small>Allowing loopback request from your public IP address and local area network devices</small></label>
+                                <label>允许局域网与回环<br>
+                                    <small>允许来自您公网 IP 及局域网的回环请求</small></label>
                             </div>
                         </div>
                     </div>  
                 </div>
-                <h4>Country Whitelist</h4>
+                <h4>国家白名单</h4>
                     <p><i class="yellow exclamation triangle icon"></i>
-                    This will allow all requests from the selected country. The requester's location is estimated from their IP address and may not be 100% accurate.</p>
+                    将允许所选国家的所有请求。访问者位置由 IP 估算，可能不完全准确。</p>
 
                 <div class="ui form">
                     <div class="field">
-                        <label>Select Country</label>
+                        <label>选择国家/地区</label>
                         <div id="countrySelectorWhitelist" class="ui fluid search multiple selection dropdown">
                             <input type="hidden" name="country">
                             <i class="dropdown icon"></i>
-                            <div class="default text">Select Country</div>
+                            <div class="default text">选择国家/地区</div>
                             <div class="menu">
                             <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
                             <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
@@ -651,13 +651,13 @@
                         </div>
                         </div>
                     </div>
-                    <button class="ui basic green button" id="whitelist-btn" onclick="addCountryToWhitelist();"><i class="ui green add icon"></i> Whitelist Country</button>
+                    <button class="ui basic green button" id="whitelist-btn" onclick="addCountryToWhitelist();"><i class="ui green add icon"></i> 加入国家白名单</button>
                 </div>
                 <table class="ui unstackable basic celled table">
                     <thead>
                         <tr>
-                            <th>ISO Code</th>
-                            <th>Remove</th>
+                            <th>国家/地区代码</th>
+                            <th>移除</th>
                         </tr>
                     </thead>
                     <tbody id="whitelistCountryList">
@@ -665,35 +665,35 @@
                     </tbody>
                 </table>
 
-                <h4>IP Whitelist</h4>
-                <p>Whitelist a certain IP or IP range</p>
+                <h4>IP 白名单</h4>
+                <p>允许指定 IP 或 IP 段访问</p>
                 <div class="ui form">
                     <div class="field">
-                        <label>IP Address</label>
-                        <input id="ipAddressInputWhitelist" type="text" placeholder="IP Address">
+                        <label>IP 地址</label>
+                        <input id="ipAddressInputWhitelist" type="text" placeholder="IP 地址">
                     </div>
                     <div class="field">
-                        <label>Remarks (Optional)</label>
-                        <input id="ipAddressCommentsWhitelist" type="text" placeholder="Comments or remarks for this IP range">
+                        <label>备注（可选）</label>
+                        <input id="ipAddressCommentsWhitelist" type="text" placeholder="该 IP 段的备注说明">
                     </div>
                     <button id="addIpButton" onclick="addIpWhitelist();" class="ui basic green button">
-                        <i class="green add icon"></i> Whitelist IP
+                        <i class="green add icon"></i> 加入 IP 白名单
                     </button>
                 </div>
                 <div class="ui message">
-                    <i class="ui info circle icon"></i> IP Address support the following formats
+                    <i class="ui info circle icon"></i> IP 地址支持以下格式
                     <div class="ui bulleted list">
-                        <div class="item">Fixed IP Address (e.g. 192.128.4.100 or fe80::210:5aff:feaa:20a2)</div>
-                        <div class="item">IP Wildcard (e.g. 172.164.*.*)</div>
-                        <div class="item">CIDR String (e.g. 128.32.0.1/16)</div>
+                        <div class="item">固定 IP（如 192.128.4.100 或 fe80::210:5aff:feaa:20a2）</div>
+                        <div class="item">IP 通配符（如 172.164.*.*）</div>
+                        <div class="item">CIDR（如 128.32.0.1/16）</div>
                     </div>
                 </div>
                 <table class="ui unstackable basic celled table">
                     <thead>
                     <tr>
-                        <th>IP Address</th>
-                        <th>Remarks</th>
-                        <th>Remove</th>
+                        <th>IP 地址</th>
+                        <th>备注</th>
+                        <th>移除</th>
                     </tr>
                     </thead>
                     <tbody id="whitelistIpTable">
@@ -703,18 +703,18 @@
             </div>
             <!-- Quick ban list-->
             <div class="ui bottom attached tab segment" data-tab="tab_quickban">
-                <h2>Quick Ban List</h2>
+                <h2>快速封禁列表</h2>
                 <button style="margin-top: -1em;" onclick="initBlacklistQuickBanTable();" class="ui green small right floated circular basic icon button"><i class="ui refresh icon"></i></button>
-                <p>You can perform one-click IP ban on the list below if you observe unusual traffic from an unknown origin<br>
-                Blacklist must be enabled in order to use this feature.</p>
+                <p>若发现来自未知来源的异常流量，可在下方列表中一键封禁 IP。<br>
+                使用此功能前需先启用黑名单。</p>
                 <div class="ui divider"></div>
                 <table class="ui celled unstackable very compact table" id="ipTable">
                     <thead>
                         <tr>
                         <th>IP</th>
-                        <th>Access Count</th>
-                        <th>Country of Origin</th>
-                        <th>Blacklist</th>
+                        <th>访问次数</th>
+                        <th>来源国家/地区</th>
+                        <th>加入黑名单</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -747,7 +747,7 @@
 
     function reloadAccessRulesWithFeedback(){
         reloadAccessRules(function(){
-            msgbox("Access Rules Reloaded", true);
+            msgbox("访问规则已重新加载", true);
         });
     }
     
@@ -801,7 +801,7 @@
                     callback();
                 }
             }else{
-                msgbox("Access rule load failed: " + data.error, false);
+                msgbox("加载访问规则失败：" + data.error, false);
             }
         })
     }
@@ -812,7 +812,7 @@
         for (var i = 0; i < currentListOfAccessRules.length; i++){
             let thisAccessRule = currentListOfAccessRules[i];
             if (thisAccessRule.ID == "default"){
-                $("#currentEditingAccessRule").html(`Editing Access Rule: ${thisAccessRule.Name} <span style="font-weight: 300;">[${thisAccessRule.ID}]</span>`);
+                $("#currentEditingAccessRule").html(`正在编辑访问规则：${thisAccessRule.Name} <span style="font-weight: 300;">[${thisAccessRule.ID}]</span>`);
                 $("#accessRuleDesc").text(thisAccessRule.Desc);
                 break;
             }
@@ -834,7 +834,7 @@
                 break;
             }
         }
-        $("#currentEditingAccessRule").html(`Editing Access Rule: ${name} <span style="font-weight: 300;">[${newRuleUUID}]</span>`);
+        $("#currentEditingAccessRule").html(`正在编辑访问规则：${name} <span style="font-weight: 300;">[${newRuleUUID}]</span>`);
         $("#accessRuleDesc").text(desc);
 
         initBlackWhitelistTables();
@@ -1090,7 +1090,7 @@
             data: { enable: isChecked, id: currentEditingAccessRule},
             success: function(data){
                 if (data.error != undefined){
-                    msgbox("Failed to update loopback whitelist: " + data.error, false);
+                    msgbox("更新回环白名单失败：" + data.error, false);
                     //Revert the checkbox state
                     if (isChecked){
                         $('#enableWhitelistLoopback').parent().checkbox("set unchecked");
@@ -1099,7 +1099,7 @@
                     }
                     return;
                 }else{
-                    msgbox("Loopback whitelist " + (isChecked ? "enabled" : "disabled"), true);
+                    msgbox("回环白名单已" + (isChecked ? "启用" : "禁用"), true);
                 }
                 
             }
@@ -1178,7 +1178,7 @@
         if (countryCode == "eu"){
             let euCountries = getEUCCs();
             countryCode = euCountries.join(",");
-            countryName = "European Union";
+            countryName = "欧盟";
         }else{
             countryCode = countryCode.toLowerCase();
         }
@@ -1206,11 +1206,11 @@
     function addIpBlacklist(){
         let targetIp = $("#ipAddressInput").val().trim();
         if (targetIp == ""){
-            alert("IP address is empty")
+            alert("IP 地址为空")
             return
         }
         if (!isValidIpFilter(targetIp)){
-            if (!confirm("This doesn't seems like a valid IP address. Continue anyway?")){
+            if (!confirm("该 IP 地址格式可能无效，是否仍继续？")){
                 return;
             }
         }
@@ -1230,7 +1230,7 @@
                 $("#ipAddressInput").parent().removeClass("error");
             },
             error: function() {
-                alert("Failed to add IP address to blacklist");
+                alert("加入黑名单失败");
             }
         });
     }
@@ -1249,7 +1249,7 @@
                     }
                 },
                 error: function() {
-                    alert("Failed to remove IP address from blacklist");
+                    alert("从黑名单移除失败");
                 }
                 
             });
@@ -1301,9 +1301,9 @@
                 initWhitelistCountryList();
                 if (ccs.length == 1){
                     //Single country
-                    msgbox(`Added ${getCountryName(ccs[0])} to whitelist`);
+                    msgbox(`已将 ${getCountryName(ccs[0])} 加入白名单`);
                 }else{
-                    msgbox(ccs.length + " countries added to whitelist");
+                    msgbox("已添加 " + ccs.length + " 个国家/地区到白名单");
                 }
             },
             error: function(xhr, status, error) {
@@ -1321,11 +1321,11 @@
         if (countryCode == "eu"){
             let euCountries = getEUCCs();
             countryCode = euCountries.join(",");
-            countryName = "European Union";
+            countryName = "欧盟";
         }else{
             countryCode = countryCode.toLowerCase(); 
         }
-        if (skipConfirm || confirm("Confirm removing " + getCountryName(countryCode) + " from whitelist?")){
+        if (skipConfirm || confirm("确认从白名单移除 " + getCountryName(countryCode) + "？")){
             $.cjax({
                 url: "/api/whitelist/country/remove",
                 method: "POST",
@@ -1334,7 +1334,7 @@
                     if (response.error != undefined){
                         msgbox(response.error, false);
                     }
-                    msgbox(countryName + " removed from whitelist");
+                    msgbox(countryName + " 已从白名单移除");
                     initWhitelistCountryList();
                 },
                 error: function(xhr, status, error) {
@@ -1349,11 +1349,11 @@
         let targetIp = $("#ipAddressInputWhitelist").val().trim();
         let remarks = $("#ipAddressCommentsWhitelist").val().trim();
         if (targetIp == ""){
-            alert("IP address is empty")
+            alert("IP 地址为空")
             return
         }
         if (!isValidIpFilter(targetIp)){
-            if (!confirm("This doesn't seems like a valid IP address. Continue anyway?")){
+            if (!confirm("该 IP 地址格式可能无效，是否仍继续？")){
                 return;
             }
         }
@@ -1374,7 +1374,7 @@
                 $("#ipAddressInputWhitelist").parent().removeClass("error");
             },
             error: function() {
-                alert("Failed to add IP address to whitelist");
+                alert("加入白名单失败");
             }
         });
     }
@@ -1393,7 +1393,7 @@
                     }
                 },
                 error: function() {
-                    alert("Failed to remove IP address from whitelist");
+                    alert("从白名单移除失败");
                 }
                 
             });

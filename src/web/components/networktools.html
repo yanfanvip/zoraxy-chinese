@@ -1,57 +1,57 @@
 <div class="standardContainer">
     <div class="ui basic segment">
-        <h2>Network Tools</h2>
-        <p>Network tools to help manage your cluster nodes</p>
+        <h2>网络工具</h2>
+        <p>用于管理集群节点的网络工具</p>
     </div>
 
 
     <div class="ui top attached tabular menu">
-        <a class="nettools item active bluefont" data-tab="tab1">Discovery</a>
-        <a class="nettools item bluefont" data-tab="tab2">Connection</a>
-        <a class="nettools item bluefont" data-tab="tab3">Interface</a>
+        <a class="nettools item active bluefont" data-tab="tab1">发现</a>
+        <a class="nettools item bluefont" data-tab="tab2">连接</a>
+        <a class="nettools item bluefont" data-tab="tab3">接口</a>
     </div>
 
     <div class="ui bottom attached tab segment nettoolstab active" data-tab="tab1">
         <!-- MDNS Scanner-->
-        <h2>Multicast DNS (mDNS) Scanner</h2>
-        <p>Discover mDNS enabled service in this gateway forwarded network</p>
-        <button class="ui basic larger circular button" onclick="launchToolWithSize('./tools/mdns.html',1000, 640);">View Discovery</button>
+        <h2>组播 DNS (mDNS) 扫描</h2>
+        <p>发现网关转发网络内启用 mDNS 的服务</p>
+        <button class="ui basic larger circular button" onclick="launchToolWithSize('./tools/mdns.html',1000, 640);">查看发现</button>
         <div class="ui divider"></div>
         <div class="ui stackable grid">
             <div class="eight wide column">
                  <!-- IP Scanner-->
-                <h2>IP Scanner</h2>
-                <p>Discover local area network devices by pinging them one by one</p>
-                <button class="ui basic larger circular button" onclick="launchToolWithSize('./tools/ipscan.html',1000, 640);">Start Scanner</button>
+                <h2>IP 扫描</h2>
+                <p>通过逐台 ping 发现局域网设备</p>
+                <button class="ui basic larger circular button" onclick="launchToolWithSize('./tools/ipscan.html',1000, 640);">开始扫描</button>
             </div>  
             <div class="eight wide column">
                  <!-- Port Scanner-->
-                <h2>Port Scanner</h2>
-                <p>Scan for open ports on a given IP address</p>
-                <button class="ui basic larger circular button" onclick="launchToolWithSize('./tools/portscan.html',1000, 640);">Start Scanner</button>
+                <h2>端口扫描</h2>
+                <p>扫描指定 IP 的开放端口</p>
+                <button class="ui basic larger circular button" onclick="launchToolWithSize('./tools/portscan.html',1000, 640);">开始扫描</button>
             </div>
         </div>  
        
         <div class="ui divider"></div>
         <!-- Traceroute-->
         <h2>Traceroute / Ping</h2>
-        <p>Trace the network nodes that your packets hops through</p>
+        <p>追踪数据包经过的网络节点</p>
         <div class="ui form">
             <div class="two fields">
                 <div class="field">
-                    <label>Target domain or IP</label>
+                    <label>目标域名或 IP</label>
                     <input type="text" id="traceroute_domain" placeholder="1.1.1.1">
                 </div>
                 <div class="field">
-                  <label>Max Hops</label>
+                  <label>最大跳数</label>
                   <input type="number" min="1" step="1" id="traceroute_maxhops" placeholder="64" value="64">
                 </div>
             </div>
-            <button class="ui basic button" onclick="traceroute();"><i class="ui blue location arrow icon"></i> Start Tracing</button>
+            <button class="ui basic button" onclick="traceroute();"><i class="ui blue location arrow icon"></i> 开始追踪</button>
             <button class="ui basic button" onclick="ping();"><i class="ui teal circle outline icon"></i> Ping</button>
             <br><br>
             <div class="field">
-                <label>Results</label>
+                <label>结果</label>
                 <textarea id="traceroute_results" rows="10" style=""></textarea>
             </div>
             
@@ -59,12 +59,12 @@
         <div class="ui divider"></div>
         <!-- Whois-->
         <h2>Whois</h2>
-        <p>Check the owner and registration information of a given domain</p>
+        <p>查询域名的所有者与注册信息</p>
         <div class="ui icon input">
-            <input id="whoisdomain" type="text" onkeypress="if(event.keyCode === 13) { performWhoisLookup(); }" placeholder="Domain or IP">
+            <input id="whoisdomain" type="text" onkeypress="if(event.keyCode === 13) { performWhoisLookup(); }" placeholder="域名或 IP">
             <i onclick="performWhoisLookup();" class="circular search link icon"></i>
         </div><br>
-        <small>Lookup might take a few minutes to complete</small>
+        <small>查询可能需要数分钟</small>
         <br>
         <div id="whois_table"></div>
     </div>
@@ -72,12 +72,12 @@
     <div class="ui bottom attached tab segment nettoolstab" data-tab="tab2">
         <div id="websshTool" style="position: relative;">
             <h2>Web SSH</h2>
-            <p>Connect to a network node within the local area network of the gateway</p>
+            <p>连接网关所在局域网内的节点</p>
             <div class="ui small form">
                 <div class="three fields">
                     <div class="field">
-                        <label>Server Name or IP Address</label>
-                        <input type="text" id="ssh_server" placeholder="e.g. example.com or 192.168.1.1">
+                        <label>服务器名或 IP 地址</label>
+                        <input type="text" id="ssh_server" placeholder="例如 example.com 或 192.168.1.1">
                     </div>
                     <div class="field">
                         <label>Port Number</label>
@@ -226,18 +226,18 @@
 
             // Validate server input
             if (server === "") {
-                msgbox("Server Name or IP Address is required", false, 5000);
+                msgbox("请填写服务器名或 IP 地址", false, 5000);
                 serverInput.focus();
                 isValid = false;
             } else if (!isIpAddress(server) && !isDomainName(server)) {
-                msgbox("Invalid Server Name or IP Address", false, 5000);
+                msgbox("服务器名或 IP 地址无效", false, 5000);
                 serverInput.focus();
                 isValid = false;
             }
 
             // Validate port input
             if (isNaN(port) || port < 2 || port > 65533) {
-                msgbox("Port Number must be a number between 2 and 65533", false, 5000);
+                msgbox("端口须为 2～65533 之间的数字", false, 5000);
                 portInput.focus();
                 isValid = false;
             }
@@ -344,7 +344,7 @@ function setWoLAddress() {
 
     if (!isValidMacAddress(mac)){
         $("#wol_mac").parent().addClass("error");
-        msgbox("Invalid MAC address given", false, 5000);
+        msgbox("MAC 地址无效", false, 5000);
         return
     }else{
         $("#wol_mac").parent().removeClass("error");
@@ -641,7 +641,7 @@ function updateForwardProxyPort(){
             if (data.error != undefined){
                 msgbox(data.error, false);
             }
-            msgbox("Forward proxy port updated");
+            msgbox("正向代理端口已更新");
             initForwardProxyInfo();
         }
     });

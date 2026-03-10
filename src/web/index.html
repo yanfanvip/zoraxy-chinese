@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
     <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -7,7 +7,7 @@
         <meta name="theme-color" content="#4b75ff">
         <meta name="zoraxy.csrf.Token" content="{{.csrfToken}}">
         <link rel="icon" type="image/png" href="./favicon.png" />
-        <title>Control Panel | Zoraxy</title>
+        <title>控制面板 | Zoraxy</title>
         <link rel="stylesheet" href="script/semantic/semantic.min.css">
         <script src="script/jquery-3.6.0.min.js"></script>
         <script src="script/semantic/semantic.min.js"></script>
@@ -39,64 +39,64 @@
             <div class="toolbar">
                 <div id="mainmenu" class="ui secondary vertical menu">
                     <a class="item" tag="qstart">
-                        <i class="simplistic magic icon"></i>Quick Start
+                        <i class="simplistic magic icon"></i>快速入门
                     </a>
                     <a class="item active" tag="status">
-                        <i class="simplistic info circle icon"></i>Status
+                        <i class="simplistic info circle icon"></i>状态
                     </a>
                     <a class="item" tag="setroot">
-                        <i class="simplistic home icon"></i> Default Site
+                        <i class="simplistic home icon"></i> 默认站点
                     </a>
-                    <div class="ui divider menudivider">Reverse Proxy</div>
+                    <div class="ui divider menudivider">反向代理</div>
                     <a class="item" tag="httprp">
-                        <i class="simplistic sitemap icon"></i> HTTP Proxy
+                        <i class="simplistic sitemap icon"></i> HTTP 代理
                     </a>
                     <a class="item" tag="vdir">
-                        <i class="simplistic folder icon"></i> Virtual Directory
+                        <i class="simplistic folder icon"></i> 虚拟目录
                     </a>
                     <a class="item" tag="rules">
-                        <i class="simplistic plus square icon"></i> Create Proxy Rules
+                        <i class="simplistic plus square icon"></i> 创建代理规则
                     </a>
                     <a class="item" tag="streamproxy">
-                        <i class="simplistic exchange icon"></i> Stream Proxy
+                        <i class="simplistic exchange icon"></i> 流代理
                     </a>
-                    <div class="ui divider menudivider">Access & Connections</div>
+                    <div class="ui divider menudivider">访问与连接</div>
                     <a class="item" tag="redirectset">
-                        <i class="simplistic level up alternate icon"></i> Redirection
+                        <i class="simplistic level up alternate icon"></i> 重定向
                     </a>
                     <a class="item" tag="access">
-                        <i class="simplistic ban icon"></i> Access Control
+                        <i class="simplistic ban icon"></i> 访问控制
                     </a>
-                    <div class="ui divider menudivider">Security</div>
+                    <div class="ui divider menudivider">安全</div>
                     <a class="item" tag="cert">
-                        <i class="simplistic lock icon"></i> TLS / SSL certificates
+                        <i class="simplistic lock icon"></i> TLS / SSL 证书
                     </a>
                     <a class="item" tag="sso">
                         <i class="simplistic user circle icon"></i> SSO / OAuth2
                     </a>
-                    <div class="ui divider menudivider">Others</div>
+                    <div class="ui divider menudivider">其他</div>
                     <a class="item" tag="webserv">
-                        <i class="simplistic globe icon"></i> Static Web Server
+                        <i class="simplistic globe icon"></i> 静态 Web 服务器
                     </a>
                     <a class="item" tag="utm">
-                        <i class="simplistic time icon"></i> Uptime Monitor
+                        <i class="simplistic time icon"></i> 运行监控
                     </a>
                     <a class="item" tag="networktool">
-                        <i class="simplistic terminal icon"></i> Network Tools
+                        <i class="simplistic terminal icon"></i> 网络工具
                     </a>
                     <a class="item" tag="stats">
-                        <i class="simplistic database icon"></i> Statistical Analysis
+                        <i class="simplistic database icon"></i> 统计分析
                     </a>
                     <a class="item" tag="utils">
-                        <i class="simplistic paperclip icon"></i> Utilities
+                        <i class="simplistic paperclip icon"></i> 实用工具
                     </a>
                     <a class="item" tag="plugins">
-                        <i class="simplistic puzzle piece icon"></i> Plugins Manager
+                        <i class="simplistic puzzle piece icon"></i> 插件管理
                     </a>
-                    <div class="ui divider menudivider">Plugins</div>
+                    <div class="ui divider menudivider">插件</div>
                     <cx id="pluginMenu"></container>
                         <a class="item" style="pointer-events: none; user-select: none; opacity: 0.6;">
-                            <i class="green circle check icon"></i> No Plugins Installed
+                            <i class="green circle check icon"></i> 未安装插件
                         </a>
                     </cx>
                     <!-- Add more components here -->
@@ -171,14 +171,8 @@
                 <iframe src="snippet/placeholder.html"></iframe>
             </div>
         </div>
-        <br><br>
-        <div class="ui divider"></div>
-        <div class="ui container" style="color: grey; font-size: 90%; padding-bottom: 1em;">
-            <p><a href="https://zoraxy.aroz.org" target="_blank">Zoraxy</a> <span class="zrversion"></span> © 2021 - <span class="year"></span> tobychui. Licensed under AGPL</p>
-        </div>
-        
         <div id="messageBox" class="ui green floating big compact message">
-            <p><i class="green check circle icon"></i> There are no messages</p>
+            <p><i class="green check circle icon"></i> 暂无消息</p>
         </div>
         
         <div id="confirmBox" style="display:none;">
@@ -188,20 +182,20 @@
             <div class="confirmBoxBody">
                 <button class="ui red basic mini circular icon right floated button" style="margin-left: 0.4em;"><i class="ui times icon"></i></button>
                 <button class="ui green basic mini circular icon right floated button"><i class="ui check icon"></i></button>
-                <div class="questionToConfirm">Confirm Exit?</div>
+                <div class="questionToConfirm">确认退出？</div>
             </div>
         </div>
 
         <div id="tourModal" class="nofocus" position="center">
-            <h4 class="tourStepTitle">Welcome to Zoraxy Tour</h4>
-            <p class="tourStepContent">This is a simplified tour to show some of what it can do.
-                Use your keyboard or click the next button to get going.</p>
+            <h4 class="tourStepTitle">欢迎使用 Zoraxy 导览</h4>
+            <p class="tourStepContent">这是简要导览，帮助您了解部分功能。
+                使用键盘或点击“下一步”按钮继续。</p>
             <div class="ui divider"></div>
             <div class="ui equal width grid" align="center">
-                <div class="column"><button onclick="previousTourStep();" class="ui basic small disabled button tourStepButtonBack">Back</button></div>
-                <div class="column"><p style="margin-top: 0.4em">Steps <span class="tourStepCounter">1 / 9</span></p></div>
-                <div class="column nextStepAvaible"><button onclick="nextTourStep();" class="ui basic right floated small button tourStepButtonNext">Next</button></div>
-                <div class="column nextStepFinish"><button onclick="endTourFocus();" class="ui right floated small button tourStepButtonFinish">Finish</button></div>
+                <div class="column"><button onclick="previousTourStep();" class="ui basic small disabled button tourStepButtonBack">上一步</button></div>
+                <div class="column"><p style="margin-top: 0.4em">步骤 <span class="tourStepCounter">1 / 9</span></p></div>
+                <div class="column nextStepAvaible"><button onclick="nextTourStep();" class="ui basic right floated small button tourStepButtonNext">下一步</button></div>
+                <div class="column nextStepFinish"><button onclick="endTourFocus();" class="ui right floated small button tourStepButtonFinish">完成</button></div>
             </div>
             <button onclick="endTourFocus();" class="ui circular small icon button tourCloseButton"><i class="ui times icon"></i></button>
         </div>
@@ -240,7 +234,7 @@
                         });
                         loadingComponents++;
                     }else{
-                        $(this).html(`<p>Unable to load components for this tab</p>`);
+                        $(this).html(`<p>无法加载该标签页的组件</p>`);
                     }
                 })
                 if (callback != undefined){
@@ -256,7 +250,7 @@
                 }else if (loadingComponents == 0){
                     callback();
                 }else{
-                    alert("Missing component. Please check if your installation is complete.")
+                    alert("缺少组件，请检查安装是否完整。")
                 }
             }
 
@@ -390,7 +384,7 @@
                     targetBtn = getTabButtonById(tabID);
                 }
                 if (targetBtn == undefined){
-                    alert("Invalid tabid given");
+                    alert("无效的标签页 ID");
                     return;
                 }
                 if (window.innerWidth < 750){

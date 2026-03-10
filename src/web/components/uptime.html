@@ -1,7 +1,7 @@
 <div class="standardContainer">
     <div class="ui basic segment">
-        <h2>Uptime Monitor</h2>
-        <p>Check the online state of proxied targets</p>
+        <h2>运行监控</h2>
+        <p>检测代理目标的在线状态</p>
     </div>
     <div class="ui divider"></div>
     <div id="utmrender" class="ui basic segment">
@@ -9,8 +9,8 @@
             <h4 class="ui header">
                 <i class="red remove icon"></i>
                 <div class="content">
-                    Uptime Monitoring service is currently unavailable
-                    <div class="sub header">This might be caused by an error in cluster communication within the host servers. Please wait for administrator to resolve the issue.</div>
+                    运行监控服务当前不可用
+                    <div class="sub header">可能是主机集群通信异常，请等待管理员处理。</div>
                 </div>
             </h4> 
         </div>
@@ -72,7 +72,7 @@
     function reloadUptimeList(){
         $("#utmrender").html(`<div class="ui utmloading segment">
         <div class="ui active inverted dimmer" style="z-index: 2;">
-            <div class="ui text loader">Loading</div>
+            <div class="ui text loader">加载中</div>
         </div>
         <br><br><br><br>
         </div>`);

@@ -16,45 +16,43 @@
         <div class="ui container">
             <div class="ui header">
                 <div class="content">
-                    Config Export and Import Tool
-                    <div class="sub header">Painless migration with one click</div>
+                    配置导出与导入
+                    <div class="sub header">一键迁移配置</div>
                 </div>
             </div>
-            <h3>Backup Current Configs</h3>
-            <p>This will download all your configuration on zoraxy in a zip file. This includes all the proxy configs and certificates. Please keep it somewhere safe and after migration, delete this if possible.</p>
+            <h3>备份当前配置</h3>
+            <p>将下载 Zoraxy 全部配置的 zip 包，包含代理配置与证书。请妥善保存；迁移后可酌情删除。</p>
             <div class="ui form">
                 <div class="grouped fields">
-                  <label>Backup Mode</label>
+                  <label>备份模式</label>
                   <div class="field">
                     <div class="ui radio checkbox">
                       <input type="radio" value="rules" name="backupmode" checked="checked">
-                      <label>Proxy Settings, Redirect Rules and Certificates Only</label>
+                      <label>仅代理设置、重定向规则与证书</label>
                     </div>
                   </div>
                   <div class="field">
                     <div class="ui radio checkbox">
                       <input type="radio" value="full" name="backupmode">
-                      <label>Full System Snapshot</label>
+                      <label>完整系统快照</label>
                     </div>
                   </div>
                 </div>
             </div>
             <br>
-            <button class="ui basic button" onclick="downloadConfig();"><i class="ui blue download icon"></i> Download</button>
+            <button class="ui basic button" onclick="downloadConfig();"><i class="ui blue download icon"></i> 下载</button>
             <div class="ui divider"></div>
 
-            <h3>Restore from Config</h3>
-            <p>You can restore your previous settings and database from a zip file config backup. 
-            <br><b style="color: rgba(255, 0, 0, 0.644);">RESTORE FULL SYSTEM SNAPSHOT WILL CAUSE THE SYSTEM TO SHUTDOWN AFTER COMPLETED. Make sure your Zoraxy is configured to work with systemd to automatic restart Zoraxy after system restore completed.<br>
-                
-            </b></p>
+            <h3>从配置恢复</h3>
+            <p>可从 zip 配置备份恢复之前的设置与数据库。<br>
+            <b style="color: rgba(255, 0, 0, 0.644);">恢复完整系统快照完成后将关闭系统。请确保 Zoraxy 已配置 systemd 以便在恢复后自动重启。</b></p>
             <form class="ui form" id="uploadForm" action="/api/conf/import" method="POST" enctype="multipart/form-data">
               <input type="file" name="file" id="fileInput" accept=".zip">
-              <button style="margin-top: 0.6em;" class="ui basic button" type="submit"><i class="ui green upload icon"></i> Restore & Exit</button>
+              <button style="margin-top: 0.6em;" class="ui basic button" type="submit"><i class="ui green upload icon"></i> 恢复并退出</button>
             </form>
-            <small>The current config will be backup to ./conf_old{timestamp}. If you screw something up, you can always restore it by ssh to your host and restore the configs from the old folder.</small>
+            <small>当前配置会备份到 ./conf_old{时间戳}。若恢复有误，可通过 SSH 从该目录手动恢复。</small>
             <br><br>
-            <button class="ui basic button"  style="float: right;" onclick="parent.hideSideWrapper();"><i class="remove icon"></i> Cancel</button>
+            <button class="ui basic button"  style="float: right;" onclick="parent.hideSideWrapper();"><i class="remove icon"></i> 取消</button>
         </div>
         <script>
             $(".checkbox").checkbox();
@@ -80,7 +78,7 @@
                 var fileInput = $("#fileInput")[0];
                 var file = fileInput.files[0];
                 if (!file) {
-                    alert("Missing file.");
+                    alert("请选择文件。");
                     return;
                 }
 
@@ -94,10 +92,10 @@
                     processData: false, // Not to process the data
                     contentType: false, // Not to set contentType
                     success: function(response) {
-                        parent.msgbox("Config restore succeed. Restart Zoraxy to apply changes.");
+                        parent.msgbox("配置已恢复，请重启 Zoraxy 使更改生效。");
                     },
                     error: function(xhr) {
-                        parent.msgbox("Restore failed: " + xhr.responseText, false, 5000);
+                        parent.msgbox("恢复失败：" + xhr.responseText, false, 5000);
                     }
                 });
             });

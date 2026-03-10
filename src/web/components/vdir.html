@@ -1,63 +1,63 @@
 <div class="standardContainer">
     <div class="ui basic segment">
-        <h2>Virtual Directory</h2>
-        <p>A virtual directory is a consolidated view of multiple directories that provides a unified entry point for users to access disparate sources.</p>
+        <h2>虚拟目录</h2>
+        <p>虚拟目录将多个目录统一为一个入口，便于用户访问不同来源的内容。</p>
     </div>
     <div id="currentVirtualDirectoryAttachingHost" class="ui basic segment">
-        Select a host / routing rule to start editing Virtual Directory
+        请先选择主机/路由规则以编辑虚拟目录
     </div>  
     <div class="ui stackable grid">
         <div class="six wide column">
-            <h4>Select a Target Host / Site</h4>
-            <p>Attach Virtual Directory routing rule to root proxy router</p>
+            <h4>选择目标主机/站点</h4>
+            <p>将虚拟目录路由规则绑定到根代理路由器</p>
             <div class="ui checkbox">
                 <input type="checkbox" id="useRootProxyRouterForVdir" onchange="handleVdirAttachTargetChange(this);">
-                <label>Root Proxy Router<br>
-                <small>Only applicable when Default Site is set to "Reverse Proxy" mode</small></label>
+                <label>根代理路由器<br>
+                <small>仅当默认站点为「反向代理」模式时可用</small></label>
             </div>
-            <div class="ui horizontal divider">OR</div>
-            <p>Create Virtual Directory routing in existing host / routing rule entries</p>
+            <div class="ui horizontal divider">或</div>
+            <p>在已有主机/路由规则中创建虚拟目录路由</p>
             <div class="ui fluid search selection dropdown">
                 <input type="hidden" id="vdirBaseRoutingRule" name="vdirBaseRoutingRule" onchange="handleVdirAttachTargetChange();">
                 <i class="dropdown icon"></i>
-                <div class="default text">Select a host to edit</div>
+                <div class="default text">选择要编辑的主机</div>
                 <div class="menu" id="hostDomainList">
                     
                 </div>
             </div>
         </div>
         <div class="ten wide column">
-            <h4>Edit Virtual Directory Routing Rules</h4>
-            <p>The following are the list of Virtual Directories currently handled by the host router above</p>
+            <h4>编辑虚拟目录路由规则</h4>
+            <p>以下为当前主机路由器处理的虚拟目录列表</p>
             <div style="width: 100%; overflow-x: auto; margin-bottom: 1em;">
                 <table class="ui celled sortable unstackable compact table">
                     <thead>
                         <tr>
-                            <th>Virtual Directory</th>
-                            <th>Destination</th>
-                            <th class="no-sort" style="min-width: 7.2em;">Actions</th>
+                            <th>虚拟目录</th>
+                            <th>目标</th>
+                            <th class="no-sort" style="min-width: 7.2em;">操作</th>
                         </tr>
                     </thead>
                     <tbody id="vdirList">
                         <tr>
-                            <td data-label="" colspan="3">No Selected Host</td>
+                            <td data-label="" colspan="3">未选择主机</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <button class="ui icon right floated basic button" onclick="reloadVdirList();"><i class="green refresh icon"></i> Refresh</button>
+            <button class="ui icon right floated basic button" onclick="reloadVdirList();"><i class="green refresh icon"></i> 刷新</button>
             <br><br>
             <div class="ui divider"></div>
             <div id="newVDSection" class="disabled section">
-                <h4>New Virtual Directory Rule</h4>
+                <h4>新建虚拟目录规则</h4>
                 <form class="ui form">
                     <div class="field">
-                        <label>Matching Path Prefix</label>
+                        <label>匹配路径前缀</label>
                         <input type="text" id="virtualDirectoryPath" placeholder="/mysite/">
-                        <small>Path that follows your select host / domain, e.g. <code>/mysite/</code> as path prefix will forward all request that matches <code>mydomain.com/mysite/*</code></small>
+                        <small>紧跟所选主机/域名的路径，例如前缀 <code>/mysite/</code> 会转发匹配 <code>mydomain.com/mysite/*</code> 的请求</small>
                     </div>
                     <div class="field">
-                        <label>Target IP Address or Domain Name with port</label>
+                        <label>目标 IP 或域名（含端口）</label>
                         <input type="text" id="virtualDirectoryDomain" onchange="updateVDTargetTLSState();">
                         <small>E.g. 192.168.0.101:8000 or example.com</small>
                     </div>
@@ -272,13 +272,13 @@
                 if (data.error != undefined){
                     msgbox(data.error, false);
                 }else{
-                    msgbox("New Virtual Directory rule added");
+                    msgbox("已添加虚拟目录规则");
                     reloadVdirList();
                     resetVdirForm();
                 }
             }, 
             error: function(){
-                msgbox("Add Virtual Directory failed due to unknown reasons", false);
+                msgbox("添加虚拟目录失败，原因未知", false);
             }
         })
         
@@ -312,7 +312,7 @@
                 if (data.error != undefined){
                     msgbox(data.error, false);
                 }else{
-                    msgbox("Virtual Directory rule removed", true);
+                    msgbox("虚拟目录规则已删除", true);
                     reloadVdirList();
                 }
             }
@@ -404,7 +404,7 @@
                 if (data.error != undefined){
                     msgbox(data.error, false);
                 }else{
-                    msgbox("Virtual Directory rule updated", true);
+                    msgbox("虚拟目录规则已更新", true);
                     exitVdirInlineEdit();
                 }
             },

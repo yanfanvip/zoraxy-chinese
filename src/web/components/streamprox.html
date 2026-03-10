@@ -1,23 +1,23 @@
 <div class="standardContainer">
     <div class="ui basic segment">
-        <h2>Stream Proxy</h2>
-        <p>Proxy traffic flow on layer 3 via TCP or UDP</p>
+        <h2>流代理</h2>
+        <p>在第三层通过 TCP 或 UDP 代理流量</p>
     </div>
     <div class="ui divider"></div>
     <div class="ui basic segment" style="margin-top: 0;">
-        <h3>TCP / UDP Proxy Rules</h3>
-        <p>A list of TCP / UDP proxy rules created on this host.</p>
+        <h3>TCP / UDP 代理规则</h3>
+        <p>本机已创建的 TCP/UDP 代理规则列表。</p>
         <div style="overflow-x: auto; ">
             <table id="proxyTable" class="ui celled basic unstackable table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Listening Address</th>
-                        <th>Target Address</th>
-                        <th>Mode</th>
-                        <th>Timeout (s)</th>
-                        <th>Enable Logging</th>
-                        <th>Actions</th>
+                        <th>名称</th>
+                        <th>监听地址</th>
+                        <th>目标地址</th>
+                        <th>模式</th>
+                        <th>超时(秒)</th>
+                        <th>启用日志</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,77 +26,76 @@
             </table>
         </div>
         <br>
-        <button class="ui basic right floated button" onclick="initProxyConfigList();" title="Refresh List"><i class="ui green refresh icon"></i>Refresh</button>
+        <button class="ui basic right floated button" onclick="initProxyConfigList();" title="刷新列表"><i class="ui green refresh icon"></i>刷新</button>
         <br><br>
     </div>
     <div class="ui divider"></div>
     <div class="ui basic segment" id="addproxyConfig">
-        <h3>Add or Edit Stream Proxy</h3>
-        <p>Create or edit a new stream proxy instance</p>
+        <h3>添加或编辑流代理</h3>
+        <p>创建或编辑流代理实例</p>
         <form id="streamProxyForm" class="ui form">
             <div class="field" style="display:none;">
                 <label>UUID</label>
                 <input type="text" name="uuid">
             </div>
             <div class="field">
-                <label>Name</label>
-                <input type="text" name="name" placeholder="Config Name">
+                <label>名称</label>
+                <input type="text" name="name" placeholder="配置名称">
             </div>
             <div class="field">
-                <label>Listening Address with Port</label>
+                <label>监听地址与端口</label>
                 <input type="text" name="listenAddr" placeholder="">
-                <small>Address to listen on this host. e.g. :25565 or 127.0.0.1:25565. <br>
-                    If you are using Docker, you will also need to expose this port to host network.</small>
+                <small>本机监听地址，如 :25565 或 127.0.0.1:25565。<br>使用 Docker 时需将该端口暴露到主机网络。</small>
             </div>
             <div class="field">
-                <label>Proxy Target Address with Port</label>
+                <label>代理目标地址与端口</label>
                 <input type="text" name="proxyAddr" placeholder="">
-                <small>Server address to forward TCP / UDP package. e.g. 192.168.1.100:25565</small>
+                <small>转发 TCP/UDP 的目标地址，如 192.168.1.100:25565</small>
             </div>
             <div class="field">
-                <label>Timeout (s)</label>
+                <label>超时（秒）</label>
                 <input type="text" name="timeout" placeholder="" value="10">
-                <small>Connection timeout in seconds</small>
+                <small>连接超时时间（秒）</small>
             </div>
             <Br>
             <div class="field">
                 <div class="ui toggle checkbox">
                     <input type="checkbox" tabindex="0" name="useTCP" class="hidden">
-                    <label>Enable TCP<br>
-                        <small>Forward TCP request on this listening socket</small>
+                    <label>启用 TCP<br>
+                        <small>在此监听套接字上转发 TCP 请求</small>
                     </label>
                 </div>
             </div>
             <div class="field">
                 <div class="ui toggle checkbox">
                     <input type="checkbox" tabindex="0" name="useUDP" class="hidden">
-                    <label>Enable UDP<br>
-                    <small>Forward UDP request on this listening socket</small></label>
+                    <label>启用 UDP<br>
+                    <small>在此监听套接字上转发 UDP 请求</small></label>
                 </div>
             </div>
             <div class="field">
                 <div class="ui toggle checkbox">
                     <input type="checkbox" tabindex="0" name="enableLogging" class="hidden">
-                    <label>Enable Logging<br>
-                        <small>Enable logging of connection status and errors for this rule</small>
+                    <label>启用日志<br>
+                        <small>记录该规则的连接状态与错误</small>
                     </label>
                 </div>
             </div>
             <div class="field">
-                <label>Proxy Protocol</label>
+                <label>PROXY 协议</label>
                 <select name="proxyProtocolVersion" class="ui dropdown">
-                    <option value="0">Disabled</option>
+                    <option value="0">禁用</option>
                     <option value="1">Proxy Protocol V1</option>
                     <option value="2">Proxy Protocol V2</option>
                 </select>
-                <small>Select Proxy Protocol v1 / v2 to use (if any)</small>
+                <small>选择使用的 PROXY 协议版本（如有）</small>
                     <div id="proxyProtocolUdpWarning" style="display:none; color:#bd7100; margin-top:0.5em;">
-                        <i class="exclamation triangle icon"></i> Proxy Protocol V1 is not supported for UDP. The proxy protocol header will not be included in UDP packets if selected.
+                        <i class="exclamation triangle icon"></i> UDP 不支持 Proxy Protocol V1，选择后 UDP 包中不会包含代理协议头。
                     </div>
             </div>
-            <button id="addStreamProxyButton" class="ui basic button" type="submit"><i class="ui green add icon"></i> Create</button>  
-            <button id="editStreamProxyButton" class="ui basic button" onclick="confirmEditTCPProxyConfig(event, this);" style="display:none;"><i class="ui green check icon"></i> Update</button>  
-            <button class="ui basic red button" onclick="event.preventDefault(); cancelStreamProxyEdit(event);"><i class="ui red remove icon"></i> Cancel</button>  
+            <button id="addStreamProxyButton" class="ui basic button" type="submit"><i class="ui green add icon"></i> 创建</button>  
+            <button id="editStreamProxyButton" class="ui basic button" onclick="confirmEditTCPProxyConfig(event, this);" style="display:none;"><i class="ui green check icon"></i> 更新</button>  
+            <button class="ui basic red button" onclick="event.preventDefault(); cancelStreamProxyEdit(event);"><i class="ui red remove icon"></i> 取消</button>  
         </form>
     </div>
 </div>
@@ -144,13 +143,13 @@
                     if (response.error) {
                         msgbox(response.error, false, 6000);
                     }else{
-                        msgbox("Config Added");
+                        msgbox("配置已添加");
                     }
                     clearStreamProxyAddEditForm();
                     initProxyConfigList();
                 },
                 error: function() {
-                    msgbox('An error occurred while processing the request', false);
+                    msgbox('处理请求时发生错误', false);
                 }
             });
         });
@@ -186,7 +185,7 @@
             
             if (isNaN(timeout)) {
                 form.find('input[name="timeout"]').parent().addClass("error");
-                msgbox('Timeout must be a valid integer', false, 5000);
+                msgbox('超时时间须为有效整数', false, 5000);
                 return false;
             }else{
                 form.find('input[name="timeout"]').parent().removeClass("error");
@@ -196,7 +195,7 @@
             var mode = form.find('select[name="mode"]').val();
             if (mode === '') {
                 form.find('select[name="mode"]').parent().addClass("error");
-                msgbox('Please select a mode', false, 5000);
+                msgbox('请选择模式', false, 5000);
                 return false;
             }else{
                 form.find('select[name="mode"]').parent().removeClass("error");
@@ -213,11 +212,11 @@
             } else {
                
                 proxyConfigs.forEach(function(config) {
-                    var runningLogo = 'Stopped';
+                    var runningLogo = '已停止';
                     var runningClass = "stopped";
                     var startButton = `<button onclick="startStreamProx('${config.UUID}');" class="ui basic mini circular icon button" title="Start Proxy"><i class="green play icon"></i></button>`;
                     if (config.Running){
-                        runningLogo = 'Running';
+                        runningLogo = '运行中';
                         startButton = `<button onclick="stopStreamProx('${config.UUID}');" class="ui basic mini circular icon button" title="Stop Proxy"><i class="red stop icon"></i></button>`;
                         runningClass = "running"
                     }
@@ -255,8 +254,8 @@
                     ));
                     row.append($('<td>').html(`
                         ${startButton}
-                        <button onclick="editTCPProxyConfig('${config.UUID}');" class="ui circular basic mini icon button" title="Edit Config"><i class="edit icon"></i></button>
-                        <button onclick="deleteTCPProxyConfig('${config.UUID}');" class="ui circular red basic mini icon button" title="Delete Config"><i class="trash icon"></i></button>
+                        <button onclick="editTCPProxyConfig('${config.UUID}');" class="ui circular basic mini icon button" title="编辑配置"><i class="edit icon"></i></button>
+                        <button onclick="deleteTCPProxyConfig('${config.UUID}');" class="ui circular red basic mini icon button" title="删除配置"><i class="trash icon"></i></button>
                     `));
                     tableBody.append(row);
                 });
@@ -327,7 +326,7 @@
                 });
                 editingStreamProxyConfigUUID = configUUID;
             }else{
-                msgbox("Unable to load target config", false);
+                msgbox("无法加载目标配置", false);
             }
         }
 
@@ -336,7 +335,7 @@
             event.stopImmediatePropagation();
             var form = $("#streamProxyForm");
             let originalButtonHTML = $(btn).html();
-            $(btn).html(`<i class="ui loading spinner icon"></i> Updating`);
+            $(btn).html(`<i class="ui loading spinner icon"></i> 更新中`);
             $(btn).addClass("disabled");
 
             var formValid = validateTCPProxyConfig(form);
@@ -368,7 +367,7 @@
                     if (response.error) {
                         msgbox(response.error, false, 6000);
                     }else{
-                        msgbox("Config Updated");
+                        msgbox("配置已更新");
                     }
                     initProxyConfigList();
                     cancelStreamProxyEdit();
@@ -378,7 +377,7 @@
                 error: function() {
                     $(btn).html(originalButtonHTML);
                     $(btn).removeClass("disabled");
-                    msgbox('An error occurred while processing the request', false);
+                    msgbox('处理请求时发生错误', false);
                 }
             });
         }
@@ -392,7 +391,7 @@
                     if (data.error != undefined){
                         msgbox(data.error, false, 6000);
                     }else{
-                        msgbox("Proxy Config Removed");
+                        msgbox("代理配置已删除");
                         initProxyConfigList();
                     }
                 }
@@ -409,7 +408,7 @@
                     if (data.error != undefined){
                         msgbox(data.error, false, 6000);
                     }else{
-                        msgbox("Service Started");
+                        msgbox("服务已启动");
                         initProxyConfigList();
                     }
                 }
@@ -427,7 +426,7 @@
                     if (data.error != undefined){
                         msgbox(data.error, false, 6000);
                     }else{
-                        msgbox("Service Stopped");
+                        msgbox("服务已停止");
                         initProxyConfigList();
                     }
                 }
@@ -443,7 +442,7 @@
                     renderProxyConfigs(response);
                 },
                 error: function() {
-                    msgbox('Unable to load proxy configs', false);
+                    msgbox('无法加载代理配置', false);
                 }
             });
         }

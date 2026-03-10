@@ -4,21 +4,21 @@
 
 <div class="standardContainer">
     <div class="ui basic segment">
-        <h2>Statistical Analysis</h2>
-        <p>Statistic of your server in every aspects</p>
+        <h2>统计分析</h2>
+        <p>从多维度查看服务器统计</p>
         <div style="margin-bottom: 0.4em;">
             <div class="ui small input">
-                <input type="text" id="statsRangeStart" placeholder="From date">
+                <input type="text" id="statsRangeStart" placeholder="开始日期">
             </div>
             <span style="padding-left: 0.6em; padding-right: 0.6em;"> <i class="ui right arrow icon"></i> </span>
             <div class="ui small input">
-                <input type="text" id="statsRangeEnd" placeholder="End date">
+                <input type="text" id="statsRangeEnd" placeholder="结束日期">
             </div>
         </div>
-        <button onclick="handleLoadStatisticButtonPress();" class="ui basic button"><i class="blue search icon"></i> Load</button>
-        <button onclick="clearStatisticDateRange();" class="ui basic button"><i class="eraser icon"></i> Clear Search</button>
+        <button onclick="handleLoadStatisticButtonPress();" class="ui basic button"><i class="blue search icon"></i> 加载</button>
+        <button onclick="clearStatisticDateRange();" class="ui basic button"><i class="eraser icon"></i> 清除</button>
         <br>
-        <small>Leave end range as empty for showing starting day only statistic</small>
+        <small>结束日期留空则仅显示起始日统计</small>
     </div>
     <div class="ui divider"></div>
     <div id="statisticRenderNotEnoughData" class="ui segment" style="padding: 2em;" align="center">
@@ -33,9 +33,9 @@
             </i>
             
             <div class="content" style="margin-top: 1em; color: #7c7c7c !important;">
-                No Data 
-                <div class="sub header" style="color: #adadad !important;">The selected period contains too little or no request data collected. <br>
-                    Please select a larger range or make sure there are enough traffic routing through this site.</div>
+                暂无数据
+                <div class="sub header" style="color: #adadad !important;">所选时间段内请求数据过少或为空。<br>
+                    请扩大时间范围或确认有足够流量经过本站。</div>
             </div>
         </h4>
     </div>
@@ -47,7 +47,7 @@
                 
               </div>
               <div class="label">
-                Total Requests
+                总请求数
               </div>
             </div>
             <div class="statistic">
@@ -55,7 +55,7 @@
                     <i class="ui green check circle icon"></i> <span class="totalSuccCount"></span>
                 </div>
               <div class="label">
-                 Success Requests
+                 成功请求
               </div>
             </div>
             <div class="statistic">
@@ -63,18 +63,18 @@
                 <i class="ui red times circle icon"></i> <span class="totalErrorCount"></span>
               </div>
               <div class="label">
-                Error Requests
+                错误请求
               </div>
             </div>
         </div>
         <!-- Forward Type Data -->
-        <h3>Forward Traffic Types</h3>
-        <p>Traffic forwarding type classified by their protocols and proxy rules.</p>
+        <h3>转发流量类型</h3>
+        <p>按协议与代理规则分类的流量类型。</p>
         <table class="ui celled unstackable table">
             <thead>
-                <tr><th>Forward Type</th>
-                <th>Counts</th>
-                <th>Percentage</th>
+                <tr><th>转发类型</th>
+                <th>数量</th>
+                <th>占比</th>
             </tr></thead>
             <tbody class="forwardTypeCounts">
             </tbody>
