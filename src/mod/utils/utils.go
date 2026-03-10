@@ -192,6 +192,10 @@ func StringInArrayIgnoreCase(arr []string, str string) bool {
 
 // Validate if the listening address is correct
 func ValidateListeningAddress(address string) bool {
+	// Unix socket mode: -port=socket
+	if address == "socket" {
+		return true
+	}
 	// Check if the address starts with a colon, indicating it's just a port
 	if strings.HasPrefix(address, ":") {
 		return true

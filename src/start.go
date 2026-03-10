@@ -242,10 +242,12 @@ func startupSequence() {
 		that provide mDNS discovery with domain (e.g. Synology NAS)
 	*/
 
-	if *allowMdnsScanning {
-		portInt, err := strconv.Atoi(strings.Split(*webUIPort, ":")[1])
-		if err != nil {
-			portInt = 8000
+	if *allowMdnsScanning && *webUIPort != "socket" {
+		portInt := 8000
+		if parts := strings.Split(*webUIPort, ":"); len(parts) >= 2 {
+			if p, err := strconv.Atoi(parts[1]); err == nil {
+				portInt = p
+			}
 		}
 
 		hostName := *mdnsName
@@ -356,20 +358,24 @@ func startupSequence() {
 	pluginFolder = strings.TrimSuffix(pluginFolder, "/")
 
 	ZoraxyPort := 8000
-	ZoraxyAddrPort, err := netip.ParseAddrPort(*webUIPort)
-
-	if err != nil {
-		// check for ":<port>" parameter
-		webUIPortNoPrefix, hadPrefix := strings.CutPrefix(*webUIPort, ":")
-		if hadPrefix {
-			ZoraxyAddrPort, err = netip.ParseAddrPort("0.0.0.0:" + webUIPortNoPrefix)
+	if *webUIPort != "socket" {
+		ZoraxyAddrPort, err := netip.ParseAddrPort(*webUIPort)
+		if err != nil {
+			// check for ":<port>" parameter
+			webUIPortNoPrefix, hadPrefix := strings.CutPrefix(*webUIPort, ":")
+			if hadPrefix {
+				ZoraxyAddrPort, err = netip.ParseAddrPort("0.0.0.0:" + webUIPortNoPrefix)
+				if err == nil && ZoraxyAddrPort.IsValid() && ZoraxyAddrPort.Port() > 0 {
+					ZoraxyPort = int(ZoraxyAddrPort.Port())
+				}
+			} else {
+				SystemWideLogger.PrintAndLog("plugin-manager", fmt.Sprintf("Could not set port for plugin communication (webUI/-port); fallback to default port '%d'", ZoraxyPort), err)
+			}
+		} else if ZoraxyAddrPort.IsValid() && ZoraxyAddrPort.Port() > 0 {
+			ZoraxyPort = int(ZoraxyAddrPort.Port())
+		} else {
+			SystemWideLogger.PrintAndLog("plugin-manager", fmt.Sprintf("Could not set port for plugin communication (webUI/-port); fallback to default port '%d'", ZoraxyPort), err)
 		}
-	}
-
-	if err == nil && ZoraxyAddrPort.IsValid() && ZoraxyAddrPort.Port() > 0 {
-		ZoraxyPort = int(ZoraxyAddrPort.Port())
-	} else {
-		SystemWideLogger.PrintAndLog("plugin-manager", fmt.Sprintf("Could not set port for plugin communication (webUI/-port); fallback to default port '%d'", ZoraxyPort), err)
 	}
 
 	pluginManager = plugins.NewPluginManager(&plugins.ManagerOptions{

@@ -34,6 +34,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"os/signal"
@@ -154,6 +155,26 @@ func main() {
 
 	//Start the finalize sequences
 	finalSequence()
+
+	if *webUIPort == "socket" {
+		socketPath := CONF_FOLDER + "/admin.sock"
+		_ = os.Remove(socketPath)
+		listener, err := net.Listen("unix", socketPath)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer listener.Close()
+		defer os.Remove(socketPath)
+		if err := os.Chmod(socketPath, 0660); err != nil {
+			// ignore on Windows or unsupported
+		}
+		SystemWideLogger.Println(SYSTEM_NAME + " started. Control panel listening on Unix socket: " + socketPath)
+		err = http.Serve(listener, entryMux)
+		if err != nil {
+			log.Fatal(err)
+		}
+		return
+	}
 
 	if strings.HasPrefix(*webUIPort, ":") {
 		//Bind to all interfaces, issue #672
