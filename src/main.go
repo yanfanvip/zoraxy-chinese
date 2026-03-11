@@ -157,7 +157,10 @@ func main() {
 	finalSequence()
 
 	if *webUIPort == "socket" {
-		socketPath := CONF_FOLDER + "/admin.sock"
+		socketPath := *webUISocket
+		if !strings.Contains(socketPath, "/") && !strings.Contains(socketPath, "\\") {
+			socketPath = CONF_FOLDER + "/" + socketPath
+		}
 		_ = os.Remove(socketPath)
 		listener, err := net.Listen("unix", socketPath)
 		if err != nil {
